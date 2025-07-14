@@ -1,0 +1,105 @@
+---
+spring:
+  config:
+    activate:
+      on-profile: local
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+      settings:
+        web-allow-others: true  # 외부 접근 허용 (개발 환경에서만)
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:testdb;MODE=MYSQL;DATABASE_TO_UPPER=false;DB_CLOSE_DELAY=-1
+#    url: jdbc:h2:file:./h2db/db/application;MODE=MYSQL;DATABASE_TO_UPPER=false;DB_CLOSE_DELAY=-1
+    username: sa
+    password:
+    hikari:
+      minimum-idle: 5                      # 최소 유지할 커넥션 수
+      maximum-pool-size: 10                # 최대 커넥션 수
+      idle-timeout: 600000                 # 커넥션이 사용되지 않을 경우 대기 시간 (밀리초)
+      max-lifetime: 1800000                # 커넥션의 최대 수명 (밀리초)
+      connection-timeout: 30000            # 커넥션 풀에서 커넥션을 얻기까지의 최대 대기 시간 (밀리초)
+      pool-name: HikariCP                  # 커넥션 풀의 이름
+      connection-test-query: SELECT 1      # 커넥션을 확인할 때 사용할 쿼리 (MySQL 기준)
+  sql:
+    init:
+      schema-locations: classpath*:init/h2db/schema/schema.sql
+#      data-locations: classpath*:init/h2db/data/data.sql
+      mode: always
+  jpa:
+    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: none  # 개발 환경에서는 create-drop 사용
+    show-sql: true
+    format_sql: true
+
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:test;MODE=MYSQL;DATABASE_TO_UPPER=false;DB_CLOSE_DELAY=-1
+    #    url: jdbc:h2:file:./target/h2db/db/application;MODE=MYSQL;DATABASE_TO_UPPER=false;DB_CLOSE_DELAY=-1
+    username: sa
+    password:
+    hikari:
+      minimum-idle: 5                      # 최소 유지할 커넥션 수
+      maximum-pool-size: 10                # 최대 커넥션 수
+      idle-timeout: 600000                 # 커넥션이 사용되지 않을 경우 대기 시간 (밀리초)
+      max-lifetime: 1800000                # 커넥션의 최대 수명 (밀리초)
+      connection-timeout: 30000            # 커넥션 풀에서 커넥션을 얻기까지의 최대 대기 시간 (밀리초)
+      pool-name: HikariCP                  # 커넥션 풀의 이름
+      connection-test-query: SELECT 1      # 커넥션을 확인할 때 사용할 쿼리 (MySQL 기준)
+  sql:
+    init:
+      schema-locations: classpath*:initdata/schema/schema.sql
+      data-locations: classpath*:initdata/data/data.sql
+      mode: always          # <-- schema.sql 항상 실행
+  jpa:
+    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    format_sql: true
+---
+spring:
+  config:
+    activate:
+      on-profile: prd
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:test;MODE=MYSQL;DATABASE_TO_UPPER=false;DB_CLOSE_DELAY=-1
+    #    url: jdbc:h2:file:./target/h2db/db/application;MODE=MYSQL;DATABASE_TO_UPPER=false;DB_CLOSE_DELAY=-1
+    username: sa
+    password:
+    hikari:
+      minimum-idle: 5                      # 최소 유지할 커넥션 수
+      maximum-pool-size: 10                # 최대 커넥션 수
+      idle-timeout: 600000                 # 커넥션이 사용되지 않을 경우 대기 시간 (밀리초)
+      max-lifetime: 1800000                # 커넥션의 최대 수명 (밀리초)
+      connection-timeout: 30000            # 커넥션 풀에서 커넥션을 얻기까지의 최대 대기 시간 (밀리초)
+      pool-name: HikariCP                  # 커넥션 풀의 이름
+      connection-test-query: SELECT 1      # 커넥션을 확인할 때 사용할 쿼리 (MySQL 기준)
+  sql:
+    init:
+      schema-locations: classpath*:initdata/schema/schema.sql
+      data-locations: classpath*:initdata/data/data.sql
+      mode: always          # <-- schema.sql 항상 실행
+  jpa:
+    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    format_sql: true

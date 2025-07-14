@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: minehair
+  config:
+    import:
+      - classpath:application-db.yml
