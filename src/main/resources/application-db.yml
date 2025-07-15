@@ -3,18 +3,25 @@ spring:
   config:
     activate:
       on-profile: local
+
   h2:
     console:
       enabled: true
       path: /h2-console
       settings:
         web-allow-others: true  # 외부 접근 허용 (개발 환경에서만)
+
   datasource:
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:mem:testdb;MODE=MYSQL;DATABASE_TO_UPPER=false;DB_CLOSE_DELAY=-1
-#    url: jdbc:h2:file:./h2db/db/application;MODE=MYSQL;DATABASE_TO_UPPER=false;DB_CLOSE_DELAY=-1
-    username: sa
-    password:
+    write:
+      driver-class-name: org.h2.Driver
+      url: jdbc:h2:file:./h2db/db/application;MODE=MYSQL;DATABASE_TO_UPPER=false
+      username: sa
+      password:
+    read:
+      driver-class-name: org.h2.Driver
+      url: jdbc:h2:file:./h2db/db/application;MODE=MYSQL;DATABASE_TO_UPPER=false;ACCESS_MODE_DATA=r
+      username: sa
+      password:
     hikari:
       minimum-idle: 5                      # 최소 유지할 커넥션 수
       maximum-pool-size: 10                # 최대 커넥션 수
@@ -23,11 +30,13 @@ spring:
       connection-timeout: 30000            # 커넥션 풀에서 커넥션을 얻기까지의 최대 대기 시간 (밀리초)
       pool-name: HikariCP                  # 커넥션 풀의 이름
       connection-test-query: SELECT 1      # 커넥션을 확인할 때 사용할 쿼리 (MySQL 기준)
+
   sql:
     init:
       schema-locations: classpath*:init/h2db/schema/schema.sql
-#      data-locations: classpath*:init/h2db/data/data.sql
+      data-locations: classpath*:init/h2db/data/data.sql
       mode: always
+
   jpa:
     defer-datasource-initialization: true
     hibernate:
@@ -40,16 +49,23 @@ spring:
   config:
     activate:
       on-profile: dev
+
   h2:
     console:
       enabled: true
       path: /h2-console
+
   datasource:
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:mem:test;MODE=MYSQL;DATABASE_TO_UPPER=false;DB_CLOSE_DELAY=-1
-    #    url: jdbc:h2:file:./target/h2db/db/application;MODE=MYSQL;DATABASE_TO_UPPER=false;DB_CLOSE_DELAY=-1
-    username: sa
-    password:
+    write:
+      driver-class-name: org.h2.Driver
+      url: jdbc:h2:file:./h2db/db/application;MODE=MYSQL;DATABASE_TO_UPPER=false
+      username: sa
+      password:
+    read:
+      driver-class-name: org.h2.Driver
+      url: jdbc:h2:file:./h2db/db/application;MODE=MYSQL;DATABASE_TO_UPPER=false;ACCESS_MODE_DATA=r
+      username: sa
+      password:
     hikari:
       minimum-idle: 5                      # 최소 유지할 커넥션 수
       maximum-pool-size: 10                # 최대 커넥션 수
@@ -58,32 +74,42 @@ spring:
       connection-timeout: 30000            # 커넥션 풀에서 커넥션을 얻기까지의 최대 대기 시간 (밀리초)
       pool-name: HikariCP                  # 커넥션 풀의 이름
       connection-test-query: SELECT 1      # 커넥션을 확인할 때 사용할 쿼리 (MySQL 기준)
+
   sql:
     init:
       schema-locations: classpath*:initdata/schema/schema.sql
       data-locations: classpath*:initdata/data/data.sql
       mode: always          # <-- schema.sql 항상 실행
+
   jpa:
     defer-datasource-initialization: true
     hibernate:
       ddl-auto: none
     show-sql: true
     format_sql: true
+
 ---
 spring:
   config:
     activate:
       on-profile: prd
+
   h2:
     console:
-      enabled: true
+      enabled: false
       path: /h2-console
+
   datasource:
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:mem:test;MODE=MYSQL;DATABASE_TO_UPPER=false;DB_CLOSE_DELAY=-1
-    #    url: jdbc:h2:file:./target/h2db/db/application;MODE=MYSQL;DATABASE_TO_UPPER=false;DB_CLOSE_DELAY=-1
-    username: sa
-    password:
+    write:
+      driver-class-name: org.h2.Driver
+      url: jdbc:h2:file:./h2db/db/application;MODE=MYSQL;DATABASE_TO_UPPER=false
+      username: sa
+      password:
+    read:
+      driver-class-name: org.h2.Driver
+      url: jdbc:h2:file:./h2db/db/application;MODE=MYSQL;DATABASE_TO_UPPER=false;ACCESS_MODE_DATA=r
+      username: sa
+      password:
     hikari:
       minimum-idle: 5                      # 최소 유지할 커넥션 수
       maximum-pool-size: 10                # 최대 커넥션 수
@@ -92,14 +118,16 @@ spring:
       connection-timeout: 30000            # 커넥션 풀에서 커넥션을 얻기까지의 최대 대기 시간 (밀리초)
       pool-name: HikariCP                  # 커넥션 풀의 이름
       connection-test-query: SELECT 1      # 커넥션을 확인할 때 사용할 쿼리 (MySQL 기준)
+
   sql:
     init:
       schema-locations: classpath*:initdata/schema/schema.sql
-      data-locations: classpath*:initdata/data/data.sql
-      mode: always          # <-- schema.sql 항상 실행
+#      data-locations: classpath*:initdata/data/data.sql
+      mode: never          # <-- schema.sql 항상 실행
+
   jpa:
-    defer-datasource-initialization: true
+    defer-datasource-initialization: false
     hibernate:
       ddl-auto: none
-    show-sql: true
-    format_sql: true
+    show-sql: false
+    format_sql: false

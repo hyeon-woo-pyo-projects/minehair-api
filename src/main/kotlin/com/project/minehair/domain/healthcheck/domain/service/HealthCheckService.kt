@@ -1,6 +1,6 @@
-package com.project.minehair.healthcheck.domain.service
+package com.project.minehair.domain.healthcheck.domain.service
 
-import com.project.minehair.healthcheck.application.port.inbound.HealthCheckUseCase
+import com.project.minehair.domain.healthcheck.application.port.inbound.HealthCheckUseCase
 import org.springframework.stereotype.Service
 import java.time.LocalDateTime
 

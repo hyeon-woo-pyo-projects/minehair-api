@@ -1,6 +1,6 @@
-package com.project.minehair.healthcheck.adapter.inbound.web
+package com.project.minehair.domain.healthcheck.adapter.inbound.web
 
-import com.project.minehair.healthcheck.application.port.inbound.HealthCheckUseCase
+import com.project.minehair.domain.healthcheck.application.port.inbound.HealthCheckUseCase
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
 
