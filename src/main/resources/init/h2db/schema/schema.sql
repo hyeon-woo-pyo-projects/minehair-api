@@ -28,3 +28,16 @@ CREATE TABLE IF NOT EXISTS role (
     updated_id bigint not null comment '수정자 ID',
     updated_at datetime null comment '수정 시간'
 ) comment '역할' CHARSET=utf8mb4;
+
+
+CREATE TABLE IF NOT EXISTS role_menu (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT 'ID',
+    role_id BIGINT NOT NULL COMMENT '역할 ID',
+    menu_id BIGINT NOT NULL COMMENT '메뉴 ID',
+    status VARCHAR(20) NOT NULL DEFAULT 'active' COMMENT '상태',
+    created_id BIGINT NOT NULL COMMENT '생성자 ID',
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '생성 시간',
+    updated_id BIGINT NOT NULL COMMENT '수정자 ID',
+    updated_at DATETIME NULL COMMENT '수정 시간',
+    CONSTRAINT uq_role_menu UNIQUE (role_id, menu_id)
+) COMMENT '역할별 메뉴 접근 권한' CHARSET=utf8mb4;

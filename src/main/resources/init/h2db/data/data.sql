@@ -34,3 +34,25 @@ VALUES
 ('USER', '회원', '로그인한 일반 사용자', 2, 'active', 1, NOW(), 1),
 ('GUEST', '비회원', '로그인하지 않은 사용자', 3, 'active', 1, NOW(), 1);
 -----------------------------------------------------------------------------------------------------------------------
+
+-- [role_menu] 테이블 초기 데이터 삽입 ------------------------------------------------------------------------------------
+-- 1. 관리자(Admin, role_id = 1): 전체 메뉴 접근 허용
+INSERT IGNORE INTO role_menu (role_id, menu_id, status, created_id, created_at, updated_id)
+SELECT 1, id, 'active', 1, NOW(), 1 FROM menu;
+
+-- 2. 회원(User, role_id = 2): 클리닉 및 상담/예약 및 Review만
+INSERT IGNORE INTO role_menu (role_id, menu_id, status, created_id, created_at, updated_id)
+SELECT 2, id, 'active', 1, NOW(), 1
+FROM menu
+WHERE name IN (
+    '클리닉', '모발', '리바이탈', '아코프', '엑스달', '아르본',
+    '상담/예약', '모델 지원',
+    'Review'
+);
+
+-- 3. 비회원(Guest, role_id = 3): 소개, Review만
+INSERT IGNORE INTO role_menu (role_id, menu_id, status, created_id, created_at, updated_id)
+SELECT 3, id, 'active', 1, NOW(), 1
+FROM menu
+WHERE name IN ('소개', 'Review');
+-----------------------------------------------------------------------------------------------------------------------
