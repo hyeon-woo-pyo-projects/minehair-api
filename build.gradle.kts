@@ -32,6 +32,9 @@ dependencies {
 	// JPA
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 
+	// Swagger
+	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.9")
+
 	compileOnly("org.projectlombok:lombok")
 	runtimeOnly("com.h2database:h2")
 	annotationProcessor("org.projectlombok:lombok")

@@ -4,3 +4,4 @@ spring:
   config:
     import:
       - classpath:application-db.yml
+      - classpath:application-swagger.yml
