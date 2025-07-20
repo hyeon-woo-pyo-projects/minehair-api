@@ -1,15 +1,15 @@
 -- [menu] 테이블 초기 데이터 삽입 ------------------------------------------------------------------------------------------
 -- 대카테고리: parent_id = NULL
-INSERT IGNORE INTO menu (parent_id, name, path, order_no, visible, status, created_id, created_at, updated_id)
+INSERT IGNORE INTO menu (id, parent_id, name, path, order_no, visible, status, created_id, created_at, updated_id)
 VALUES
-(NULL, '소개', '/about', 10, true, 'active', 1, NOW(), 1),
-(NULL, '염색', '/color', 20, true, 'active', 1, NOW(), 1),
-(NULL, '탈색', '/bleach', 30, true, 'active', 1, NOW(), 1),
-(NULL, '클리닉', '/clinic', 40, true, 'active', 1, NOW(), 1),
-(NULL, '상담/예약', '/contact', 50, true, 'active', 1, NOW(), 1),
-(NULL, 'Review', '/review', 60, true, 'active', 1, NOW(), 1),
-(NULL, 'Review', '/review', 70, true, 'active', 1, NOW(), 1),
-(NULL, 'Community', '/community', 80, true, 'active', 1, NOW(), 1);
+(1, NULL, '소개', '/about', 10, true, 'active', 1, NOW(), 1),
+(2, NULL, '염색', '/color', 20, true, 'active', 1, NOW(), 1),
+(3, NULL, '탈색', '/bleach', 30, true, 'active', 1, NOW(), 1),
+(4, NULL, '클리닉', '/clinic', 40, true, 'active', 1, NOW(), 1),
+(5, NULL, '상담/예약', '/contact', 50, true, 'active', 1, NOW(), 1),
+(6, NULL, 'Review', '/review', 60, true, 'active', 1, NOW(), 1),
+(7, NULL, 'Q&A', '/qna', 70, true, 'active', 1, NOW(), 1),
+(8, NULL, 'Community', '/community', 80, true, 'active', 1, NOW(), 1);
 
 -- 중카테고리/소카테고리: parent_id를 정확히 지정해야 함
 -- 중복되면 무시됨 (name + parent_id 기준)
@@ -38,22 +38,35 @@ VALUES
 
 -- [role_menu] 테이블 초기 데이터 삽입 ------------------------------------------------------------------------------------
 -- 1. 관리자(Admin, role_id = 1): 전체 메뉴 접근 허용
-INSERT IGNORE INTO role_menu (role_id, menu_id, status, created_id, created_at, updated_id)
-SELECT 1, id, 'active', 1, NOW(), 1 FROM menu;
+INSERT INTO role_menu (role_id, menu_id, status, created_id, created_at, updated_id)
+SELECT 1, m.id, 'active', 1, NOW(), 1
+FROM menu m
+WHERE NOT EXISTS (
+    SELECT 1 FROM role_menu rm
+    WHERE rm.role_id = 1 AND rm.menu_id = m.id
+);
 
 -- 2. 회원(User, role_id = 2): 클리닉 및 상담/예약 및 Review만
-INSERT IGNORE INTO role_menu (role_id, menu_id, status, created_id, created_at, updated_id)
-SELECT 2, id, 'active', 1, NOW(), 1
-FROM menu
-WHERE name IN (
+INSERT INTO role_menu (role_id, menu_id, status, created_id, created_at, updated_id)
+SELECT 2, m.id, 'active', 1, NOW(), 1
+FROM menu m
+WHERE m.name IN (
     '클리닉', '모발', '리바이탈', '아코프', '엑스달', '아르본',
     '상담/예약', '모델 지원',
     'Review'
+)
+AND NOT EXISTS (
+    SELECT 1 FROM role_menu rm
+    WHERE rm.role_id = 2 AND rm.menu_id = m.id
 );
 
 -- 3. 비회원(Guest, role_id = 3): 소개, Review만
-INSERT IGNORE INTO role_menu (role_id, menu_id, status, created_id, created_at, updated_id)
-SELECT 3, id, 'active', 1, NOW(), 1
-FROM menu
-WHERE name IN ('소개', 'Review');
+INSERT INTO role_menu (role_id, menu_id, status, created_id, created_at, updated_id)
+SELECT 3, m.id, 'active', 1, NOW(), 1
+FROM menu m
+WHERE m.name IN ('소개', 'Review')
+AND NOT EXISTS (
+    SELECT 1 FROM role_menu rm
+    WHERE rm.role_id = 3 AND rm.menu_id = m.id
+);
 -----------------------------------------------------------------------------------------------------------------------
