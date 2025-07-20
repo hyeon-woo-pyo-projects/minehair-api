@@ -6,7 +6,7 @@ import com.project.minehair.domain.menu.adapter.`in`.web.dto.UpdateMenuRequest
 import com.project.minehair.domain.menu.application.port.`in`.MenuUseCase
 import com.project.minehair.domain.menu.application.port.out.MenuPersistencePort
 import com.project.minehair.domain.menu.domain.Menu
-import com.project.minehair.domain.menu.domain.MenuStatus
+import com.project.minehair.global.enums.Status
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.time.LocalDateTime
@@ -26,7 +26,7 @@ class MenuService(
             path = request.path,
             orderNo = request.orderNo,
             visible = request.visible,
-            status = MenuStatus.ACTIVE,
+            status = Status.active,
             createdId = request.createdId,
             createdAt = LocalDateTime.now(),
             updatedId = request.createdId,
@@ -57,7 +57,7 @@ class MenuService(
             path = request.path,
             orderNo = request.orderNo,
             visible = request.visible,
-            status = MenuStatus.valueOf(request.status),
+            status = request.status,
             updatedId = request.updatedId,
             updatedAt = LocalDateTime.now()
         )

@@ -1,10 +1,9 @@
 package com.project.minehair.domain.menu.adapter.out.persistence
 
+import com.project.minehair.global.entity.BaseJpaEntity
+import com.project.minehair.global.enums.Status
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
-import jakarta.persistence.GeneratedValue
-import jakarta.persistence.GenerationType
-import jakarta.persistence.Id
 import jakarta.persistence.Table
 import java.time.LocalDateTime
 
@@ -12,11 +11,6 @@ import java.time.LocalDateTime
 @Entity
 @Table(name = "menu")
 data class MenuJpaEntity(
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long? = null,
-
     @Column(name = "parent_id")
     val parentId: Long? = null,
 
@@ -32,18 +26,11 @@ data class MenuJpaEntity(
     @Column(name = "visible", nullable = false)
     val visible: Boolean,
 
-    @Column(name = "status", nullable = false, length = 20)
-    val status: String = "active",
-
-    @Column(name = "created_id", nullable = false)
-    val createdId: Long,
-
-    @Column(name = "created_at", nullable = false)
-    val createdAt: LocalDateTime,
-
-    @Column(name = "updated_id", nullable = false)
-    val updatedId: Long,
-
-    @Column(name = "updated_at")
-    val updatedAt: LocalDateTime? = null
-)
+    // BaseJpaEntity 필드들 override
+    override val id: Long? = null,
+    override val status: Status = Status.active,
+    override val createdId: Long = 0L,
+    override val createdAt: LocalDateTime = LocalDateTime.now(),
+    override val updatedId: Long = 0L,
+    override val updatedAt: LocalDateTime? = null
+) : BaseJpaEntity(id, status, createdId, createdAt, updatedId, updatedAt)
