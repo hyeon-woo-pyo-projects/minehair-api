@@ -2,13 +2,14 @@
 -- 대카테고리: parent_id = NULL
 INSERT IGNORE INTO menu (parent_id, name, path, order_no, visible, status, created_id, created_at, updated_id)
 VALUES
-(NULL, '소개', '/about', 1, true, 'active', 1, NOW(), 1),
-(NULL, '염색', '/color', 2, true, 'active', 1, NOW(), 1),
-(NULL, '탈색', '/bleach', 3, true, 'active', 1, NOW(), 1),
-(NULL, '클리닉', '/clinic', 4, true, 'active', 1, NOW(), 1),
-(NULL, '상담/예약', '/contact', 5, true, 'active', 1, NOW(), 1),
-(NULL, 'Review', '/review', 6, true, 'active', 1, NOW(), 1),
-(NULL, 'Community', '/community', 7, true, 'active', 1, NOW(), 1);
+(NULL, '소개', '/about', 10, true, 'active', 1, NOW(), 1),
+(NULL, '염색', '/color', 20, true, 'active', 1, NOW(), 1),
+(NULL, '탈색', '/bleach', 30, true, 'active', 1, NOW(), 1),
+(NULL, '클리닉', '/clinic', 40, true, 'active', 1, NOW(), 1),
+(NULL, '상담/예약', '/contact', 50, true, 'active', 1, NOW(), 1),
+(NULL, 'Review', '/review', 60, true, 'active', 1, NOW(), 1),
+(NULL, 'Review', '/review', 70, true, 'active', 1, NOW(), 1),
+(NULL, 'Community', '/community', 80, true, 'active', 1, NOW(), 1);
 
 -- 중카테고리/소카테고리: parent_id를 정확히 지정해야 함
 -- 중복되면 무시됨 (name + parent_id 기준)
