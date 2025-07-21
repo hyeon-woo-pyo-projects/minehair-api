@@ -70,3 +70,32 @@ AND NOT EXISTS (
     WHERE rm.role_id = 3 AND rm.menu_id = m.id
 );
 -----------------------------------------------------------------------------------------------------------------------
+-- [users] 테이블 초기 데이터 삽입 ------------------------------------------------------------------------------------
+INSERT IGNORE INTO users (
+    role_id,
+    user_id,
+    password,
+    name,
+    phone,
+    email,
+    user_type,
+    status,
+    created_id,
+    created_at,
+    updated_id,
+    updated_at
+) VALUES (
+    1,
+    'admin',
+    HASH('SHA256', STRINGTOUTF8('bWluZWhhaXI=')),
+    '시스템 관리자',
+    '010-1234-5678',
+    'admin@example.com',
+    'admin',
+    'active',
+    1,
+    NOW(),
+    1,
+    NULL
+);
+-----------------------------------------------------------------------------------------------------------------------

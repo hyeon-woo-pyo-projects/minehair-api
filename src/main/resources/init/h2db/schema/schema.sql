@@ -29,7 +29,6 @@ CREATE TABLE IF NOT EXISTS role (
     updated_at datetime null comment '수정 시간'
 ) comment '역할' CHARSET=utf8mb4;
 
-
 CREATE TABLE IF NOT EXISTS role_menu (
     id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT 'ID',
     role_id BIGINT NOT NULL COMMENT '역할 ID',
@@ -41,3 +40,21 @@ CREATE TABLE IF NOT EXISTS role_menu (
     updated_at DATETIME NULL COMMENT '수정 시간',
     CONSTRAINT uq_role_menu UNIQUE (role_id, menu_id)
 ) COMMENT '역할별 메뉴 접근 권한' CHARSET=utf8mb4;
+
+-- 사용자 테이블 (회원과 관리자 통합)
+CREATE TABLE IF NOT EXISTS users (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT 'ID',
+    role_id BIGINT NOT NULL COMMENT '역할 ID',
+    user_id VARCHAR(100) NOT NULL COMMENT '사용자명',
+    password VARCHAR(255) NOT NULL COMMENT '비밀번호',
+    name VARCHAR(100) NOT NULL COMMENT '이름',
+    phone VARCHAR(20) NULL COMMENT '전화번호',
+    email VARCHAR(255) NULL COMMENT '이메일',
+    user_type VARCHAR(20) NOT NULL DEFAULT 'member' COMMENT '사용자 유형 (member: 회원, admin: 관리자)',
+    status VARCHAR(20) NOT NULL DEFAULT 'active' COMMENT '상태',
+    created_id BIGINT NOT NULL COMMENT '생성자 ID',
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '생성 시간',
+    updated_id BIGINT NOT NULL COMMENT '수정자 ID',
+    updated_at DATETIME NULL COMMENT '수정 시간',
+    CONSTRAINT uq_users_user_id_user_type UNIQUE (user_id, user_type)
+) COMMENT '사용자 테이블 (회원/관리자 통합)' CHARSET=utf8mb4;

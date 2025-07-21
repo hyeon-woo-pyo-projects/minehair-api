@@ -54,6 +54,8 @@ spring:
     console:
       enabled: true
       path: /h2-console
+      settings:
+        web-allow-others: true  # 외부 접근 허용 (개발 환경에서만)
 
   datasource:
     write:
@@ -77,9 +79,9 @@ spring:
 
   sql:
     init:
-      schema-locations: classpath*:initdata/schema/schema.sql
-      data-locations: classpath*:initdata/data/data.sql
-      mode: always          # <-- schema.sql 항상 실행
+      schema-locations: classpath*:init/h2db/schema/schema.sql
+      data-locations: classpath*:init/h2db/data/data.sql
+      mode: always
 
   jpa:
     defer-datasource-initialization: true
