@@ -1,39 +1,42 @@
 package com.example.users.adapter.`in`.web
 
+import com.project.minehair.domain.user.adapter.`in`.web.dto.UserCreateRequest
+import com.project.minehair.domain.user.application.port.`in`.UserUseCase
+import com.project.minehair.global.response.BaseResponse
+import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.tags.Tag
+import jakarta.validation.Valid
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
+@Tag(name = "회원 API", description = "회원 API")
 @RestController
 @RequestMapping("/api/users")
 class UserController(
-//    private val userUseCase: UserUseCase
+    private val userUseCase: UserUseCase
 ) {
 
-//    /**
-//     * 사용자 생성 (회원가입)
-//     */
-//    @PostMapping
-//    fun createUser(@Valid @RequestBody request: UserCreateRequest): BaseResponse<Nothing?> {
-//        val response = userUseCase.createUser(request)
-//        return BaseResponse.ok()
-//    }
+    /**
+     * 사용자 생성 (회원가입)
+     */
+    @Operation(summary = "회원 가입", description = "회원 가입")
+    @PostMapping
+    fun createUser(@Valid @RequestBody request: UserCreateRequest): BaseResponse<Nothing?> {
+        val response = userUseCase.createUser(request)
+        return BaseResponse.ok()
+    }
 
 //    /**
 //     * 사용자 조회 (ID로)
 //     */
 //    @GetMapping("/{id}")
-//    fun getUserById(@PathVariable id: Long): ResponseEntity<UserResponse> {
+//    fun getUserById(@PathVariable id: Long): BaseResponse<UserResponse> {
 //        val response = userUseCase.getUserById(id)
-//        return ResponseEntity.ok(response)
-//    }
-//
-//    /**
-//     * 사용자 조회 (사용자명으로)
-//     */
-//    @GetMapping("/by-user-id/{userId}")
-//    fun getUserByUserId(@PathVariable userId: String): ResponseEntity<UserResponse> {
-//        val response = userUseCase.getUserByUserId(userId)
-//        return ResponseEntity.ok(response)
+//        return BaseResponse.success(response)
 //    }
 //
 //    /**
@@ -45,9 +48,9 @@ class UserController(
 //        @RequestParam(defaultValue = "20") size: Int,
 //        @RequestParam(required = false) userType: String?,
 //        @RequestParam(required = false) status: String?
-//    ): ResponseEntity<List<UserResponse>> {
+//    ): BaseResponse<List<UserResponse>> {
 //        val responses = userUseCase.getAllUsers(page, size, userType, status)
-//        return ResponseEntity.ok(responses)
+//        return BaseResponse.success(responses)
 //    }
 //
 //    /**
@@ -57,9 +60,9 @@ class UserController(
 //    fun updateUser(
 //        @PathVariable id: Long,
 //        @Valid @RequestBody request: UserUpdateRequest
-//    ): ResponseEntity<UserResponse> {
+//    ): BaseResponse<UserResponse> {
 //        val response = userUseCase.updateUser(id, request)
-//        return ResponseEntity.ok(response)
+//        return BaseResponse.success(response)
 //    }
 //
 //    /**
@@ -69,18 +72,18 @@ class UserController(
 //    fun changeUserStatus(
 //        @PathVariable id: Long,
 //        @RequestParam status: String
-//    ): ResponseEntity<UserResponse> {
+//    ): BaseResponse<UserResponse> {
 //        val response = userUseCase.changeUserStatus(id, status)
-//        return ResponseEntity.ok(response)
+//        return BaseResponse.success(response)
 //    }
 //
 //    /**
 //     * 사용자 삭제 (논리적 삭제)
 //     */
 //    @DeleteMapping("/{id}")
-//    fun deleteUser(@PathVariable id: Long): ResponseEntity<Void> {
+//    fun deleteUser(@PathVariable id: Long): BaseResponse<Nothing?> {
 //        userUseCase.deleteUser(id)
-//        return ResponseEntity.noContent().build()
+//        return BaseResponse.ok()
 //    }
 //
 //    /**
@@ -91,17 +94,17 @@ class UserController(
 //        @PathVariable id: Long,
 //        @RequestParam oldPassword: String,
 //        @RequestParam newPassword: String
-//    ): ResponseEntity<Void> {
+//    ): BaseResponse<Nothing?> {
 //        userUseCase.changePassword(id, oldPassword, newPassword)
-//        return ResponseEntity.noContent().build()
+//        return BaseResponse.ok()
 //    }
 //
 //    /**
 //     * 사용자 ID 중복 확인
 //     */
 //    @GetMapping("/check-duplicate/{userId}")
-//    fun checkUserIdDuplicate(@PathVariable userId: String): ResponseEntity<Boolean> {
+//    fun checkUserIdDuplicate(@PathVariable userId: String): BaseResponse<Boolean> {
 //        val isDuplicate = userUseCase.checkUserIdDuplicate(userId)
-//        return ResponseEntity.ok(isDuplicate)
+//        return BaseResponse.success(isDuplicate)
 //    }
 }
