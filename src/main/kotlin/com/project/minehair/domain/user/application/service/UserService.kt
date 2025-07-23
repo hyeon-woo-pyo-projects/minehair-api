@@ -2,28 +2,30 @@ package com.project.minehair.domain.user.application.service
 
 import com.project.minehair.domain.user.adapter.`in`.web.dto.UserCreateRequest
 import com.project.minehair.domain.user.application.port.`in`.UserUseCase
+import com.project.minehair.domain.user.application.port.out.persistence.UserPersistencePort
 import com.project.minehair.domain.user.domain.User
 import com.project.minehair.global.enums.Status
+import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
 @Service
 @Transactional(readOnly = true)
 class UserService(
-//    private val userPort: UserPort,
-//    private val passwordEncoder: PasswordEncoder
+    private val userPersistencePort: UserPersistencePort,
+    private val passwordEncoder: PasswordEncoder
 ) : UserUseCase {
 
     @Transactional
     override fun createUser(request: UserCreateRequest) {
         // 사용자 ID 중복 확인
-        if (userPort.existsByUserId(request.userId)) {
-            throw BusinessException(ErrorCode.DUPLICATE_USER_ID)
+        if (userPersistencePort.existsByUserId(request.userId)) {
+//            throw BusinessException(ErrorCode.DUPLICATE_USER_ID)
         }
 
         // 이메일 중복 확인
-        if (userPort.existsByEmail(request.email)) {
-            throw BusinessException(ErrorCode.DUPLICATE_EMAIL)
+        if (userPersistencePort.existsByEmail(request.email)) {
+//            throw BusinessException(ErrorCode.DUPLICATE_EMAIL)
         }
 
         val encodedPassword = passwordEncoder.encode(request.password)
@@ -37,7 +39,7 @@ class UserService(
             userType = request.userType,
             status = Status.active
         )
-        userPort.save(user)
+        userPersistencePort.save(user)
     }
 
 //    override fun getUserById(id: Long): UserResponse {

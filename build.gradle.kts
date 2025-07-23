@@ -33,6 +33,9 @@ dependencies {
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 
+	// Spring Boot Starter Security
+	implementation("org.springframework.boot:spring-boot-starter-security")
+
 	// Apache Commons Lang
 	implementation("org.apache.commons:commons-lang3:$commonsLangVersion")
 

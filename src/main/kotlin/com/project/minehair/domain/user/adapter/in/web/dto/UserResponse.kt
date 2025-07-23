@@ -15,7 +15,7 @@ data class UserResponse(
     val userType: UserType,
     val status: Status,
     val createdAt: LocalDateTime,
-    val updatedAt: LocalDateTime
+    val updatedAt: LocalDateTime?
 ) {
     companion object {
         fun from(user: User): UserResponse {

@@ -5,26 +5,27 @@ import java.time.LocalDateTime
 
 data class User(
     val id: Long? = null,
+    val roleId: String,
     val userId: String,
     val email: String,
     val password: String,
     val name: String,
-    val phoneNumber: String?,
+    val phone: String,
     val userType: UserType,
     val status: Status,
     val createdAt: LocalDateTime = LocalDateTime.now(),
-    val updatedAt: LocalDateTime = LocalDateTime.now()
+    val updatedAt: LocalDateTime? = LocalDateTime.now()
 ) {
     fun update(
         email: String,
         name: String,
-        phoneNumber: String?,
+        phone: String,
         userType: UserType
     ): User {
         return copy(
             email = email,
             name = name,
-            phoneNumber = phoneNumber,
+            phone = phone,
             userType = userType,
             updatedAt = LocalDateTime.now()
         )
