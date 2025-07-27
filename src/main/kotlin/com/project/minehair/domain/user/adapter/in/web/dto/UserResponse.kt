@@ -9,7 +9,7 @@ import java.time.LocalDateTime
 data class UserResponse(
     val id: Long,
     val userId: String,
-    val email: String,
+    val email: String?,
     val name: String,
     val phoneNumber: String?,
     val userType: UserType,
@@ -24,7 +24,7 @@ data class UserResponse(
                 userId = user.userId,
                 email = user.email,
                 name = user.name,
-                phoneNumber = user.phoneNumber,
+                phoneNumber = user.phone,
                 userType = user.userType,
                 status = user.status,
                 createdAt = user.createdAt,

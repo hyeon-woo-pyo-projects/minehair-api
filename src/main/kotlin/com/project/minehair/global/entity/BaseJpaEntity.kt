@@ -25,8 +25,8 @@ abstract class BaseJpaEntity(
     @Column(name = "created_at", nullable = false, updatable = false)
     open val createdAt: LocalDateTime,
 
-    @Column(name = "updated_id", nullable = false)
-    open val updatedId: Long,
+    @Column(name = "updated_id")
+    open val updatedId: Long?,
 
     @LastModifiedDate
     @Column(name = "updated_at")

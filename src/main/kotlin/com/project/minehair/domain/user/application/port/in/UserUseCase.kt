@@ -1,8 +1,6 @@
 package com.project.minehair.domain.user.application.port.`in`
 
 import com.project.minehair.domain.user.adapter.`in`.web.dto.UserCreateRequest
-import com.project.minehair.domain.user.adapter.`in`.web.dto.UserResponse
-import com.project.minehair.domain.user.adapter.`in`.web.dto.UserUpdateRequest
 
 interface UserUseCase {
     /**

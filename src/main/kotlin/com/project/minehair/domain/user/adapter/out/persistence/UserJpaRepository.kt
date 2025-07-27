@@ -1,6 +1,5 @@
 package com.project.minehair.domain.user.adapter.out.persistence
 
-import com.project.minehair.domain.user.adapter.out.persistence.entity.UserEntity
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 

@@ -1,4 +1,4 @@
-package com.project.minehair.domain.user.adapter.out.persistence.entity
+package com.project.minehair.domain.user.adapter.out.persistence
 
 import com.project.minehair.domain.user.domain.UserType
 import com.project.minehair.global.entity.BaseJpaEntity
@@ -26,7 +26,7 @@ class UserEntity(
     val phone: String,
 
     @Column(name = "email")
-    val email: String,
+    val email: String?,
 
     @Enumerated(EnumType.STRING)
     @Column(name = "user_type")
@@ -37,7 +37,7 @@ class UserEntity(
     override val status: Status = Status.active,
     override val createdId: Long = 0L,
     override val createdAt: LocalDateTime = LocalDateTime.now(),
-    override val updatedId: Long = 0L,
+    override val updatedId: Long? = 0L,
     override val updatedAt: LocalDateTime? = null
 
 ) : BaseJpaEntity(id, status, createdId, createdAt, updatedId, updatedAt)  {

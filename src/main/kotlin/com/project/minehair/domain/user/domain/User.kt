@@ -1,21 +1,26 @@
 package com.project.minehair.domain.user.domain
 
+import com.project.minehair.global.domain.BaseDomain
 import com.project.minehair.global.enums.Status
 import java.time.LocalDateTime
 
 data class User(
-    val id: Long? = null,
-    val roleId: String,
+    val roleId: Long,
     val userId: String,
-    val email: String,
+    val email: String?,
     val password: String,
     val name: String,
     val phone: String,
     val userType: UserType,
-    val status: Status,
-    val createdAt: LocalDateTime = LocalDateTime.now(),
-    val updatedAt: LocalDateTime? = LocalDateTime.now()
-) {
+
+    override val id: Long? = null,
+    override val status: Status = Status.active,
+    override val createdId: Long = 0L,
+    override val createdAt: LocalDateTime = LocalDateTime.now(),
+    override val updatedId: Long = 0L,
+    override val updatedAt: LocalDateTime? = null
+) : BaseDomain(id, status, createdId, createdAt, updatedId, updatedAt) {
+
     fun update(
         email: String,
         name: String,

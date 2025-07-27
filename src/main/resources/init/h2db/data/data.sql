@@ -86,11 +86,11 @@ INSERT IGNORE INTO users (
     updated_at
 ) VALUES (
     1,
-    'admin',
+    'system',
     HASH('SHA256', STRINGTOUTF8('bWluZWhhaXI=')),
-    '시스템 관리자',
-    '010-1234-5678',
-    'admin@example.com',
+    '시스템',
+    '010-0000-0000',
+    'system@example.com',
     'admin',
     'active',
     1,

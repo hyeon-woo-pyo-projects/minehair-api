@@ -3,7 +3,7 @@ package com.project.minehair.domain.user.domain
 import com.project.minehair.domain.user.adapter.`in`.web.dto.UserCreateRequest
 import com.project.minehair.domain.user.adapter.`in`.web.dto.UserResponse
 import com.project.minehair.domain.user.adapter.`in`.web.dto.UserUpdateRequest
-import com.project.minehair.domain.user.adapter.out.persistence.entity.UserEntity
+import com.project.minehair.domain.user.adapter.out.persistence.UserEntity
 import com.project.minehair.global.enums.Status
 import org.springframework.stereotype.Component
 
@@ -15,7 +15,7 @@ class UserMapper {
      */
     fun toDomain(request: UserCreateRequest, encodedPassword: String): User {
         return User(
-            roleId = 0L,
+            roleId = 1L,
             userId = request.userId,
             email = request.email,
             password = encodedPassword,

@@ -8,6 +8,7 @@ import com.project.minehair.global.enums.Status
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import java.time.LocalDateTime
 
 @Service
 @Transactional(readOnly = true)
@@ -31,13 +32,20 @@ class UserService(
         val encodedPassword = passwordEncoder.encode(request.password)
 
         val user = User(
+            id = null,
+            roleId = 1L,
             userId = request.userId,
             email = request.email,
             password = encodedPassword,
             name = request.name,
-            phoneNumber = request.phoneNumber,
+            phone = request.phone,
             userType = request.userType,
-            status = Status.active
+            status = Status.active,
+            createdId = 1L,
+            createdAt = LocalDateTime.now(),
+            updatedId = 1L,
+            updatedAt = null
+
         )
         userPersistencePort.save(user)
     }
