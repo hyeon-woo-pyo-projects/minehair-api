@@ -1,0 +1,8 @@
+server:
+  shutdown: graceful          # graceful shutdown 활성화 (기본값: immediate)
+
+  tomcat:
+    resource:
+      cache-ttl: 60000
+    resources:
+      cache-size: 50MB

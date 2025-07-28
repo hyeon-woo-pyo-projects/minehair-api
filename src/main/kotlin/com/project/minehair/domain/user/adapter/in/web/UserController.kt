@@ -1,11 +1,11 @@
-package com.example.users.adapter.`in`.web
+package com.project.minehair.domain.user.adapter.`in`.web
 
 import com.project.minehair.domain.user.adapter.`in`.web.dto.UserCreateRequest
 import com.project.minehair.domain.user.application.port.`in`.UserUseCase
 import com.project.minehair.global.response.BaseResponse
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
-import jakarta.validation.Valid
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -13,18 +13,21 @@ import org.springframework.web.bind.annotation.RestController
 
 @Tag(name = "회원 API", description = "회원 API")
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api/user")
 class UserController(
     private val userUseCase: UserUseCase
 ) {
 
-    /**
-     * 사용자 생성 (회원가입)
-     */
+    @Operation(summary = "회원 조회", description = "회원 조회")
+    @GetMapping
+    fun list(@RequestBody request: UserCreateRequest): BaseResponse<Nothing?> {
+        return BaseResponse.ok()
+    }
+
     @Operation(summary = "회원 가입", description = "회원 가입")
     @PostMapping
-    fun createUser(@Valid @RequestBody request: UserCreateRequest): BaseResponse<Nothing?> {
-        val response = userUseCase.createUser(request)
+    fun createUser(@RequestBody request: UserCreateRequest): BaseResponse<Nothing?> {
+        userUseCase.createUser(request)
         return BaseResponse.ok()
     }
 

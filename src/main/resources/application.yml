@@ -1,5 +1,4 @@
-server:
-  shutdown: graceful          # graceful shutdown 활성화 (기본값: immediate)
+
 spring:
   application:
     name: minehair
@@ -7,6 +6,8 @@ spring:
     import:
       - classpath:application-db.yml
       - classpath:application-swagger.yml
+      - classpath:application-web.yml
+      - classpath:application-server.yml
   lifecycle:
     timeout-per-shutdown-phase: 30s  # 각 셧다운 단계별 최대 대기 시간
 
