@@ -4,7 +4,9 @@ import com.project.minehair.domain.user.adapter.`in`.web.dto.UserCreateRequest
 import com.project.minehair.domain.user.application.port.`in`.UserUseCase
 import com.project.minehair.domain.user.application.port.out.persistence.UserPersistencePort
 import com.project.minehair.domain.user.domain.User
+import com.project.minehair.global.enums.ErrorCode
 import com.project.minehair.global.enums.Status
+import com.project.minehair.global.exception.BusinessException
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -21,12 +23,12 @@ class UserService(
     override fun createUser(request: UserCreateRequest) {
         // 사용자 ID 중복 확인
         if (userPersistencePort.existsByUserId(request.userId)) {
-//            throw BusinessException(ErrorCode.DUPLICATE_USER_ID)
+            throw BusinessException(ErrorCode.DUPLICATE_USERID)
         }
 
         // 이메일 중복 확인
         if (userPersistencePort.existsByEmail(request.email)) {
-//            throw BusinessException(ErrorCode.DUPLICATE_EMAIL)
+            throw BusinessException(ErrorCode.DUPLICATE_EMAIL)
         }
 
         val encodedPassword = passwordEncoder.encode(request.password)
