@@ -19,6 +19,9 @@ class SecurityConfig {
             .authorizeHttpRequests {
                 it.anyRequest().permitAll()
             }
+            .headers { headers ->
+                headers.frameOptions { it.sameOrigin() } // H2 콘솔의 iframe 허용
+            }
         return http.build()
     }
 
