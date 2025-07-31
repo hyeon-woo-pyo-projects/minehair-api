@@ -27,6 +27,7 @@ repositories {
 
 val commonsLangVersion = "3.18.0"
 val springdocVersion = "2.8.9"
+val embededRedisVersion = "0.7.3"
 
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
@@ -44,6 +45,9 @@ dependencies {
 
 	// Swagger
 	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:$springdocVersion")
+
+	// Embeded Redis
+	implementation("it.ozimov:embedded-redis:${embededRedisVersion}")
 
 	compileOnly("org.projectlombok:lombok")
 	runtimeOnly("com.h2database:h2")

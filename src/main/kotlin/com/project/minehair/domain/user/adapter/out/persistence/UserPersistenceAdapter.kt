@@ -23,4 +23,10 @@ class UserPersistenceAdapter(
         val userEntity = userMapper.toEntity(user)
         userJpaRepository.save(userEntity)
     }
+
+    override fun findUserByUserId(userId: String): User {
+        val userEntity = userJpaRepository.findByUserId(userId)
+            ?: throw IllegalArgumentException("User with userId $userId not found")
+        return userMapper.toDomain(userEntity)
+    }
 }

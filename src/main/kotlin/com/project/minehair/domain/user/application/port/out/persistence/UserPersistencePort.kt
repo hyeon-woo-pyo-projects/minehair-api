@@ -19,6 +19,7 @@ interface UserPersistencePort {
      */
     fun save(user: User)
 
-    // 추가적인 메서드 정의 가능
+
+    fun findUserByUserId(userId: String):User
 
 }
