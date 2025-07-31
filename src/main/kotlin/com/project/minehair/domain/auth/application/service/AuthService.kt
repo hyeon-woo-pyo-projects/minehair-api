@@ -5,7 +5,6 @@ import com.project.minehair.domain.auth.application.port.`in`.AuthUseCase
 import com.project.minehair.domain.auth.application.port.out.AuthDomainPort
 import com.project.minehair.global.enums.ErrorCode
 import com.project.minehair.global.exception.BusinessException
-import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -13,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional
 @Service
 class AuthService(
     private val userDomainPort: AuthDomainPort,
-    private val authenticationManager: AuthenticationManager
+//    private val authenticationManager: AuthenticationManager
 ): AuthUseCase {
 
     override fun login(loginRequest: LoginRequest) {

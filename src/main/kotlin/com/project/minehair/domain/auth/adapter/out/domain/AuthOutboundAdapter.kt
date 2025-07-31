@@ -1,6 +1,7 @@
 package com.project.minehair.domain.auth.adapter.out.domain
 
 import com.project.minehair.domain.auth.application.port.out.AuthDomainPort
+import com.project.minehair.domain.user.adapter.`in`.query.UserQueryAdapter
 import com.project.minehair.global.domain.inter.InterDomainUserInfo
 import org.springframework.stereotype.Component
 
@@ -10,7 +11,7 @@ class AuthOutboundAdapter(
 ): AuthDomainPort {
 
     override fun getUserByUserId(userId: String): InterDomainUserInfo? {
-        return userQueryAdapter.findUserByUserId(userId)?.let { user ->
+        return userQueryAdapter.getUserByUserId(userId)?.let { user ->
             InterDomainUserInfo(
                 id = user.id,
                 // 필요한 다른 필드들도 추가 가능

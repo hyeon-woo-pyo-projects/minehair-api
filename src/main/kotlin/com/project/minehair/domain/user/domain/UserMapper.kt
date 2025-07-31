@@ -4,6 +4,7 @@ import com.project.minehair.domain.user.adapter.`in`.web.dto.UserCreateRequest
 import com.project.minehair.domain.user.adapter.`in`.web.dto.UserResponse
 import com.project.minehair.domain.user.adapter.`in`.web.dto.UserUpdateRequest
 import com.project.minehair.domain.user.adapter.out.persistence.UserEntity
+import com.project.minehair.global.domain.inter.InterDomainUserInfo
 import com.project.minehair.global.enums.Status
 import org.springframework.stereotype.Component
 
@@ -104,5 +105,11 @@ class UserMapper {
      */
     fun toDomainList(entities: List<UserEntity>): List<User> {
         return entities.map { toDomain(it) }
+    }
+
+    fun toInterDomainUserInfo(user: User): InterDomainUserInfo {
+        return InterDomainUserInfo(
+            id = user.id!!
+        )
     }
 }

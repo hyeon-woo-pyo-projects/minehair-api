@@ -19,6 +19,11 @@ configurations {
 	compileOnly {
 		extendsFrom(configurations.annotationProcessor.get())
 	}
+	// 로깅 충돌 해결을 위한 설정
+	all {
+		exclude(group = "commons-logging", module = "commons-logging")
+		exclude(group = "org.slf4j", module = "slf4j-simple")
+	}
 }
 
 repositories {
@@ -27,7 +32,7 @@ repositories {
 
 val commonsLangVersion = "3.18.0"
 val springdocVersion = "2.8.9"
-val embededRedisVersion = "0.7.3"
+val embeddedRedisVersion = "0.7.3"
 
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
@@ -46,8 +51,11 @@ dependencies {
 	// Swagger
 	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:$springdocVersion")
 
-	// Embeded Redis
-	implementation("it.ozimov:embedded-redis:${embededRedisVersion}")
+	// Embeded Redis - 로깅 충돌을 일으킬 수 있는 의존성 제외
+	implementation("it.ozimov:embedded-redis:${embeddedRedisVersion}") {
+		exclude(group = "org.slf4j", module = "slf4j-simple")
+		exclude(group = "commons-logging", module = "commons-logging")
+	}
 
 	compileOnly("org.projectlombok:lombok")
 	runtimeOnly("com.h2database:h2")
