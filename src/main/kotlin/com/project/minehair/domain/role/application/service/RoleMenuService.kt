@@ -4,6 +4,9 @@ import com.project.minehair.domain.role.adapter.`in`.web.dto.RoleMenuResponse
 import com.project.minehair.domain.role.application.port.`in`.RoleMenuUseCase
 import com.project.minehair.domain.role.application.port.out.domain.MenuDomainPort
 import com.project.minehair.domain.role.application.port.out.persistence.RoleMenuPersistencePort
+import com.project.minehair.global.enums.ErrorCode
+import com.project.minehair.global.exception.BusinessException
+import com.project.minehair.global.filter.context.JwtTokenContext
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -16,8 +19,11 @@ class RoleMenuService(
 
     override fun getMenusByRole(): List<RoleMenuResponse> {
 
+        val role = menuDomainPort.getRoleByCode(JwtTokenContext.getAuthorities().first())
+            ?: throw BusinessException(ErrorCode.NOT_FOUND, "role");
+
         // 1. 토큰을 조회하여, roleId를 가져온다
-        val roleId = 3L;
+        val roleId = role.id;
 
         // 1. role_menu 매핑 조회
         val roleMenus = roleMenuPersistencePort.findByRoleId(roleId)

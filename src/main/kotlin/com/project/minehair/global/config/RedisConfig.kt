@@ -1,39 +1,42 @@
 package com.project.minehair.global.config
 
-import jakarta.annotation.PostConstruct
-import jakarta.annotation.PreDestroy
+import org.springframework.beans.factory.annotation.Value
+import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import redis.embedded.RedisServer
-import java.io.IOException
-import java.net.ServerSocket
+import org.springframework.data.redis.connection.RedisConnectionFactory
+import org.springframework.data.redis.connection.RedisStandaloneConfiguration
+import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory
+import org.springframework.data.redis.core.RedisTemplate
+import org.springframework.data.redis.repository.configuration.EnableRedisRepositories
+import org.springframework.data.redis.serializer.StringRedisSerializer
 
 @Configuration
-class RedisConfig {
+@EnableRedisRepositories
+class RedisConfig(
+    @Value("\${spring.redis.host}") private val redisHost: String,
+    @Value("\${spring.redis.port}") private val redisPort: String
+) {
 
-    private lateinit var redisServer: RedisServer
-    private val redisPort = 6379
-
-    @PostConstruct
-    fun startRedis() {
-        if (!isPortInUse(redisPort)) {
-            redisServer = RedisServer(redisPort)
-            redisServer.start()
-            println("Redis server started on port $redisPort")
-        } else {
-            println("Redis server is already running on port $redisPort")
-        }
+    @Bean
+    fun redisConnectionFactory(): RedisConnectionFactory {
+        val redisConfig = RedisStandaloneConfiguration()
+        redisConfig.hostName = redisHost
+        redisConfig.port = redisPort.toInt()
+        return LettuceConnectionFactory(redisConfig)
     }
 
-    @PreDestroy
-    fun stopRedis() {
-        redisServer.stop()
-    }
+    @Bean
+    fun redisTemplate(): RedisTemplate<String, String> {
+        val template = RedisTemplate<String, String>()
+        template.setConnectionFactory(redisConnectionFactory())
 
-    private fun isPortInUse(port: Int): Boolean {
-        return try {
-            ServerSocket(port).use { false }
-        } catch (e: IOException) {
-            true
-        }
+        val stringSerializer = StringRedisSerializer()
+        template.keySerializer = stringSerializer
+        template.valueSerializer = stringSerializer
+        template.hashKeySerializer = stringSerializer
+        template.hashValueSerializer = stringSerializer
+
+        template.afterPropertiesSet()
+        return template
     }
 }

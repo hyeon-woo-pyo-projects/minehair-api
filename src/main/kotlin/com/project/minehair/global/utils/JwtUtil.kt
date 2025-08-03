@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Value
 import org.springframework.security.oauth2.jwt.*
 import org.springframework.stereotype.Component
 import java.time.Instant
+import java.time.LocalDateTime
+import java.time.ZoneId
 import java.time.temporal.ChronoUnit
 
 @Component
@@ -85,7 +87,7 @@ class JwtUtil(
     }
 
     /**
-     * 토큰 만료 시간 조회
+     * 토큰 만료 시간 조회 (Instant 반환)
      */
     fun getExpirationFromToken(token: String): Instant? {
         return try {
@@ -97,12 +99,74 @@ class JwtUtil(
     }
 
     /**
-     * 토큰 발급 시간 조회
+     * 토큰 발급 시간 조회 (Instant 반환)
      */
     fun getIssuedAtFromToken(token: String): Instant? {
         return try {
             val jwt = jwtDecoder.decode(token)
             jwt.issuedAt
+        } catch (e: JwtException) {
+            null
+        }
+    }
+
+    // ===== ThreadLocal Context에서 사용할 Long 타입 메서드들 추가 =====
+
+    /**
+     * 토큰 만료 시간을 Long (epochMilli)으로 반환 - ThreadLocal Context용
+     */
+    fun getExpirationFromTokenAsLong(token: String): Long {
+        return getExpirationFromToken(token)?.toEpochMilli() ?: 0L
+    }
+
+    /**
+     * 토큰 발급 시간을 Long (epochMilli)으로 반환 - ThreadLocal Context용
+     */
+    fun getIssuedAtFromTokenAsLong(token: String): Long {
+        return getIssuedAtFromToken(token)?.toEpochMilli() ?: 0L
+    }
+
+    /**
+     * 토큰 만료 시간을 LocalDateTime으로 반환
+     */
+    fun getExpirationAsLocalDateTime(token: String): LocalDateTime? {
+        return getExpirationFromToken(token)?.let { instant ->
+            LocalDateTime.ofInstant(instant, ZoneId.systemDefault())
+        }
+    }
+
+    /**
+     * 토큰 발급 시간을 LocalDateTime으로 반환
+     */
+    fun getIssuedAtAsLocalDateTime(token: String): LocalDateTime? {
+        return getIssuedAtFromToken(token)?.let { instant ->
+            LocalDateTime.ofInstant(instant, ZoneId.systemDefault())
+        }
+    }
+
+    /**
+     * 토큰이 곧 만료되는지 확인 (기본 5분)
+     */
+    fun isTokenExpiringSoon(token: String, thresholdMinutes: Int = 5): Boolean {
+        val remainingSeconds = getRemainingValidityInSeconds(token)
+        return remainingSeconds <= (thresholdMinutes * 60)
+    }
+
+    /**
+     * 토큰의 상세 정보를 반환하는 헬퍼 메서드
+     */
+    fun getTokenDetails(token: String): TokenDetails? {
+        return try {
+            val jwt = jwtDecoder.decode(token)
+            TokenDetails(
+                userId = jwt.subject,
+                issuedAt = jwt.issuedAt?.toEpochMilli() ?: 0L,
+                expiresAt = jwt.expiresAt?.toEpochMilli() ?: 0L,
+                remainingSeconds = getRemainingValidityInSeconds(token),
+                isExpiringSoon = isTokenExpiringSoon(token),
+                tokenType = jwt.getClaim("type") ?: "unknown",
+                roles = jwt.getClaimAsStringList("roles") ?: emptyList()
+            )
         } catch (e: JwtException) {
             null
         }
@@ -183,3 +247,14 @@ class JwtUtil(
         return refreshTokenExpiration
     }
 }
+
+// 토큰 상세 정보를 담는 데이터 클래스
+data class TokenDetails(
+    val userId: String,
+    val issuedAt: Long,
+    val expiresAt: Long,
+    val remainingSeconds: Long,
+    val isExpiringSoon: Boolean,
+    val tokenType: String,
+    val roles: List<String>
+)

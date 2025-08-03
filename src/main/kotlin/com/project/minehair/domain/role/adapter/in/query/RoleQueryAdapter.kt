@@ -14,4 +14,9 @@ class RoleQueryAdapter(
         val role = roleQueryService.findRoleById(id)
         return roleMapper.toInterDomainRoleInfo(role)
     }
+
+    fun getRoleByCode(roleCode: String): InterDomainRoleInfo? {
+        val role = roleQueryService.findRoleByCode(roleCode)
+        return roleMapper.toInterDomainRoleInfo(role)
+    }
 }

@@ -1,0 +1,29 @@
+---
+spring:
+  config:
+    activate:
+      on-profile: local
+
+  redis:
+    host: localhost
+    port: 6379
+
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+  redis:
+    host: localhost
+    port: 6379
+
+---
+spring:
+  config:
+    activate:
+      on-profile: prd
+
+  redis:
+    host: localhost
+    port: 6379

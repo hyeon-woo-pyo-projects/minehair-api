@@ -13,7 +13,7 @@ class RedisUtil(
         return redisTemplate.opsForValue().get(key)
     }
 
-    fun setRedisValue (key: String, value: String, timeout: Long, timeUnit: TimeUnit) {
+    fun setRedisValue(key: String, value: String, timeout: Long, timeUnit: TimeUnit) {
         redisTemplate.opsForValue().set(key, value, timeout, timeUnit)
     }
 
@@ -21,7 +21,7 @@ class RedisUtil(
         redisTemplate.opsForHash<String, String>().putAll(key, valueMap)
     }
 
-    fun setExpire (key: String, timeout: Long, timeUnit: TimeUnit) {
+    fun setExpire(key: String, timeout: Long, timeUnit: TimeUnit) {
         redisTemplate.expire(key, timeout, timeUnit)
     }
 

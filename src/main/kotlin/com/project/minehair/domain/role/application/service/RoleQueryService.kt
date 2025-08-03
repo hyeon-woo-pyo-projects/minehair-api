@@ -16,4 +16,8 @@ class RoleQueryService (
     override fun findRoleById(id: Long): Role {
         return rolePersistencePort.findRoleById(id)
     }
+
+    override fun findRoleByCode(roleCode: String): Role {
+        return rolePersistencePort.findRoleByCode(roleCode)
+    }
 }

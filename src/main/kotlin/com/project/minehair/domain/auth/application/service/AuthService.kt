@@ -25,7 +25,7 @@ class AuthService(
     private val passwordEncoder: PasswordEncoder,
     private val jwtUtil: JwtUtil,
     private val redisUtil: RedisUtil
-): AuthUseCase {
+) : AuthUseCase {
 
     override fun login(loginRequest: LoginRequest): LoginResponse {
 
@@ -61,13 +61,13 @@ class AuthService(
             "user:${loginRequest.userId}:accessToken",
             accessToken,
             jwtUtil.getAccessTokenExpiration(),
-            TimeUnit.MILLISECONDS
+            TimeUnit.MINUTES
         )
         redisUtil.setRedisValue(
             "user:${loginRequest.userId}:refreshToken",
             refreshToken,
             jwtUtil.getRefreshTokenExpiration(),
-            TimeUnit.MILLISECONDS
+            TimeUnit.MINUTES
         )
 
         return LoginResponse(

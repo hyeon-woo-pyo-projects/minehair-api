@@ -19,12 +19,19 @@ class RolePersistenceAdapter(
             }
     }
 
-    override fun findRoleById(roleId: Long): Role {
-        return roleJpaRepository.findById(roleId)
+    override fun findRoleById(id: Long): Role {
+        return roleJpaRepository.findById(id)
             .map { roleEntity ->
                 roleMapper.toDomain(roleEntity)
             }
             .orElseThrow { BusinessException(ErrorCode.NOT_FOUND) }
+    }
+
+    override fun findRoleByCode(code: String): Role {
+        return roleJpaRepository.findByCode(code)
+            ?.let { roleEntity ->
+                roleMapper.toDomain(roleEntity)
+            } ?: throw BusinessException(ErrorCode.NOT_FOUND)
     }
 
 }

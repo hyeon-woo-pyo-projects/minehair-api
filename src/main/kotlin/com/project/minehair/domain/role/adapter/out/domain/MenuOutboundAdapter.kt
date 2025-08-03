@@ -1,8 +1,10 @@
 package com.project.minehair.domain.role.adapter.out.domain
 
 import com.project.minehair.domain.menu.adapter.`in`.query.MenuQueryAdapter
+import com.project.minehair.domain.role.adapter.`in`.query.RoleQueryAdapter
 import com.project.minehair.domain.role.application.port.out.domain.MenuDomainPort
 import com.project.minehair.global.domain.inter.InterDomainMenuInfo
+import com.project.minehair.global.domain.inter.InterDomainRoleInfo
 import org.springframework.stereotype.Component
 
 /**
@@ -11,7 +13,8 @@ import org.springframework.stereotype.Component
  */
 @Component
 class MenuOutboundAdapter(
-    private val menuQueryAdapter: MenuQueryAdapter
+    private val menuQueryAdapter: MenuQueryAdapter,
+    private val roleQueryAdapter: RoleQueryAdapter
 ) : MenuDomainPort {
 
     override fun getMenusByIds(menuIds: List<Long>): List<InterDomainMenuInfo> {
@@ -46,6 +49,16 @@ class MenuOutboundAdapter(
         } catch (e: Exception) {
             // Menu가 없는 경우 null 반환
             null
+        }
+    }
+
+    override fun getRoleByCode(roleCode: String): InterDomainRoleInfo? {
+        return roleQueryAdapter.getRoleByCode(roleCode)?.let { role ->
+            InterDomainRoleInfo(
+                id = role.id,
+                code = role.code,
+                name = role.name,
+            )
         }
     }
 }

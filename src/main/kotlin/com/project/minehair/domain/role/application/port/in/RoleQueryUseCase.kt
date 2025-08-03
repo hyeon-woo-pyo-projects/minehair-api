@@ -4,7 +4,10 @@ import com.project.minehair.domain.role.domain.Role
 
 interface RoleQueryUseCase {
 
-    // id
+    // id로 조회
     fun findRoleById(id: Long): Role
+
+    // code로 조회
+    fun findRoleByCode(roleCode: String): Role?
 
 }
