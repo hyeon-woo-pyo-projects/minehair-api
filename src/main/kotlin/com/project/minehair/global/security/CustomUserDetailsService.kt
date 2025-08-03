@@ -18,8 +18,11 @@ class CustomUserDetailsService(
         val user = authDomainPort.getUserByUserId(userId)
             ?: throw BusinessException(ErrorCode.USER_NOT_FOUND)
 
+        val role = authDomainPort.getRoleById(user.roleId)
+            ?: throw BusinessException(ErrorCode.NOT_FOUND, "role")
+
         val authorities = mutableListOf<SimpleGrantedAuthority>()
-        authorities.add(SimpleGrantedAuthority("ROLE_${user.userType}")) // 예: ROLE_USER, ROLE_ADMIN
+        authorities.add(SimpleGrantedAuthority("ROLE_${role.code}")) // 예: ROLE_USER, ROLE_ADMIN
 
         return User.builder()
             .username(user.userId)

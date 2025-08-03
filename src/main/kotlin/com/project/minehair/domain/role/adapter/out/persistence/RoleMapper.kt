@@ -1,6 +1,8 @@
 package com.project.minehair.domain.role.adapter.out.persistence
 
 import com.project.minehair.domain.role.domain.Role
+import com.project.minehair.global.domain.inter.InterDomainRoleInfo
+import com.project.minehair.global.domain.inter.InterDomainUserInfo
 import org.springframework.stereotype.Component
 
 @Component
@@ -39,6 +41,14 @@ class RoleMapper {
             createdAt = domain.createdAt,
             updatedId = domain.updatedId,
             updatedAt = domain.updatedAt
+        )
+    }
+
+    fun toInterDomainRoleInfo(role: Role): InterDomainRoleInfo {
+        return InterDomainRoleInfo(
+            id = role.id!!,
+            code = role.code,
+            name = role.name
         )
     }
 }

@@ -110,6 +110,7 @@ class UserMapper {
     fun toInterDomainUserInfo(user: User): InterDomainUserInfo {
         return InterDomainUserInfo(
             id = user.id!!,
+            roleId = user.roleId,
             userId = user.userId,
             password = user.password,
             userType = user.userType,

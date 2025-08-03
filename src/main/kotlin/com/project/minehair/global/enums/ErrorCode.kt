@@ -25,6 +25,8 @@ enum class ErrorCode(
     RESOURCE_NOT_FOUND("RESOURCE_NOT_FOUND", HttpStatus.NOT_FOUND, "요청한 리소스를 찾을 수 없습니다."),
     USER_NOT_FOUND("USER_NOT_FOUND", HttpStatus.NOT_FOUND, "사용자를 찾을 수 없습니다."),
 
+    NOT_FOUND("NOT_FOUND", HttpStatus.NOT_FOUND, "데이터를 찾을 수 없습니다."),
+
     CONFLICT("CONFLICT", HttpStatus.CONFLICT, "리소스 충돌이 발생했습니다."),
     DUPLICATE_EMAIL("DUPLICATE_EMAIL", HttpStatus.CONFLICT, "이미 존재하는 이메일입니다."),
     DUPLICATE_USERID("DUPLICATE_USER_ID", HttpStatus.CONFLICT, "이미 존재하는 사용자명입니다."),
@@ -39,4 +41,7 @@ enum class ErrorCode(
     INTERNAL_SERVER_ERROR("INTERNAL_SERVER_ERROR", HttpStatus.INTERNAL_SERVER_ERROR, "서버 내부 오류가 발생했습니다."),
     DATABASE_ERROR("DATABASE_ERROR", HttpStatus.INTERNAL_SERVER_ERROR, "데이터베이스 오류가 발생했습니다."),
     EXTERNAL_API_ERROR("EXTERNAL_API_ERROR", HttpStatus.INTERNAL_SERVER_ERROR, "외부 API 호출에 실패했습니다."),
+
+
+
 }

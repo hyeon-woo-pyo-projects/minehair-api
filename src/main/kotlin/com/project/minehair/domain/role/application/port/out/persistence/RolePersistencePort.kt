@@ -9,4 +9,9 @@ interface RolePersistencePort {
      */
     fun findAllRoles(): List<Role>
 
+    /**
+     * 역할 ID로 역할 조회
+     */
+    fun findRoleById(roleId: Long): Role
+
 }
