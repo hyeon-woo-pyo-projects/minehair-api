@@ -4,7 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface UserJpaRepository : JpaRepository<UserEntity, Long> {
+interface UserJpaRepository : JpaRepository<UserJpaEntity, Long> {
 
     /**
      * 사용자 ID로 존재 여부 확인
@@ -19,10 +19,10 @@ interface UserJpaRepository : JpaRepository<UserEntity, Long> {
     /**
      * 사용자 ID로 사용자 조회
      */
-    fun findByUserId(userId: String): UserEntity?
+    fun findByUserId(userId: String): UserJpaEntity?
 
     /**
      * 이메일로 사용자 조회
      */
-    fun findByEmail(email: String): UserEntity?
+    fun findByEmail(email: String): UserJpaEntity?
 }

@@ -3,7 +3,7 @@ package com.project.minehair.domain.user.domain
 import com.project.minehair.domain.user.adapter.`in`.web.dto.UserCreateRequest
 import com.project.minehair.domain.user.adapter.`in`.web.dto.UserResponse
 import com.project.minehair.domain.user.adapter.`in`.web.dto.UserUpdateRequest
-import com.project.minehair.domain.user.adapter.out.persistence.UserEntity
+import com.project.minehair.domain.user.adapter.out.persistence.UserJpaEntity
 import com.project.minehair.global.domain.inter.InterDomainUserInfo
 import com.project.minehair.global.enums.Status
 import org.springframework.stereotype.Component
@@ -67,8 +67,8 @@ class UserMapper {
     /**
      * Domain User -> JPA UserEntity 변환
      */
-    fun toEntity(user: User): UserEntity {
-        return UserEntity(
+    fun toEntity(user: User): UserJpaEntity {
+        return UserJpaEntity(
             id = user.id,
             roleId = user.roleId,
             userId = user.userId,
@@ -84,7 +84,7 @@ class UserMapper {
     /**
      * JPA UserEntity -> Domain User 변환
      */
-    fun toDomain(entity: UserEntity): User {
+    fun toDomain(entity: UserJpaEntity): User {
         return User(
             id = entity.id,
             roleId = entity.roleId,
@@ -103,13 +103,16 @@ class UserMapper {
     /**
      * List<UserEntity> -> List<User> 변환
      */
-    fun toDomainList(entities: List<UserEntity>): List<User> {
+    fun toDomainList(entities: List<UserJpaEntity>): List<User> {
         return entities.map { toDomain(it) }
     }
 
     fun toInterDomainUserInfo(user: User): InterDomainUserInfo {
         return InterDomainUserInfo(
-            id = user.id!!
+            id = user.id!!,
+            userId = user.userId,
+            password = user.password,
+            userType = user.userType,
         )
     }
 }

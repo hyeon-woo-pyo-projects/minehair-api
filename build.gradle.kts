@@ -51,11 +51,17 @@ dependencies {
 	// Swagger
 	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:$springdocVersion")
 
+	// Redis
+	implementation("org.springframework.boot:spring-boot-starter-data-redis")
+
 	// Embeded Redis - 로깅 충돌을 일으킬 수 있는 의존성 제외
 	implementation("it.ozimov:embedded-redis:${embeddedRedisVersion}") {
 		exclude(group = "org.slf4j", module = "slf4j-simple")
 		exclude(group = "commons-logging", module = "commons-logging")
 	}
+
+	// Spring Security OAuth2 Resource Server
+	implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server")
 
 	compileOnly("org.projectlombok:lombok")
 	runtimeOnly("com.h2database:h2")

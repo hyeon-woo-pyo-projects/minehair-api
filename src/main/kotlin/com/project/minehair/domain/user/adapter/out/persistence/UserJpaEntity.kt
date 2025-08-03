@@ -8,7 +8,7 @@ import java.time.LocalDateTime
 
 @Entity
 @Table(name = "users",)
-class UserEntity(
+class UserJpaEntity(
 
     @Column(name = "role_id")
     val roleId: Long,

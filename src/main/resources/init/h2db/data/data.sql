@@ -87,11 +87,11 @@ INSERT IGNORE INTO users (
 ) VALUES (
     1,
     'system',
-    HASH('SHA256', STRINGTOUTF8('bWluZWhhaXI=')),
+    '$2a$10$nZDAWUA7.IVQn62NSya4ueQaV.eRGFrweOHTWMvAtRtrSwMZwcl5S',
     '시스템',
     '010-0000-0000',
     'system@example.com',
-    'admin',
+    'ADMIN',
     'active',
     1,
     NOW(),

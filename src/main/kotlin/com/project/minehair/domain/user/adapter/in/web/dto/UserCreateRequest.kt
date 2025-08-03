@@ -10,6 +10,6 @@ data class UserCreateRequest(
     val password: String,
     val name: String,
     val phone: String,
-    val userType: UserType = UserType.member
+    val userType: UserType = UserType.MEMBER
 
 )

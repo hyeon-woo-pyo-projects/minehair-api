@@ -12,6 +12,9 @@ enum class ErrorCode(
     INVALID_PARAMETER("INVALID_PARAMETER", HttpStatus.BAD_REQUEST, "잘못된 파라미터입니다."),
     MISSING_REQUIRED_FIELD("MISSING_REQUIRED_FIELD", HttpStatus.BAD_REQUEST, "필수 필드가 누락되었습니다."),
 
+    INVALID_CREDENTIALS("INVALID_CREDENTIALS", HttpStatus.UNAUTHORIZED, "잘못된 인증 정보 입니다."),
+    AUTHENTICATION_FAILED("AUTHENTICATION_FAILED", HttpStatus.UNAUTHORIZED, "인증에 실패했습니다."),
+
     UNAUTHORIZED("UNAUTHORIZED", HttpStatus.UNAUTHORIZED, "인증이 필요합니다."),
     INVALID_TOKEN("INVALID_TOKEN", HttpStatus.UNAUTHORIZED, "유효하지 않은 토큰입니다."),
     TOKEN_EXPIRED("TOKEN_EXPIRED", HttpStatus.UNAUTHORIZED, "토큰이 만료되었습니다."),

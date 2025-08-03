@@ -14,7 +14,9 @@ class AuthOutboundAdapter(
         return userQueryAdapter.getUserByUserId(userId)?.let { user ->
             InterDomainUserInfo(
                 id = user.id,
-                // 필요한 다른 필드들도 추가 가능
+                userId = user.userId,
+                password = user.password,
+                userType = user.userType
             )
         }
     }
