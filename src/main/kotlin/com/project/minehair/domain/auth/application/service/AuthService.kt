@@ -72,7 +72,8 @@ class AuthService(
 
         return LoginResponse(
             accessToken = accessToken,
-            refreshToken = refreshToken
+            refreshToken = refreshToken,
+            authorities.first()
         )
     }
 
