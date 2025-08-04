@@ -104,7 +104,7 @@ INSERT IGNORE INTO banner (
     content,
     color,
     link,
-    is_post
+    is_post,
     status,
     created_id,
     created_at,
@@ -114,8 +114,8 @@ INSERT IGNORE INTO banner (
     '새로운 배너를 추가해보세요.',
     '#FF5733',
     'https://example.com',
-    'active',
     true,
+    'active',
     1,
     NOW(),
     1,
