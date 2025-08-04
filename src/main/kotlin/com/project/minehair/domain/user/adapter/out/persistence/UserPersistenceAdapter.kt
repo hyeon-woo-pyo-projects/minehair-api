@@ -3,6 +3,7 @@ package com.project.minehair.domain.user.adapter.out.persistence
 import com.project.minehair.domain.user.application.port.out.UserPersistencePort
 import com.project.minehair.domain.user.domain.User
 import com.project.minehair.domain.user.domain.UserMapper
+import com.project.minehair.global.enums.Status
 import com.project.minehair.global.utils.CryptoUtil
 import org.springframework.stereotype.Component
 
@@ -14,16 +15,16 @@ class UserPersistenceAdapter(
 ) : UserPersistencePort {
 
     override fun existsByUserId(userId: String): Boolean {
-        return userJpaRepository.existsByUserId(userId)
+        return userJpaRepository.existsByUserIdAndStatus(userId, Status.active)
     }
 
     override fun existsByEmail(email: String): Boolean {
-        return userJpaRepository.existsByEmail(email)
+        return userJpaRepository.existsByEmailAndStatus(email, Status.active)
     }
 
     override fun existsByPhone(phone: String): Boolean {
         val phoneHash = cryptoUtil.hashForSearch(phone)
-        return userJpaRepository.existsByPhoneHash(phoneHash)
+        return userJpaRepository.existsByPhoneHashAndStatus(phoneHash, Status.active)
     }
 
     override fun save(user: User) {
