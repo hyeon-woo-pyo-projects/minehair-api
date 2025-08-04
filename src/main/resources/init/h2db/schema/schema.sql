@@ -18,7 +18,7 @@ ALTER TABLE menu ADD CONSTRAINT uq_menu_name_parent UNIQUE (name, parent_id);
 
 CREATE TABLE IF NOT EXISTS role (
     id bigint auto_increment primary key comment 'ID',
-    code varchar(50) not null unique comment '역할 코드 (예: ADMIN, USER, GUEST)',
+    code varchar(50) not null unique comment '역할 코드 (예: ROLE_ADMIN, ROLE_USER, ROLE_GUEST)',
     name varchar(100) not null comment '역할 이름',
     description varchar(255) null comment '역할 설명',
     priority int not null default 0 comment '역할 우선순위',
@@ -48,13 +48,14 @@ CREATE TABLE IF NOT EXISTS users (
     user_id VARCHAR(100) NOT NULL COMMENT '사용자명',
     password VARCHAR(255) NOT NULL COMMENT '비밀번호',
     name VARCHAR(100) NOT NULL COMMENT '이름',
-    phone VARCHAR(20) NULL COMMENT '전화번호',
+    phone VARCHAR(255) NOT NULL COMMENT '전화번호',
+    phone_hash VARCHAR(255) NOT NULL COMMENT '전화번호 해시',
     email VARCHAR(255) NULL COMMENT '이메일',
-    user_type VARCHAR(20) NOT NULL DEFAULT 'member' COMMENT '사용자 유형 (member: 회원, admin: 관리자)',
     status VARCHAR(20) NOT NULL DEFAULT 'active' COMMENT '상태',
     created_id BIGINT NOT NULL COMMENT '생성자 ID',
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '생성 시간',
     updated_id BIGINT NOT NULL COMMENT '수정자 ID',
     updated_at DATETIME NULL COMMENT '수정 시간',
-    CONSTRAINT uq_users_user_id_user_type UNIQUE (user_id, user_type)
+    CONSTRAINT uq_users_user_id_status UNIQUE (user_id, status),
+    CONSTRAINT uq_users_phone_hash UNIQUE (phone_hash)
 ) COMMENT '사용자 테이블 (회원/관리자 통합)' CHARSET=utf8mb4;

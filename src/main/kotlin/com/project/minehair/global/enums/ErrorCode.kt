@@ -29,6 +29,7 @@ enum class ErrorCode(
 
     CONFLICT("CONFLICT", HttpStatus.CONFLICT, "리소스 충돌이 발생했습니다."),
     DUPLICATE_EMAIL("DUPLICATE_EMAIL", HttpStatus.CONFLICT, "이미 존재하는 이메일입니다."),
+    DUPLICATE_PHONE("DUPLICATE_PHONE", HttpStatus.CONFLICT, "이미 존재하는 전화번호입니다."),
     DUPLICATE_USERID("DUPLICATE_USER_ID", HttpStatus.CONFLICT, "이미 존재하는 사용자명입니다."),
 
     // Business Rule Violations

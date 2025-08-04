@@ -1,13 +1,14 @@
 package com.project.minehair.domain.user.adapter.out.persistence
 
-import com.project.minehair.domain.user.domain.UserType
 import com.project.minehair.global.entity.BaseJpaEntity
 import com.project.minehair.global.enums.Status
-import jakarta.persistence.*
+import jakarta.persistence.Column
+import jakarta.persistence.Entity
+import jakarta.persistence.Table
 import java.time.LocalDateTime
 
 @Entity
-@Table(name = "users",)
+@Table(name = "users")
 class UserJpaEntity(
 
     @Column(name = "role_id")
@@ -25,12 +26,11 @@ class UserJpaEntity(
     @Column(name = "phone")
     val phone: String,
 
+    @Column(name = "phone_hash")
+    val phoneHash: String,
+
     @Column(name = "email")
     val email: String?,
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "user_type")
-    val userType: UserType,
 
     // BaseJpaEntity 필드들 override
     override val id: Long? = null,
@@ -40,5 +40,5 @@ class UserJpaEntity(
     override val updatedId: Long? = 0L,
     override val updatedAt: LocalDateTime? = null
 
-) : BaseJpaEntity(id, status, createdId, createdAt, updatedId, updatedAt)  {
+) : BaseJpaEntity(id, status, createdId, createdAt, updatedId, updatedAt) {
 }

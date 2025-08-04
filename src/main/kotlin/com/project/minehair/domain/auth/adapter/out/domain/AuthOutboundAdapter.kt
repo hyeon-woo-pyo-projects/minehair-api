@@ -20,7 +20,6 @@ class AuthOutboundAdapter(
                 roleId = user.roleId,
                 userId = user.userId,
                 password = user.password,
-                userType = user.userType
             )
         }
     }

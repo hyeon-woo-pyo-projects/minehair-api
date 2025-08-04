@@ -5,7 +5,7 @@ import com.project.minehair.domain.user.application.port.`in`.UserUseCase
 import com.project.minehair.global.response.BaseResponse
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
-import org.springframework.web.bind.annotation.GetMapping
+import jakarta.validation.Valid
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -18,18 +18,18 @@ class UserController(
     private val userUseCase: UserUseCase
 ) {
 
-    @Operation(summary = "회원 조회", description = "회원 조회")
-    @GetMapping
-    fun list(@RequestBody request: UserCreateRequest): BaseResponse<Nothing?> {
-        return BaseResponse.ok()
-    }
-
     @Operation(summary = "회원 가입", description = "회원 가입")
     @PostMapping
-    fun createUser(@RequestBody request: UserCreateRequest): BaseResponse<Nothing?> {
+    fun createUser(@Valid @RequestBody request: UserCreateRequest): BaseResponse<Nothing?> {
         userUseCase.createUser(request)
         return BaseResponse.ok()
     }
+
+//    @Operation(summary = "회원 조회", description = "회원 조회")
+//    @GetMapping
+//    fun list(@RequestBody request: UserCreateRequest): BaseResponse<Nothing?> {
+//        return BaseResponse.ok()
+//    }
 
 //    /**
 //     * 사용자 조회 (ID로)

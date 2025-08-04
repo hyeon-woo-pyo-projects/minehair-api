@@ -12,22 +12,6 @@ import org.springframework.stereotype.Component
 class UserMapper {
 
     /**
-     * UserCreateRequest -> Domain User 변환
-     */
-    fun toDomain(request: UserCreateRequest, encodedPassword: String): User {
-        return User(
-            roleId = 1L,
-            userId = request.userId,
-            email = request.email,
-            password = encodedPassword,
-            name = request.name,
-            phone = request.phone,
-            userType = request.userType,
-            status = Status.active
-        )
-    }
-
-    /**
      * Domain User -> UserResponse 변환
      */
     fun toResponse(user: User): UserResponse {
@@ -37,7 +21,6 @@ class UserMapper {
             email = user.email,
             name = user.name,
             phoneNumber = user.phone,
-            userType = user.userType,
             status = user.status,
             createdAt = user.createdAt,
             updatedAt = user.updatedAt
@@ -60,7 +43,6 @@ class UserMapper {
             email = request.email,
             name = request.name,
             phone = request.phone,
-            userType = request.userType
         )
     }
 
@@ -76,7 +58,7 @@ class UserMapper {
             password = user.password,
             name = user.name,
             phone = user.phone,
-            userType = user.userType,
+            phoneHash = user.phoneHash,
             status = user.status
         )
     }
@@ -93,7 +75,7 @@ class UserMapper {
             password = entity.password,
             name = entity.name,
             phone = entity.phone,
-            userType = entity.userType,
+            phoneHash = entity.phoneHash,
             status = entity.status,
             createdAt = entity.createdAt,
             updatedAt = entity.updatedAt
@@ -113,7 +95,6 @@ class UserMapper {
             roleId = user.roleId,
             userId = user.userId,
             password = user.password,
-            userType = user.userType,
         )
     }
 }

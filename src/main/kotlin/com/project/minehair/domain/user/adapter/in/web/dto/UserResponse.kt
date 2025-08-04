@@ -1,7 +1,6 @@
 package com.project.minehair.domain.user.adapter.`in`.web.dto
 
 import com.project.minehair.domain.user.domain.User
-import com.project.minehair.domain.user.domain.UserType
 import com.project.minehair.global.enums.Status
 import java.time.LocalDateTime
 
@@ -12,7 +11,6 @@ data class UserResponse(
     val email: String?,
     val name: String,
     val phoneNumber: String?,
-    val userType: UserType,
     val status: Status,
     val createdAt: LocalDateTime,
     val updatedAt: LocalDateTime?
@@ -25,7 +23,6 @@ data class UserResponse(
                 email = user.email,
                 name = user.name,
                 phoneNumber = user.phone,
-                userType = user.userType,
                 status = user.status,
                 createdAt = user.createdAt,
                 updatedAt = user.updatedAt

@@ -1,6 +1,5 @@
 package com.project.minehair.domain.user.adapter.`in`.web.dto
 
-import com.project.minehair.domain.user.domain.UserType
 import jakarta.validation.constraints.Email
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.Pattern
@@ -21,6 +20,4 @@ data class UserUpdateRequest(
         message = "전화번호는 010-1234-5678 형식이어야 합니다."
     )
     val phone: String,
-
-    val userType: UserType
 )

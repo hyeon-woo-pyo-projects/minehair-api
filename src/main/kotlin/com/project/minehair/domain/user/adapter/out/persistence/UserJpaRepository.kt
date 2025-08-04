@@ -17,6 +17,11 @@ interface UserJpaRepository : JpaRepository<UserJpaEntity, Long> {
     fun existsByEmail(email: String): Boolean
 
     /**
+     * 전화번호로 존재 여부 확인
+     */
+    fun existsByPhoneHash(phoneHash: String): Boolean
+
+    /**
      * 사용자 ID로 사용자 조회
      */
     fun findByUserId(userId: String): UserJpaEntity?

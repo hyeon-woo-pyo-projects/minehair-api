@@ -2,11 +2,13 @@ package com.project.minehair.domain.user.application.service
 
 import com.project.minehair.domain.user.adapter.`in`.web.dto.UserCreateRequest
 import com.project.minehair.domain.user.application.port.`in`.UserUseCase
-import com.project.minehair.domain.user.application.port.out.persistence.UserPersistencePort
+import com.project.minehair.domain.user.application.port.out.UserDomainPort
+import com.project.minehair.domain.user.application.port.out.UserPersistencePort
 import com.project.minehair.domain.user.domain.User
 import com.project.minehair.global.enums.ErrorCode
 import com.project.minehair.global.enums.Status
 import com.project.minehair.global.exception.BusinessException
+import com.project.minehair.global.utils.CryptoUtil
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -16,7 +18,9 @@ import java.time.LocalDateTime
 @Transactional(readOnly = true)
 class UserService(
     private val userPersistencePort: UserPersistencePort,
-    private val passwordEncoder: PasswordEncoder
+    private val userDomainPort: UserDomainPort,
+    private val passwordEncoder: PasswordEncoder,
+    private val cryptoUtil: CryptoUtil
 ) : UserUseCase {
 
     @Transactional
@@ -31,23 +35,29 @@ class UserService(
             throw BusinessException(ErrorCode.DUPLICATE_EMAIL)
         }
 
-        val encodedPassword = passwordEncoder.encode(request.password)
+        // 전화번호 중복 확인
+        if (userPersistencePort.existsByPhone(request.phone)) {
+            throw BusinessException(ErrorCode.DUPLICATE_PHONE)
+        }
+
+        // ROLE_USER 조회
+        val role = userDomainPort.getRoleByCode("ROLE_USER")
+            ?: throw BusinessException(ErrorCode.NOT_FOUND, "role")
 
         val user = User(
             id = null,
-            roleId = 1L,
+            roleId = role.id,
             userId = request.userId,
             email = request.email,
-            password = encodedPassword,
+            password = passwordEncoder.encode(request.password),
             name = request.name,
-            phone = request.phone,
-            userType = request.userType,
+            phone = cryptoUtil.encrypt(request.phone),
+            phoneHash = cryptoUtil.hashForSearch(request.phone),
             status = Status.active,
             createdId = 1L,
             createdAt = LocalDateTime.now(),
             updatedId = 1L,
             updatedAt = null
-
         )
         userPersistencePort.save(user)
     }

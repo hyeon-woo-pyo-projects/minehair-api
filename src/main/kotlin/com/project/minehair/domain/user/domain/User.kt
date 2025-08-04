@@ -11,7 +11,7 @@ data class User(
     val password: String,
     val name: String,
     val phone: String,
-    val userType: UserType,
+    val phoneHash: String,
 
     override val id: Long? = null,
     override val status: Status = Status.active,
@@ -25,13 +25,11 @@ data class User(
         email: String,
         name: String,
         phone: String,
-        userType: UserType
     ): User {
         return copy(
             email = email,
             name = name,
             phone = phone,
-            userType = userType,
             updatedAt = LocalDateTime.now()
         )
     }
