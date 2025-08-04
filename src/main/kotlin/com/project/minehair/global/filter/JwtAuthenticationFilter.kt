@@ -34,6 +34,7 @@ class JwtAuthenticationFilter(
         return when {
             path.startsWith("/api/auth") -> true
             path.startsWith("/health") -> true
+            path.startsWith("/api/user") && request.method == "POST" -> true
             // 개발 도구들
             // path.startsWith("/h2-console/") -> true
             // path.startsWith("/v3/api-docs/") -> true
