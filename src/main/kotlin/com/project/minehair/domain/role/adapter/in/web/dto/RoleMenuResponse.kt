@@ -4,7 +4,7 @@ import com.project.minehair.global.enums.Status
 
 data class RoleMenuResponse(
     val menuId: Long,
-    val parantId: Long?,
+    val parentId: Long?,
     val menuName: String,
     val menuPath: String,
     val menuOrderNo: Int,

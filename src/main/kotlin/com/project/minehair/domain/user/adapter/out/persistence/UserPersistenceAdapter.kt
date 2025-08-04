@@ -33,7 +33,7 @@ class UserPersistenceAdapter(
     }
 
     override fun findUserByUserId(userId: String): User {
-        val userEntity = userJpaRepository.findByUserId(userId)
+        val userEntity = userJpaRepository.findByUserIdAndStatus(userId, Status.active)
             ?: throw IllegalArgumentException("User with userId $userId not found")
         return userMapper.toDomain(userEntity)
     }

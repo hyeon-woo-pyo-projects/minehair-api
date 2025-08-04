@@ -1,11 +1,9 @@
 package com.project.minehair.domain.user.domain
 
-import com.project.minehair.domain.user.adapter.`in`.web.dto.UserCreateRequest
 import com.project.minehair.domain.user.adapter.`in`.web.dto.UserResponse
 import com.project.minehair.domain.user.adapter.`in`.web.dto.UserUpdateRequest
 import com.project.minehair.domain.user.adapter.out.persistence.UserJpaEntity
 import com.project.minehair.global.domain.inter.InterDomainUserInfo
-import com.project.minehair.global.enums.Status
 import org.springframework.stereotype.Component
 
 @Component

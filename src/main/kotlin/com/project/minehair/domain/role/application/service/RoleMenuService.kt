@@ -40,7 +40,7 @@ class RoleMenuService(
             menu?.let {
                 RoleMenuResponse(
                     menuId = roleMenu.menuId,
-                    parantId = it.parentId,
+                    parentId = it.parentId,
                     menuName = it.name,
                     menuPath = it.path,
                     menuOrderNo = it.orderNo,
@@ -62,7 +62,7 @@ class RoleMenuService(
 
         return RoleMenuResponse(
             menuId = roleMenu.menuId,
-            parantId = menu.parentId,
+            parentId = menu.parentId,
             menuName = menu.name,
             menuPath = menu.path,
             menuOrderNo = menu.orderNo,

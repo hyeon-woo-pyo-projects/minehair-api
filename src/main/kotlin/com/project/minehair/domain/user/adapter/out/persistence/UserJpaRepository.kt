@@ -25,10 +25,10 @@ interface UserJpaRepository : JpaRepository<UserJpaEntity, Long> {
     /**
      * 사용자 ID로 사용자 조회
      */
-    fun findByUserId(userId: String): UserJpaEntity?
+    fun findByUserIdAndStatus(userId: String, status: Status): UserJpaEntity?
 
     /**
      * 이메일로 사용자 조회
      */
-    fun findByEmail(email: String): UserJpaEntity?
+    fun findByEmailAndStatus(email: String, status: Status): UserJpaEntity?
 }

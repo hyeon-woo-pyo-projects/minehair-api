@@ -59,3 +59,17 @@ CREATE TABLE IF NOT EXISTS users (
     CONSTRAINT uq_users_user_id_status UNIQUE (user_id, status),
     CONSTRAINT uq_users_phone_hash UNIQUE (phone_hash)
 ) COMMENT '사용자 테이블 (회원/관리자 통합)' CHARSET=utf8mb4;
+
+-- 커스텀배너 테이블
+CREATE TABLE IF NOT EXISTS banner (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT 'ID',
+    content TEXT NOT NULL COMMENT '배너 내용',
+    color VARCHAR(10) NOT NULL COMMENT '배너 색상',
+    link TEXT NOT NULL COMMENT '배너 링크',
+    is_post BOOLEAN NOT NULL DEFAULT false COMMENT '게시 여부',
+    status VARCHAR(20) NOT NULL DEFAULT 'active' COMMENT '상태',
+    created_id BIGINT NOT NULL COMMENT '생성자 ID',
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '생성 시간',
+    updated_id BIGINT NOT NULL COMMENT '수정자 ID',
+    updated_at DATETIME NULL COMMENT '수정 시간'
+) COMMENT '배너 테이블' CHARSET=utf8mb4;
