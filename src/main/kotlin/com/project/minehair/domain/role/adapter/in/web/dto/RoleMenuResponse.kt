@@ -7,6 +7,7 @@ data class RoleMenuResponse(
     val parentId: Long?,
     val menuName: String,
     val menuPath: String,
+    val imageUrl: String?,
     val menuOrderNo: Int,
     val menuVisible: Boolean,
     val status: Status

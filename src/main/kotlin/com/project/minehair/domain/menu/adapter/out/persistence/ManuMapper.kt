@@ -53,6 +53,7 @@ class MenuMapper {
             parentId = domain.parentId,
             name = domain.name,
             path = domain.path,
+            imageUrl = domain.imageUrl,
             orderNo = domain.orderNo,
             visible = domain.visible
         )

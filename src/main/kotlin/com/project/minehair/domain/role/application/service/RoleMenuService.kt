@@ -43,6 +43,7 @@ class RoleMenuService(
                     parentId = it.parentId,
                     menuName = it.name,
                     menuPath = it.path,
+                    imageUrl = it.imageUrl,
                     menuOrderNo = it.orderNo,
                     menuVisible = it.visible,
                     status = roleMenu.status
@@ -65,6 +66,7 @@ class RoleMenuService(
             parentId = menu.parentId,
             menuName = menu.name,
             menuPath = menu.path,
+            imageUrl = menu.imageUrl,
             menuOrderNo = menu.orderNo,
             menuVisible = menu.visible,
             status = roleMenu.status

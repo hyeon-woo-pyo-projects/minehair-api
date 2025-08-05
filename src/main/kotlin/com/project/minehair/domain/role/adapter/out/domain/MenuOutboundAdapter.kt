@@ -29,6 +29,7 @@ class MenuOutboundAdapter(
                     parentId = menu.parentId,
                     name = menu.name,
                     path = menu.path,
+                    imageUrl = menu.imageUrl,
                     orderNo = menu.orderNo,
                     visible = menu.visible
                 )
@@ -43,6 +44,7 @@ class MenuOutboundAdapter(
                 parentId = menu.parentId,
                 name = menu.name,
                 path = menu.path,
+                imageUrl = menu.imageUrl,
                 orderNo = menu.orderNo,
                 visible = menu.visible
             )
