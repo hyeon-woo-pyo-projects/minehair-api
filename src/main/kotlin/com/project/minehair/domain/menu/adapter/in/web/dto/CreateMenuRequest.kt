@@ -5,6 +5,7 @@ data class CreateMenuRequest(
     val parentId: Long?,
     val name: String,
     val path: String,
+    val imageUrl: String?,
     val orderNo: Int,
     val visible: Boolean,
     val createdId: Long

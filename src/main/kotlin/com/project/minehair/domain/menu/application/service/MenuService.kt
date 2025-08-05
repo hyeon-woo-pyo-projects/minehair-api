@@ -24,6 +24,7 @@ class MenuService(
             parentId = request.parentId,
             name = request.name,
             path = request.path,
+            imageUrl = request.imageUrl,
             orderNo = request.orderNo,
             visible = request.visible,
             status = Status.active,

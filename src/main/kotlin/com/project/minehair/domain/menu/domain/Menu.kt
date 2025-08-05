@@ -8,6 +8,7 @@ data class Menu(
     val parentId: Long?,
     val name: String,
     val path: String,
+    val imageUrl: String?,
     val orderNo: Int,
     val visible: Boolean,
 

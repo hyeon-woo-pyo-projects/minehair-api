@@ -14,11 +14,14 @@ data class MenuJpaEntity(
     @Column(name = "parent_id")
     val parentId: Long? = null,
 
-    @Column(name = "name", nullable = false, length = 100)
+    @Column(name = "name", nullable = false)
     val name: String,
 
-    @Column(name = "path", nullable = false, length = 255)
+    @Column(name = "path", nullable = false)
     val path: String,
+
+    @Column(name = "image_url")
+    val imageUrl: String?,
 
     @Column(name = "order_no", nullable = false)
     val orderNo: Int = 0,

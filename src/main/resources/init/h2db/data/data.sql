@@ -1,20 +1,20 @@
 -- [menu] 테이블 초기 데이터 삽입 ------------------------------------------------------------------------------------------
 -- 대카테고리: parent_id = NULL
-INSERT IGNORE INTO menu (id, parent_id, name, path, order_no, visible, status, created_id, created_at, updated_id)
+INSERT IGNORE INTO menu (id, parent_id, name, path, image_url, order_no, visible, status, created_id, created_at, updated_id)
 VALUES
-(1, NULL, '소개', '/about', 10, true, 'active', 1, NOW(), 1),
-(2, NULL, '염색', '/color', 20, true, 'active', 1, NOW(), 1),
-(3, NULL, '탈색', '/bleach', 30, true, 'active', 1, NOW(), 1),
-(4, NULL, '클리닉', '/clinic', 40, true, 'active', 1, NOW(), 1),
-(5, NULL, '상담/예약', '/contact', 50, true, 'active', 1, NOW(), 1),
-(6, NULL, 'Review', '/review', 60, true, 'active', 1, NOW(), 1),
-(7, NULL, 'Q&A', '/qna', 70, true, 'active', 1, NOW(), 1),
-(8, NULL, 'Community', '/community', 80, true, 'active', 1, NOW(), 1);
+(1, NULL, '소개', '/about', '', 10, true, 'active', 1, NOW(), 1),
+(2, NULL, '염색', '/color', '', 20, true, 'active', 1, NOW(), 1),
+(3, NULL, '탈색', '/bleach', '', 30, true, 'active', 1, NOW(), 1),
+(4, NULL, '클리닉', '/clinic', '', 40, true, 'active', 1, NOW(), 1),
+(5, NULL, '상담/예약', '/contact', '', 50, true, 'active', 1, NOW(), 1),
+(6, NULL, 'Review', '/review', '', 60, true, 'active', 1, NOW(), 1),
+(7, NULL, 'Q&A', '/qna', '', 70, true, 'active', 1, NOW(), 1),
+(8, NULL, 'Community', '/community', '', 80, true, 'active', 1, NOW(), 1);
 
 -- 중카테고리/소카테고리: parent_id를 정확히 지정해야 함
 -- 중복되면 무시됨 (name + parent_id 기준)
-INSERT INTO menu (parent_id, name, path, order_no, visible, status, created_id, created_at, updated_id)
-SELECT m.id, '모발', '/clinic/hair', 1, true, 'active', 1, NOW(), 1
+INSERT INTO menu (parent_id, name, path, image_url, order_no, visible, status, created_id, created_at, updated_id)
+SELECT m.id, '모발', '/clinic/hair', '', 1, true, 'active', 1, NOW(), 1
 FROM menu m
 WHERE m.name = '클리닉'
   AND NOT EXISTS (
@@ -22,8 +22,8 @@ WHERE m.name = '클리닉'
 );
 
 -- 소카테고리들
-INSERT INTO menu (parent_id, name, path, order_no, visible, status, created_id, created_at, updated_id)
-SELECT m.id, '리바이탈', '/clinic/hair/revital', 1, true, 'active', 1, NOW(), 1
+INSERT INTO menu (parent_id, name, path, image_url, order_no, visible, status, created_id, created_at, updated_id)
+SELECT m.id, '리바이탈', '/clinic/hair/revital', '', 1, true, 'active', 1, NOW(), 1
 FROM menu m WHERE m.name = '모발'
   AND NOT EXISTS (SELECT 1 FROM menu WHERE name = '리바이탈' AND parent_id = m.id);
 -----------------------------------------------------------------------------------------------------------------------

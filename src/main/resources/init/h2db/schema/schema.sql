@@ -3,6 +3,7 @@ CREATE TABLE IF NOT EXISTS menu (
     parent_id bigint null comment '부모 메뉴 ID',
     name varchar(100) not null comment '메뉴 이름',
     path varchar(255) not null comment '메뉴 경로',
+    image_url varchar(255) null comment '메뉴 이미지 URL',
     order_no int not null DEFAULT 0 comment '정렬 순서',
     visible boolean not null comment '표시 여부',
     status varchar(20) not null default 'active' comment '상태',
