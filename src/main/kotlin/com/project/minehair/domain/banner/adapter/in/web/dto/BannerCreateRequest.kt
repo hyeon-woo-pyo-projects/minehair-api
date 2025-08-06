@@ -13,6 +13,10 @@ data class BannerCreateRequest(
     @field:NotBlank(message = "배너 컬러는 필수입니다.")
     val color: String,
 
+    @Schema(description = "배너 텍스트 컬러", example = "#FFFFFF", required = true)
+    @field:NotBlank(message = "배너 텍스트 컬러는 필수입니다.")
+    val textColor: String,
+
     @Schema(description = "배너 링크", example = "http://example.com", required = true)
     @field:NotBlank(message = "배너 링크는 필수입니다.")
     val link: String,

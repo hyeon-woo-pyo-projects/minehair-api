@@ -17,6 +17,9 @@ class BannerJpaEntity (
     @Column(name = "color")
     val color: String,
 
+    @Column(name = "text_color")
+    val textColor: String,
+
     @Column(name = "link")
     val link: String,
 

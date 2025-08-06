@@ -103,6 +103,7 @@ INSERT IGNORE INTO users (
 INSERT IGNORE INTO banner (
     content,
     color,
+    text_color,
     link,
     image_url,
     is_post,
@@ -114,6 +115,7 @@ INSERT IGNORE INTO banner (
 ) VALUES (
     '새로운 배너를 추가해보세요.',
     '#FF5733',
+    '#FFFFFF',
     'https://example.com',
     NULL,
     true,

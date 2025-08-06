@@ -61,11 +61,12 @@ CREATE TABLE IF NOT EXISTS users (
     CONSTRAINT uq_users_phone_hash UNIQUE (phone_hash)
 ) COMMENT '사용자 테이블 (회원/관리자 통합)' CHARSET=utf8mb4;
 
--- 커스텀배너 테이블
+-- 배너 테이블
 CREATE TABLE IF NOT EXISTS banner (
     id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT 'ID',
     content TEXT NOT NULL COMMENT '배너 내용',
     color VARCHAR(10) NOT NULL COMMENT '배너 색상',
+    text_color VARCHAR(10) NOT NULL COMMENT '배너 텍스트 색상',
     link TEXT NOT NULL COMMENT '배너 링크',
     image_url TEXT NULL COMMENT '배너 이미지 URL',
     is_post BOOLEAN NOT NULL DEFAULT false COMMENT '게시 여부',

@@ -7,6 +7,7 @@ import java.time.LocalDateTime
 data class Banner(
     val content: String,
     val color: String,
+    val textColor: String,
     val link: String,
     val imageUrl: String?,
     val isPost: Boolean,
@@ -24,6 +25,7 @@ data class Banner(
         fun of(
             content: String,
             color: String,
+            textColor: String,
             link: String,
             imageUrl: String?,
             isPost: Boolean = false
@@ -31,6 +33,7 @@ data class Banner(
             return Banner(
                 content = content,
                 color = color,
+                textColor = textColor,
                 link = link,
                 imageUrl = imageUrl,
                 isPost = isPost,
@@ -44,6 +47,7 @@ data class Banner(
     fun update(
         content: String,
         color: String,
+        textColor: String,
         link: String,
         imageUrl: String?,
         isPost: Boolean
@@ -51,6 +55,7 @@ data class Banner(
         return copy(
             content = content,
             color = color,
+            textColor = textColor,
             link = link,
             imageUrl = imageUrl,
             isPost = isPost,

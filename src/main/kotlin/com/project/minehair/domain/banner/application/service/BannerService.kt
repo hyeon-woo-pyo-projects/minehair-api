@@ -27,6 +27,7 @@ class BannerService(
             BannerResponse(
                 content = banner.content,
                 color = banner.color,
+                textColor = banner.textColor,
                 link = banner.link,
                 imageUrl = banner.imageUrl,
                 isPost = banner.isPost
@@ -34,6 +35,7 @@ class BannerService(
         } ?: BannerResponse(
             content = "",
             color = "",
+            textColor = "",
             link = "",
             imageUrl = null,
             isPost = false
@@ -48,6 +50,7 @@ class BannerService(
         val banner = Banner.of(
             content = request.content,
             color = request.color,
+            textColor = request.textColor,
             link = request.link,
             imageUrl = request.imageUrl,
         )
@@ -62,6 +65,7 @@ class BannerService(
             BannerResponse(
                 content = banner.content,
                 color = banner.color,
+                textColor = banner.textColor,
                 link = banner.link,
                 imageUrl = banner.imageUrl,
                 isPost = banner.isPost
@@ -77,6 +81,7 @@ class BannerService(
             BannerResponse(
                 content = banner.content,
                 color = banner.color,
+                textColor = banner.textColor,
                 link = banner.link,
                 imageUrl = banner.imageUrl,
                 isPost = banner.isPost
@@ -95,6 +100,7 @@ class BannerService(
         banner.update(
             content = request.content,
             color = request.color,
+            textColor = request.textColor,
             link = request.link,
             imageUrl = request.imageUrl,
             isPost = request.isPost
