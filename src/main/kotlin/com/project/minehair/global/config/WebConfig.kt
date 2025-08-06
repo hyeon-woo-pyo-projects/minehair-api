@@ -13,7 +13,8 @@ class WebConfig : WebMvcConfigurer {
         registry.addMapping("/**")  // 모든 경로에 적용
             .allowedOrigins(
                 "http://localhost:3000",
-                "https://minehair401.com"
+                "https://minehair401.com",
+                "https://www.minehair401.com"
             )
             .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")
             .allowedHeaders("*")
