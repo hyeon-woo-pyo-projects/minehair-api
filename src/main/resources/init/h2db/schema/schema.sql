@@ -67,6 +67,7 @@ CREATE TABLE IF NOT EXISTS banner (
     content TEXT NOT NULL COMMENT '배너 내용',
     color VARCHAR(10) NOT NULL COMMENT '배너 색상',
     link TEXT NOT NULL COMMENT '배너 링크',
+    image_url TEXT NULL COMMENT '배너 이미지 URL',
     is_post BOOLEAN NOT NULL DEFAULT false COMMENT '게시 여부',
     status VARCHAR(20) NOT NULL DEFAULT 'active' COMMENT '상태',
     created_id BIGINT NOT NULL COMMENT '생성자 ID',

@@ -8,6 +8,7 @@ data class Banner(
     val content: String,
     val color: String,
     val link: String,
+    val imageUrl: String?,
     val isPost: Boolean,
 
     override val id: Long? = null,
@@ -24,12 +25,14 @@ data class Banner(
             content: String,
             color: String,
             link: String,
+            imageUrl: String?,
             isPost: Boolean = false
         ): Banner {
             return Banner(
                 content = content,
                 color = color,
                 link = link,
+                imageUrl = imageUrl,
                 isPost = isPost,
                 createdId = 1L,
                 createdAt = LocalDateTime.now()
@@ -42,12 +45,14 @@ data class Banner(
         content: String,
         color: String,
         link: String,
+        imageUrl: String?,
         isPost: Boolean
     ): Banner {
         return copy(
             content = content,
             color = color,
             link = link,
+            imageUrl = imageUrl,
             isPost = isPost,
             updatedId = updatedId,
             updatedAt = LocalDateTime.now()

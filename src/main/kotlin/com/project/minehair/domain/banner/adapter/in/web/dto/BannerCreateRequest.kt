@@ -15,6 +15,9 @@ data class BannerCreateRequest(
 
     @Schema(description = "배너 링크", example = "http://example.com", required = true)
     @field:NotBlank(message = "배너 링크는 필수입니다.")
-    val link: String
+    val link: String,
+
+    @Schema(description = "배너 이미지 URL", example = "http://example.com/image.png", required = false)
+    val imageUrl: String?
 
 )

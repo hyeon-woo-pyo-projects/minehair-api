@@ -20,6 +20,9 @@ class BannerJpaEntity (
     @Column(name = "link")
     val link: String,
 
+    @Column(name = "image_url")
+    val imageUrl: String?,
+
     @Column(name = "is_post")
     val isPost: Boolean,
 

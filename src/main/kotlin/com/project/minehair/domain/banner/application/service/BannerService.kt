@@ -28,12 +28,14 @@ class BannerService(
                 content = banner.content,
                 color = banner.color,
                 link = banner.link,
+                imageUrl = banner.imageUrl,
                 isPost = banner.isPost
             )
         } ?: BannerResponse(
             content = "",
             color = "",
             link = "",
+            imageUrl = null,
             isPost = false
         )
     }
@@ -46,7 +48,8 @@ class BannerService(
         val banner = Banner.of(
             content = request.content,
             color = request.color,
-            link = request.link
+            link = request.link,
+            imageUrl = request.imageUrl,
         )
         bannerPersistencePort.save(banner)
     }
@@ -60,6 +63,7 @@ class BannerService(
                 content = banner.content,
                 color = banner.color,
                 link = banner.link,
+                imageUrl = banner.imageUrl,
                 isPost = banner.isPost
             )
         }
@@ -74,6 +78,7 @@ class BannerService(
                 content = banner.content,
                 color = banner.color,
                 link = banner.link,
+                imageUrl = banner.imageUrl,
                 isPost = banner.isPost
             )
         } ?: throw BusinessException(ErrorCode.NOT_FOUND, "Banner with id $id not found")
@@ -91,6 +96,7 @@ class BannerService(
             content = request.content,
             color = request.color,
             link = request.link,
+            imageUrl = request.imageUrl,
             isPost = request.isPost
         )
 

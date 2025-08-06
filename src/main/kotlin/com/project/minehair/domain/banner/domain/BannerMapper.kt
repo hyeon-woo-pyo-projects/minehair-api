@@ -13,6 +13,7 @@ class BannerMapper {
             content = entity.content,
             color = entity.color,
             link = entity.link,
+            imageUrl = entity.imageUrl,
             isPost = entity.isPost,
             status = entity.status,
             createdAt = entity.createdAt,
@@ -26,6 +27,7 @@ class BannerMapper {
             content = banner.content,
             color = banner.color,
             link = banner.link,
+            imageUrl = banner.imageUrl,
             isPost = banner.isPost,
             status = banner.status,
             createdAt = banner.createdAt,
@@ -38,6 +40,7 @@ class BannerMapper {
             content = banner.content,
             color = banner.color,
             link = banner.link,
+            imageUrl = banner.imageUrl,
             isPost = banner.isPost,
         )
     }

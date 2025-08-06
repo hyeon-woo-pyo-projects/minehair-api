@@ -4,5 +4,6 @@ data class BannerResponse(
     val content: String,
     val color: String,
     val link: String,
+    val imageUrl: String?,
     val isPost: Boolean,
 )
