@@ -25,6 +25,7 @@ class BannerService(
     override fun getPostBanner(): BannerResponse {
         return bannerPersistencePort.findByIsPost(true)?.let { banner ->
             BannerResponse(
+                id = banner.id,
                 content = banner.content,
                 color = banner.color,
                 textColor = banner.textColor,
@@ -33,6 +34,7 @@ class BannerService(
                 isPost = banner.isPost
             )
         } ?: BannerResponse(
+            id = null,
             content = "",
             color = "",
             textColor = "",
@@ -63,6 +65,7 @@ class BannerService(
     override fun getBannersList(): List<BannerResponse> {
         return bannerPersistencePort.findAll().map { banner ->
             BannerResponse(
+                id = banner.id,
                 content = banner.content,
                 color = banner.color,
                 textColor = banner.textColor,
@@ -79,6 +82,7 @@ class BannerService(
     override fun getBannerById(id: Long): BannerResponse {
         return bannerPersistencePort.findById(id)?.let { banner ->
             BannerResponse(
+                id = banner.id,
                 content = banner.content,
                 color = banner.color,
                 textColor = banner.textColor,
