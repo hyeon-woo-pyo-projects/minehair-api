@@ -19,7 +19,9 @@ class RoleService(
         // 2. 응답 DTO로 변환
         return roles.map { role ->
             RoleResponse(
-                id = role.id
+                id = role.id,
+                name = role.name,
+                code = role.code,
             )
         }
     }
