@@ -76,3 +76,32 @@ CREATE TABLE IF NOT EXISTS banner (
     updated_id BIGINT NOT NULL COMMENT '수정자 ID',
     updated_at DATETIME NULL COMMENT '수정 시간'
 ) COMMENT '배너 테이블' CHARSET=utf8mb4;
+
+-- 상담 항목 테이블
+CREATE TABLE IF NOT EXISTS consultation_category (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT 'ID',
+    code VARCHAR(10) NOT NULL COMMENT '상담 항목 코드',
+    name VARCHAR(10) NOT NULL COMMENT '상담 항목 이름',
+    description VARCHAR(255) NULL COMMENT '상담 항목 설명',
+    status VARCHAR(20) NOT NULL DEFAULT 'active' COMMENT '상태',
+    created_id BIGINT NOT NULL COMMENT '생성자 ID',
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '생성 시간',
+    updated_id BIGINT NOT NULL COMMENT '수정자 ID',
+    updated_at DATETIME NULL COMMENT '수정 시간'
+) COMMENT '상담 항목 테이블' CHARSET=utf8mb4;
+
+-- 상담 접수 테이블
+CREATE TABLE IF NOT EXISTS consultation_reception (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT 'ID',
+    category_id BIGINT NOT NULL COMMENT '상담 항목 ID',
+    name VARCHAR(100) NOT NULL COMMENT '이름',
+    phone VARCHAR(255) NOT NULL COMMENT '전화번호',
+    phone_hash VARCHAR(255) NOT NULL COMMENT '전화번호 해시',
+    content TEXT NOT NULL COMMENT '상담 내용',
+    reception_state VARCHAR(20) NOT NULL DEFAULT 'pending' COMMENT '접수 상태',
+    status VARCHAR(20) NOT NULL DEFAULT 'active' COMMENT '상태',
+    created_id BIGINT NOT NULL COMMENT '생성자 ID',
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '생성 시간',
+    updated_id BIGINT NOT NULL COMMENT '수정자 ID',
+    updated_at DATETIME NULL COMMENT '수정 시간'
+) COMMENT '상담 접수 테이블' CHARSET=utf8mb4;
