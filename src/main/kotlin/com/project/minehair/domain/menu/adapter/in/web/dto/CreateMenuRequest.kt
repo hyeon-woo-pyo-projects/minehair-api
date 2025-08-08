@@ -6,7 +6,8 @@ data class CreateMenuRequest(
     val name: String,
     val path: String,
     val imageUrl: String?,
+    val isVisible: Boolean,
+    val menuType: String,
     val orderNo: Int,
-    val visible: Boolean,
     val createdId: Long
 )

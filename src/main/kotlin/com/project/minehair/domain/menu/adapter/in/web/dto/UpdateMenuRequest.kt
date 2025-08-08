@@ -7,8 +7,10 @@ data class UpdateMenuRequest(
     val parentId: Long?,
     val name: String,
     val path: String,
+    val imageUrl: String?,
+    val isVisible: Boolean,
+    val menuType: String,
     val orderNo: Int,
-    val visible: Boolean,
     val status: Status,
     val updatedId: Long
 )

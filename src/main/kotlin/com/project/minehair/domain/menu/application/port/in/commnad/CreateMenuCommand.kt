@@ -1,7 +1,7 @@
-package com.project.minehair.global.domain.inter
+package com.project.minehair.domain.menu.application.port.`in`.commnad
 
-data class InterDomainMenuInfo(
-    val id: Long?,
+data class CreateMenuCommand(
+
     val parentId: Long?,
     val name: String,
     val path: String,
@@ -9,5 +9,5 @@ data class InterDomainMenuInfo(
     val isVisible: Boolean,
     val menuType: String,
     val orderNo: Int,
-)
 
+)

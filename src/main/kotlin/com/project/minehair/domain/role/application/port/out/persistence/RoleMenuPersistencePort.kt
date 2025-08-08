@@ -38,4 +38,9 @@ interface RoleMenuPersistencePort {
      * 메뉴 ID로 역할-메뉴 매핑 목록 조회 (메뉴 삭제 시 사용)
      */
     fun findByMenuId(menuId: Long): List<RoleMenu>
+
+    /**
+     * 역할-메뉴 매핑 저장
+     */
+    fun save(roleMenu: RoleMenu): RoleMenu
 }

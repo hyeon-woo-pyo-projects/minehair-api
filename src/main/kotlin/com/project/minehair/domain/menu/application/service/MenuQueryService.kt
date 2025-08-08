@@ -43,7 +43,7 @@ class MenuQueryService(
             return emptyList()
         }
         return menuPersistencePort.findByIds(menuIds)
-            .filter { it.visible }
+            .filter { it.isVisible }
     }
 
     /**
@@ -51,5 +51,9 @@ class MenuQueryService(
      */
     override fun findChildMenus(parentMenuId: Long): List<Menu> {
         return menuPersistencePort.findByParentId(parentMenuId)
+    }
+
+    override fun findMaxOrderNo(): Int {
+        return menuPersistencePort.findMaxOrderNo() ?: 0
     }
 }

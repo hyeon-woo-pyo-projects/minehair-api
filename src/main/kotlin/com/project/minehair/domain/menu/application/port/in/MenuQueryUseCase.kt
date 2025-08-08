@@ -36,4 +36,6 @@ interface MenuQueryUseCase {
      * @return 하위 메뉴 엔티티 목록
      */
     fun findChildMenus(parentMenuId: Long): List<Menu>
+
+    fun findMaxOrderNo(): Int
 }

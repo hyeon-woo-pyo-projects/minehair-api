@@ -1,7 +1,7 @@
-package com.project.minehair.domain.menu.adapter.`in`.query
+package com.project.minehair.domain.menu.adapter.`in`.domain
 
 import com.project.minehair.domain.menu.adapter.out.persistence.MenuMapper
-import com.project.minehair.domain.menu.application.service.MenuQueryService
+import com.project.minehair.domain.menu.application.port.`in`.MenuQueryUseCase
 import com.project.minehair.global.domain.inter.InterDomainMenuInfo
 import org.springframework.stereotype.Component
 
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component
  */
 @Component
 class MenuQueryAdapter(
-    private val menuQueryService: MenuQueryService,
+    private val menuQueryUseCase: MenuQueryUseCase,
     private val menuMapper: MenuMapper
 ) {
 
@@ -25,7 +25,7 @@ class MenuQueryAdapter(
         if (menuIds.isEmpty()) {
             return emptyList()
         }
-        val menus = menuQueryService.findMenusByIds(menuIds)
+        val menus = menuQueryUseCase.findMenusByIds(menuIds)
         return menuMapper.toInterDomainInfoList(menus)
     }
 
@@ -35,7 +35,7 @@ class MenuQueryAdapter(
      * @return 메뉴 엔티티
      */
     fun findMenuById(menuId: Long): InterDomainMenuInfo {
-        val menu = menuQueryService.findMenuById(menuId)
+        val menu = menuQueryUseCase.findMenuById(menuId)
         return menuMapper.toInterDomainInfo(menu)
     }
 
@@ -48,7 +48,7 @@ class MenuQueryAdapter(
         if (menuIds.isEmpty()) {
             return emptyList()
         }
-        val activeMenus = menuQueryService.findActiveMenusByIds(menuIds)
+        val activeMenus = menuQueryUseCase.findActiveMenusByIds(menuIds)
         return menuMapper.toInterDomainInfoList(activeMenus)
     }
 
@@ -58,7 +58,11 @@ class MenuQueryAdapter(
      * @return 하위 메뉴 엔티티 목록
      */
     fun findChildMenus(parentMenuId: Long): List<InterDomainMenuInfo> {
-        val childMenus = menuQueryService.findChildMenus(parentMenuId)
+        val childMenus = menuQueryUseCase.findChildMenus(parentMenuId)
         return menuMapper.toInterDomainInfoList(childMenus)
+    }
+
+    fun getMaxOrderNo(): Int {
+        return menuQueryUseCase.findMaxOrderNo()
     }
 }

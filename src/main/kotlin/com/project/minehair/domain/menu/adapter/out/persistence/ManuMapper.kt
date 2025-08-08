@@ -1,8 +1,10 @@
 package com.project.minehair.domain.menu.adapter.out.persistence
 
+import com.project.minehair.domain.menu.application.port.`in`.commnad.CreateMenuCommand
 import com.project.minehair.domain.menu.domain.Menu
 import com.project.minehair.global.domain.inter.InterDomainMenuInfo
 import org.springframework.stereotype.Component
+import java.time.LocalDateTime
 
 // MenuMapper.kt - 도메인 ↔ JPA 매퍼
 @Component
@@ -15,13 +17,31 @@ class MenuMapper {
             name = entity.name,
             path = entity.path,
             imageUrl = entity.imageUrl,
+            isVisible = entity.isVisible,
+            menuType = entity.menuType,
             orderNo = entity.orderNo,
-            visible = entity.visible,
             status = entity.status,
             createdId = entity.createdId,
             createdAt = entity.createdAt,
             updatedId = entity.updatedId,
             updatedAt = entity.updatedAt
+        )
+    }
+
+    fun toDomain(createMenuCommand: CreateMenuCommand): Menu {
+        return Menu(
+            id = null,
+            parentId = createMenuCommand.parentId,
+            name = createMenuCommand.name,
+            path = createMenuCommand.path,
+            imageUrl = createMenuCommand.imageUrl,
+            isVisible = createMenuCommand.isVisible,
+            menuType = createMenuCommand.menuType,
+            orderNo = createMenuCommand.orderNo,
+            createdId = 1L,
+            createdAt = LocalDateTime.now(),
+            updatedId = 0L,
+            updatedAt = null
         )
     }
 
@@ -32,8 +52,9 @@ class MenuMapper {
             name = domain.name,
             path = domain.path,
             imageUrl = domain.imageUrl,
+            isVisible = domain.isVisible,
+            menuType = domain.menuType,
             orderNo = domain.orderNo,
-            visible = domain.visible,
             status = domain.status,
             createdId = domain.createdId,
             createdAt = domain.createdAt,
@@ -54,8 +75,9 @@ class MenuMapper {
             name = domain.name,
             path = domain.path,
             imageUrl = domain.imageUrl,
+            isVisible = domain.isVisible,
+            menuType = domain.menuType,
             orderNo = domain.orderNo,
-            visible = domain.visible
         )
     }
 
@@ -66,5 +88,17 @@ class MenuMapper {
      */
     fun toInterDomainInfoList(domains: List<Menu>): List<InterDomainMenuInfo> {
         return domains.map { toInterDomainInfo(it) }
+    }
+
+    fun toCreateCommand(interDomainMenuInfo: InterDomainMenuInfo): CreateMenuCommand {
+        return CreateMenuCommand(
+            parentId = interDomainMenuInfo.parentId,
+            name = interDomainMenuInfo.name,
+            path = interDomainMenuInfo.path,
+            imageUrl = interDomainMenuInfo.imageUrl,
+            isVisible = interDomainMenuInfo.isVisible,
+            menuType = interDomainMenuInfo.menuType,
+            orderNo = interDomainMenuInfo.orderNo
+        )
     }
 }

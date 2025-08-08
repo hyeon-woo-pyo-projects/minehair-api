@@ -1,21 +1,22 @@
 package com.project.minehair.domain.role.adapter.out.domain
 
-import com.project.minehair.domain.menu.adapter.`in`.query.MenuQueryAdapter
+import com.project.minehair.domain.menu.adapter.`in`.domain.MenuCommandAdapter
+import com.project.minehair.domain.menu.adapter.`in`.domain.MenuQueryAdapter
+import com.project.minehair.domain.menu.adapter.out.persistence.MenuMapper
+import com.project.minehair.domain.menu.domain.Menu
 import com.project.minehair.domain.role.adapter.`in`.query.RoleQueryAdapter
-import com.project.minehair.domain.role.application.port.out.domain.MenuDomainPort
+import com.project.minehair.domain.role.application.port.out.domain.RoleMenuDomainPort
 import com.project.minehair.global.domain.inter.InterDomainMenuInfo
 import com.project.minehair.global.domain.inter.InterDomainRoleInfo
 import org.springframework.stereotype.Component
 
-/**
- * Menu 도메인과 통신하는 어댑터
- * MenuPort의 구현체로, 실제 Menu 도메인의 UseCase를 호출
- */
 @Component
-class MenuOutboundAdapter(
+class RoleMenuOutboundAdapter(
     private val menuQueryAdapter: MenuQueryAdapter,
-    private val roleQueryAdapter: RoleQueryAdapter
-) : MenuDomainPort {
+    private val menuCommandAdapter: MenuCommandAdapter,
+    private val roleQueryAdapter: RoleQueryAdapter,
+    private val menuMapper: MenuMapper
+) : RoleMenuDomainPort {
 
     override fun getMenusByIds(menuIds: List<Long>): List<InterDomainMenuInfo> {
         if (menuIds.isEmpty()) {
@@ -30,8 +31,9 @@ class MenuOutboundAdapter(
                     name = menu.name,
                     path = menu.path,
                     imageUrl = menu.imageUrl,
+                    isVisible = menu.isVisible,
+                    menuType = menu.menuType,
                     orderNo = menu.orderNo,
-                    visible = menu.visible
                 )
             }
     }
@@ -45,8 +47,9 @@ class MenuOutboundAdapter(
                 name = menu.name,
                 path = menu.path,
                 imageUrl = menu.imageUrl,
+                isVisible = menu.isVisible,
+                menuType = menu.menuType,
                 orderNo = menu.orderNo,
-                visible = menu.visible
             )
         } catch (e: Exception) {
             // Menu가 없는 경우 null 반환
@@ -62,5 +65,14 @@ class MenuOutboundAdapter(
                 name = role.name,
             )
         }
+    }
+
+    override fun getMaxOrderNo(): Int {
+        return menuQueryAdapter.getMaxOrderNo()
+    }
+
+    override fun createMenu(menuInfo: InterDomainMenuInfo): Menu {
+        val createMenuCommand = menuMapper.toCreateCommand(menuInfo)
+        return menuCommandAdapter.createMenu(createMenuCommand)
     }
 }

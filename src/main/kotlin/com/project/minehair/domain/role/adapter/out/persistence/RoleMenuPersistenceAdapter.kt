@@ -54,4 +54,10 @@ class RoleMenuPersistenceAdapter(
         return roleMenuJpaRepository.findByMenuId(menuId)
             .map { roleMenuMapper.toDomain(it) }
     }
+
+    override fun save(roleMenu: RoleMenu): RoleMenu {
+        val entity = roleMenuMapper.toEntity(roleMenu)
+        val savedEntity = roleMenuJpaRepository.save(entity)
+        return roleMenuMapper.toDomain(savedEntity)
+    }
 }

@@ -47,12 +47,16 @@ class MenuPersistenceAdapter(
     }
 
     override fun findActiveMenus(): List<Menu> {
-        return menuJpaRepository.findByVisibleTrueOrderByOrderNo()
+        return menuJpaRepository.findByIsVisibleTrueOrderByOrderNo()
             .map { menuMapper.toDomain(it) }
     }
 
     override fun findByPath(path: String): Menu? {
         return menuJpaRepository.findByPath(path)
             ?.let { menuMapper.toDomain(it) }
+    }
+
+    override fun findMaxOrderNo(): Int? {
+        return menuJpaRepository.findTopByOrderByOrderNoDesc()?.orderNo
     }
 }

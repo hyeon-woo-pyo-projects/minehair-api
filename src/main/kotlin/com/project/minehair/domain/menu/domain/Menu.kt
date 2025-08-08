@@ -9,8 +9,9 @@ data class Menu(
     val name: String,
     val path: String,
     val imageUrl: String?,
+    val isVisible: Boolean,
+    val menuType: String,
     val orderNo: Int,
-    val visible: Boolean,
 
     override val id: Long? = null,
     override val status: Status = Status.active,
@@ -21,8 +22,8 @@ data class Menu(
 ) : BaseDomain(id, status, createdId, createdAt, updatedId, updatedAt) {
 
     // Menu 고유 기능
-    fun hide() = copy(visible = false)
-    fun show() = copy(visible = true)
+    fun hide() = copy(isVisible = false)
+    fun show() = copy(isVisible = true)
 
     // 공통 상태 변경 (불변성 보장)
     fun activate(updatedId: Long) = copy(

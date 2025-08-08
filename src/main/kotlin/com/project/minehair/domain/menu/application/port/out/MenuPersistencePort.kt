@@ -37,4 +37,6 @@ interface MenuPersistencePort {
      * @return 메뉴 엔티티 (없으면 null)
      */
     fun findByPath(path: String): Menu?
+
+    fun findMaxOrderNo(): Int? // 최대 정렬 번호 조회
 }

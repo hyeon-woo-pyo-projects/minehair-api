@@ -23,11 +23,14 @@ data class MenuJpaEntity(
     @Column(name = "image_url")
     val imageUrl: String?,
 
+    @Column(name = "is_visible", nullable = false)
+    val isVisible: Boolean,
+
+    @Column(name = "menu_type", nullable = false)
+    val menuType: String,
+
     @Column(name = "order_no", nullable = false)
     val orderNo: Int = 0,
-
-    @Column(name = "visible", nullable = false)
-    val visible: Boolean,
 
     // BaseJpaEntity 필드들 override
     override val id: Long? = null,
