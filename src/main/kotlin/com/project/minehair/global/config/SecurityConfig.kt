@@ -39,12 +39,12 @@ class SecurityConfig(
                 auth
                     .requestMatchers("/h2-console/**").permitAll() // H2 콘솔 접근 허용
                     .requestMatchers(
-                        "/v3/api-docs/**"
-                        , "/swagger-ui/**"
-                        , "/swagger-ui.html"
-                        , "/swagger-resources/**"
-                        , "/webjars/**"
-                    ).permitAll()  //swagger UI 접근 허용
+                        "/api/v3/api-docs/**",
+                        "/api/swagger-ui/**",
+                        "/api/swagger-ui.html",
+                        "/swagger-resources/**",
+                        "/webjars/**"
+                    ).permitAll() // Swagger 관련 API 접근 허용
                     .requestMatchers("/health/**").permitAll() // 헬스 체크 API 접근 허용
                     .requestMatchers("/api/auth/**").permitAll()  // 로그인/회원가입은 토큰 불필요
                     .requestMatchers(HttpMethod.GET, "/api/role-menus/**").permitAll() // 공개 API
