@@ -39,6 +39,7 @@ class BannerMapper {
 
     fun toResponse(banner: Banner): BannerResponse {
         return BannerResponse(
+            id = banner.id,
             content = banner.content,
             color = banner.color,
             textColor = banner.textColor,
