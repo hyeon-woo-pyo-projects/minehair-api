@@ -124,5 +124,21 @@ INSERT IGNORE INTO banner (
     NOW(),
     1,
     NULL
-)
+);
+-----------------------------------------------------------------------------------------------------------------------
+-- [banner] 테이블 초기 데이터 삽입 ---------------------------------------------------------------------------------------
+INSERT IGNORE INTO consultation_category (
+    code,
+    name,
+    description,
+    status,
+    created_id,
+    created_at,
+    updated_id,
+    updated_at
+) VALUES
+('root_bleaching','뿌리 탈색','뿌리 탈색','active',1,NOW(),1,NULL),
+('full_bleaching','전체 탈색','전체 탈색','active',1,NOW(),1,NULL),
+('root_coloring','뿌리 염색','뿌리 염색','active',1,NOW(),1,NULL),
+('full_coloring','전체 염색','전체 염색','active',1,NOW(),1,NULL);
 -----------------------------------------------------------------------------------------------------------------------

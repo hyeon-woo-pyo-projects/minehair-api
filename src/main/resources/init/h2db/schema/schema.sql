@@ -80,14 +80,15 @@ CREATE TABLE IF NOT EXISTS banner (
 -- 상담 항목 테이블
 CREATE TABLE IF NOT EXISTS consultation_category (
     id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT 'ID',
-    code VARCHAR(10) NOT NULL COMMENT '상담 항목 코드',
-    name VARCHAR(10) NOT NULL COMMENT '상담 항목 이름',
+    code VARCHAR(50) NOT NULL COMMENT '상담 항목 코드',
+    name VARCHAR(50) NOT NULL COMMENT '상담 항목 이름',
     description VARCHAR(255) NULL COMMENT '상담 항목 설명',
     status VARCHAR(20) NOT NULL DEFAULT 'active' COMMENT '상태',
     created_id BIGINT NOT NULL COMMENT '생성자 ID',
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '생성 시간',
     updated_id BIGINT NOT NULL COMMENT '수정자 ID',
-    updated_at DATETIME NULL COMMENT '수정 시간'
+    updated_at DATETIME NULL COMMENT '수정 시간',
+    CONSTRAINT uq_consultation_category_code UNIQUE (code)
 ) COMMENT '상담 항목 테이블' CHARSET=utf8mb4;
 
 -- 상담 접수 테이블
