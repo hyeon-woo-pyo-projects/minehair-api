@@ -4,22 +4,22 @@ FROM eclipse-temurin:21-jre
 # 작업 디렉토리 설정
 WORKDIR /app
 
+# 업로드 디렉토리 생성 및 권한 설정
+RUN mkdir -p /app/uploads && \
+    chmod 755 /app/uploads
+
 # JAR 파일을 컨테이너로 복사
-# minehair-0.0.1-SNAPSHOT.jar를 app.jar로 이름 변경하여 복사
 COPY minehair-0.0.1-SNAPSHOT.jar app.jar
 
-# 포트 노출 (8081 포트)
-EXPOSE 8081
+# 볼륨 마운트 포인트 선언
+VOLUME ["/app/uploads"]
+
+# 포트 노출 (8080 포트)
+EXPOSE 8080
+
+# 환경변수 설정
+ENV JAVA_OPTS="-Xmx512m -Xms256m"
+ENV APP_UPLOAD_PATH="/app/uploads"
 
 # 컨테이너 시작 시 JAR 파일 실행
-ENTRYPOINT ["java", "-jar", "app.jar"]
-
-# 또는 CMD 사용 가능
-# CMD ["java", "-jar", "app.jar"]
-
-# JVM 옵션을 추가하고 싶다면:
-# ENTRYPOINT ["java", "-Xmx512m", "-Xms256m", "-jar", "app.jar"]
-
-# 환경변수 설정 (선택사항)
-ENV JAVA_OPTS="-Xmx512m -Xms256m"
-# ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar app.jar"]
+ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar app.jar"]
