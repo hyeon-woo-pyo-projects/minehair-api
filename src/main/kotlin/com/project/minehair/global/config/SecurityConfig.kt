@@ -97,6 +97,8 @@ class SecurityConfig(
         val configuration = CorsConfiguration()
         configuration.allowedOrigins = listOf(
             "http://localhost:3000",
+            "http://minehair401.com",          // 추가!
+            "http://www.minehair401.com",       // 추가!
             "https://minehair401.com",          // 추가!
             "https://www.minehair401.com"       // 추가!
         )
