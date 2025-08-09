@@ -4,7 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema
 
 data class CreateRoleMenuRequest(
 
-    @Schema(name = "parantId", description = "부모 메뉴 ID")
+    @Schema(name = "parentId", description = "부모 메뉴 ID")
     val parentId: Long? = null,
     @Schema(name = "menuName", description = "메뉴명")
     val menuName: String,

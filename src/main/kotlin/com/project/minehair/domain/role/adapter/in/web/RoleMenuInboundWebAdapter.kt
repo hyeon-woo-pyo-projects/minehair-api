@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
@@ -27,7 +28,7 @@ class RoleMenuInboundWebAdapter(
 
     @Operation(summary = "메뉴 생성 및 역할 세팅", description = "메뉴 생성 및 역할 세팅")
     @PostMapping
-    fun createMenuAndAssignRoles(createRoleMenuRequest: CreateRoleMenuRequest): BaseResponse<Nothing?> {
+    fun createMenuAndAssignRoles(@RequestBody createRoleMenuRequest: CreateRoleMenuRequest): BaseResponse<Nothing?> {
         roleMenuUseCase.createMenuAndAssignRoles(createRoleMenuRequest)
         return BaseResponse.ok()
     }
