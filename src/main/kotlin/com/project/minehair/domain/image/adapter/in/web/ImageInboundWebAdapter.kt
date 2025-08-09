@@ -28,7 +28,6 @@ class ImageInboundWebAdapter(
         @PathVariable("imagePath") imagePath: String,
         @RequestParam("imageFile") imageFile: MultipartFile
     ): BaseResponse<ImageUploadResponse> {
-        imageUseCase.uploadImage(imagePath, imageFile)
-        return BaseResponse.success(ImageUploadResponse(imagePath))
+        return BaseResponse.success(imageUseCase.uploadImage(imagePath, imageFile))
     }
 }

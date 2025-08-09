@@ -37,6 +37,7 @@ class SecurityConfig(
             }
             .authorizeHttpRequests { auth ->
                 auth
+                    .requestMatchers("/uploads/**").permitAll()
                     .requestMatchers("/h2-console/**").permitAll() // H2 콘솔 접근 허용
                     .requestMatchers(
                         "/api/v3/api-docs/**",

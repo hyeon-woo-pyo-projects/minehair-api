@@ -1,5 +1,6 @@
 package com.project.minehair.domain.image.application.service
 
+import com.project.minehair.domain.image.adapter.`in`.web.dto.ImageUploadResponse
 import com.project.minehair.domain.image.application.port.`in`.ImageUseCase
 import com.project.minehair.domain.image.application.port.out.ImageStoragePort
 import org.springframework.stereotype.Service
@@ -10,7 +11,7 @@ class ImageService(
     private val imageStoragePort: ImageStoragePort
 ): ImageUseCase {
 
-    override fun uploadImage(imagePath: String, imageFile: MultipartFile): String {
+    override fun uploadImage(imagePath: String, imageFile: MultipartFile): ImageUploadResponse {
         // 1. 파일 검증
         validateImageFile(imageFile)
 
@@ -18,7 +19,16 @@ class ImageService(
         val fullPath = generateFullPath(imagePath, imageFile)
 
         // 3. 파일 저장 (아웃바운드 포트 호출)
-        return imageStoragePort.saveImage(imageFile, fullPath)
+        val imageUrl = imageStoragePort.saveImage(imageFile, fullPath)
+
+        // 4. 상세 정보와 함께 응답
+        return ImageUploadResponse(
+            imageUrl = imageUrl,
+            fileName = fullPath.substringAfterLast('/'),
+            originalFileName = imageFile.originalFilename ?: "unknown",
+            filePath = fullPath,
+            fileSize = imageFile.size
+        )
     }
 
     private fun validateImageFile(file: MultipartFile) {

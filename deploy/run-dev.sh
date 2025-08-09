@@ -26,7 +26,7 @@ echo "새 컨테이너 실행 중..."
 docker run -d \
   -e SPRING_PROFILES_ACTIVE=dev \
   -e SERVER_PORT=8080 \
-  -e BASE_URL=http://localhost:8080 \
+  -e BASE_URL=https://minehair401.com \
   -p 8080:8080 \
   -v "$HOST_IMAGE_PATH":/app/uploads \
   --name "$CONTAINER_NAME" \

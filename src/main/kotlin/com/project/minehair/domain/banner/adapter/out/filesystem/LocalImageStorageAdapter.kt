@@ -11,7 +11,7 @@ import java.nio.file.StandardCopyOption
 @Component
 class LocalImageStorageAdapter(
     private val uploadBasePath: String = "/app/uploads",
-    private val baseUrl: String = "http://localhost:8080"
+    private val baseUrl: String = "https://minehair401.com"
 ) : ImageStoragePort {
 
     override fun saveImage(file: MultipartFile, fullPath: String): String {
