@@ -38,7 +38,7 @@ if [ $? -eq 0 ]; then
     echo "이미지 저장 경로: $HOST_IMAGE_PATH"
     echo ""
     echo "유용한 명령어:"
-    echo "  - 로그 확인: docker logs $CONTAINER_NAME"
+    echo "  - 로그 확인: docker logs -f $CONTAINER_NAME"
     echo "  - 컨테이너 중지: docker stop $CONTAINER_NAME"
     echo "  - 컨테이너 재시작: docker restart $CONTAINER_NAME"
     echo "  - 이미지 폴더 확인: ls -la $HOST_IMAGE_PATH"
