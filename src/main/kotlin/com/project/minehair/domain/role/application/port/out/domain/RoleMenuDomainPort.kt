@@ -30,4 +30,9 @@ interface RoleMenuDomainPort {
      */
     fun createMenu(menuInfo: InterDomainMenuInfo) : Menu
 
+    /**
+     * 메뉴 수정
+     */
+    fun updateMenu(menuInfo: InterDomainMenuInfo): Menu
+
 }

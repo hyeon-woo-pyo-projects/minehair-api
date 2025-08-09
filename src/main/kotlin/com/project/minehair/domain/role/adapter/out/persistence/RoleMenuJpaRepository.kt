@@ -1,5 +1,6 @@
 package com.project.minehair.domain.role.adapter.out.persistence
 
+import com.project.minehair.global.enums.Status
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 
@@ -11,7 +12,7 @@ interface RoleMenuJpaRepository : JpaRepository<RoleMenuJpaEntity, Long> {
      * @param roleId 역할 ID
      * @return 역할-메뉴 매핑 엔티티 목록
      */
-    fun findByRoleId(roleId: Long): List<RoleMenuJpaEntity>
+    fun findByRoleIdAndStatus(roleId: Long, status: Status): List<RoleMenuJpaEntity>
 
     /**
      * 역할 ID와 메뉴 ID로 특정 매핑 조회

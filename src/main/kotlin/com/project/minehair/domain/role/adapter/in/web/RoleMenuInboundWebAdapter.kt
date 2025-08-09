@@ -2,6 +2,7 @@ package com.project.minehair.domain.role.adapter.`in`.web
 
 import com.project.minehair.domain.role.adapter.`in`.web.dto.CreateRoleMenuRequest
 import com.project.minehair.domain.role.adapter.`in`.web.dto.RoleMenuResponse
+import com.project.minehair.domain.role.adapter.`in`.web.dto.UpdateRoleMenuRequest
 import com.project.minehair.domain.role.application.port.`in`.RoleMenuUseCase
 import com.project.minehair.global.response.BaseResponse
 import io.swagger.v3.oas.annotations.Operation
@@ -29,15 +30,15 @@ class RoleMenuInboundWebAdapter(
         return BaseResponse.ok()
     }
 
-//    @Operation(summary = "메뉴, 역할 세팅 수정", description = "메뉴, 역할 세팅 수정")
-//    @PatchMapping("/{id}")
-//    fun updateMenuRole(
-//        @PathVariable id: Long,
-//        @RequestBody updateRoleMenuRequest: UpdateRoleMenuRequest
-//    ): BaseResponse<Nothing?> {
-//        roleMenuUseCase.updateMenuRole(updateRoleMenuRequest)
-//        return BaseResponse.ok()
-//    }
+    @Operation(summary = "메뉴, 역할 세팅 수정", description = "메뉴, 역할 세팅 수정")
+    @PatchMapping("/{menuId}")
+    fun updateMenuRole(
+        @PathVariable menuId: Long,
+        @RequestBody updateRoleMenuRequest: UpdateRoleMenuRequest
+    ): BaseResponse<Nothing?> {
+        roleMenuUseCase.updateMenuRole(menuId, updateRoleMenuRequest)
+        return BaseResponse.ok()
+    }
 
 //    @Operation(summary = "역할-메뉴 관계 상세 조회", description = "특정 역할의 특정 메뉴 할당 정보를 조회합니다")
 //    @GetMapping("/roles/{roleId}/menus/{menuId}")

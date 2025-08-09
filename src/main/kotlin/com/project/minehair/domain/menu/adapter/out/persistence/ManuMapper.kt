@@ -1,6 +1,7 @@
 package com.project.minehair.domain.menu.adapter.out.persistence
 
 import com.project.minehair.domain.menu.application.port.`in`.commnad.CreateMenuCommand
+import com.project.minehair.domain.menu.application.port.`in`.commnad.UpdateMenuCommand
 import com.project.minehair.domain.menu.domain.Menu
 import com.project.minehair.global.domain.inter.InterDomainMenuInfo
 import org.springframework.stereotype.Component
@@ -44,6 +45,25 @@ class MenuMapper {
             updatedAt = null
         )
     }
+
+    fun toDomain(updateMenuCommand: UpdateMenuCommand): Menu {
+        return Menu(
+            id = updateMenuCommand.id,
+            parentId = updateMenuCommand.parentId,
+            name = updateMenuCommand.name,
+            path = updateMenuCommand.path,
+            imageUrl = updateMenuCommand.imageUrl,
+            isVisible = updateMenuCommand.isVisible,
+            menuType = updateMenuCommand.menuType,
+            orderNo = updateMenuCommand.orderNo,
+            createdId = 1L,
+            createdAt = LocalDateTime.now(),
+            updatedId = 0L,
+            updatedAt = null
+        )
+    }
+
+
 
     fun toEntity(domain: Menu): MenuJpaEntity {
         return MenuJpaEntity(
@@ -99,6 +119,19 @@ class MenuMapper {
             isVisible = interDomainMenuInfo.isVisible,
             menuType = interDomainMenuInfo.menuType,
             orderNo = interDomainMenuInfo.orderNo
+        )
+    }
+
+    fun toUpdateCommand(interDomainMenuInfo: InterDomainMenuInfo): UpdateMenuCommand {
+        return UpdateMenuCommand(
+            id = interDomainMenuInfo.id!!,
+            parentId = interDomainMenuInfo.parentId,
+            name = interDomainMenuInfo.name,
+            path = interDomainMenuInfo.path,
+            imageUrl = interDomainMenuInfo.imageUrl,
+            isVisible = interDomainMenuInfo.isVisible,
+            menuType = interDomainMenuInfo.menuType,
+            orderNo = interDomainMenuInfo.orderNo,
         )
     }
 }

@@ -75,4 +75,9 @@ class RoleMenuOutboundAdapter(
         val createMenuCommand = menuMapper.toCreateCommand(menuInfo)
         return menuCommandAdapter.createMenu(createMenuCommand)
     }
+
+    override fun updateMenu(menuInfo: InterDomainMenuInfo): Menu {
+        val updateMenuCommand = menuMapper.toUpdateCommand(menuInfo)
+        return menuCommandAdapter.updateMenu(updateMenuCommand)
+    }
 }

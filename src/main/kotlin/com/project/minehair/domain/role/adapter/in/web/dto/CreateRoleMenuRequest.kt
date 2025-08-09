@@ -10,11 +10,13 @@ data class CreateRoleMenuRequest(
     val menuName: String,
     @Schema(name = "menuPath", description = "경로")
     val menuPath: String,
+    @Schema(name = "imageUrl", description = "이미지 URL")
+    val imageUrl: String? = null,
     @Schema(name = "isVisible", description = "메뉴 노출 여부")
     val isVisible: Boolean,
-    @Schema(name = "roles", description = "역할 ID 목록")
-    val roles: List<Long>,
     @Schema(name = "menuType", description = "메뉴 타입(대(MAJOR), 중(MINOR), 소(SUB))")
     val menuType: String,
+    @Schema(name = "roles", description = "역할 ID 목록")
+    val roles: List<Long>,
 
 )

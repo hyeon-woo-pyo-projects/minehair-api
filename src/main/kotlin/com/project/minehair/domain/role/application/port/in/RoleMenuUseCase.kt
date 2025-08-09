@@ -2,6 +2,7 @@ package com.project.minehair.domain.role.application.port.`in`
 
 import com.project.minehair.domain.role.adapter.`in`.web.dto.CreateRoleMenuRequest
 import com.project.minehair.domain.role.adapter.`in`.web.dto.RoleMenuResponse
+import com.project.minehair.domain.role.adapter.`in`.web.dto.UpdateRoleMenuRequest
 
 interface RoleMenuUseCase {
     /**
@@ -13,6 +14,11 @@ interface RoleMenuUseCase {
      * 메뉴 생성 및 역할 세팅
      */
     fun createMenuAndAssignRoles(createRoleMenuRequest: CreateRoleMenuRequest)
+
+    /**
+     * 메뉴, 역할 세팅 수정
+     */
+    fun updateMenuRole(menuId: Long, updateRoleMenuRequest: UpdateRoleMenuRequest)
 
 //    /**
 //     * 특정 역할의 특정 메뉴 할당 정보 상세 조회

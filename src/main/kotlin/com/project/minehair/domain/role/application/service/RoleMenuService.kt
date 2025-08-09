@@ -2,6 +2,7 @@ package com.project.minehair.domain.role.application.service
 
 import com.project.minehair.domain.role.adapter.`in`.web.dto.CreateRoleMenuRequest
 import com.project.minehair.domain.role.adapter.`in`.web.dto.RoleMenuResponse
+import com.project.minehair.domain.role.adapter.`in`.web.dto.UpdateRoleMenuRequest
 import com.project.minehair.domain.role.application.port.`in`.RoleMenuUseCase
 import com.project.minehair.domain.role.application.port.out.domain.RoleMenuDomainPort
 import com.project.minehair.domain.role.application.port.out.persistence.RoleMenuPersistencePort
@@ -43,16 +44,20 @@ class RoleMenuService(
         return roleMenus.mapNotNull { roleMenu ->
             val menu = menus.find { it.id == roleMenu.menuId }
             menu?.let {
-                RoleMenuResponse(
-                    menuId = roleMenu.menuId,
-                    parentId = it.parentId,
-                    menuName = it.name,
-                    menuPath = it.path,
-                    imageUrl = it.imageUrl,
-                    menuOrderNo = it.orderNo,
-                    menuVisible = it.isVisible,
-                    status = roleMenu.status
-                )
+                roleMenu.id?.let { it1 ->
+                    RoleMenuResponse(
+                        id = it1,
+                        menuId = roleMenu.menuId,
+                        parentId = it.parentId,
+                        menuName = it.name,
+                        menuPath = it.path,
+                        imageUrl = it.imageUrl,
+                        menuVisible = it.isVisible,
+                        menuType = it.menuType,
+                        menuOrderNo = it.orderNo,
+                        status = roleMenu.status
+                    )
+                }
             }
         }
     }
@@ -94,54 +99,50 @@ class RoleMenuService(
         }
     }
 
-//    override fun getRoleMenuDetail(roleId: Long, menuId: Long): RoleMenuResponse {
-//        // 1. role_menu 조회
-//        val roleMenu = roleMenuPersistencePort.findByRoleIdAndMenuId(roleId, menuId)
-//            ?: throw IllegalArgumentException("Role-Menu mapping not found")
-//
-//        // 2. 메뉴 정보 조회
-//        val menu = menuDomainPort.getMenuById(menuId)
-//            ?: throw IllegalArgumentException("Menu not found")
-//
-//        return RoleMenuResponse(
-//            menuId = roleMenu.menuId,
-//            parentId = menu.parentId,
-//            menuName = menu.name,
-//            menuPath = menu.path,
-//            imageUrl = menu.imageUrl,
-//            menuOrderNo = menu.orderNo,
-//            menuVisible = menu.visible,
-//            status = roleMenu.status
-//        )
-//    }
-//
-//    @Transactional
-//    override fun assignMenusToRole(roleId: Long, menuIds: List<Long>) {
-//        // 중복 제거 및 기존에 없는 메뉴만 추가
-//        val existingMenuIds = roleMenuPersistencePort.findByRoleId(roleId)
-//            .map { it.menuId }
-//            .toSet()
-//
-//        val newMenuIds = menuIds.filterNot { existingMenuIds.contains(it) }
-//
-//        if (newMenuIds.isNotEmpty()) {
-//            roleMenuPersistencePort.saveRoleMenus(roleId, newMenuIds)
-//        }
-//    }
-//
-//    @Transactional
-//    override fun replaceRoleMenus(roleId: Long, menuIds: List<Long>) {
-//        // 1. 기존 매핑 모두 삭제
-//        roleMenuPersistencePort.deleteByRoleId(roleId)
-//
-//        // 2. 새로운 매핑 생성
-//        if (menuIds.isNotEmpty()) {
-//            roleMenuPersistencePort.saveRoleMenus(roleId, menuIds)
-//        }
-//    }
-//
-//    @Transactional
-//    override fun removeMenuFromRole(roleId: Long, menuId: Long) {
-//        roleMenuPersistencePort.deleteByRoleIdAndMenuId(roleId, menuId)
-//    }
+    /**
+     * 메뉴, 역할 세팅 수정
+     */
+    @Transactional
+    override fun updateMenuRole(menuId: Long, updateRoleMenuRequest: UpdateRoleMenuRequest) {
+
+        // 1. 메뉴 정보 업데이트
+        val interDomainMenuInfo = InterDomainMenuInfo(
+            id = menuId,
+            parentId = updateRoleMenuRequest.parentId,
+            name = updateRoleMenuRequest.menuName,
+            path = updateRoleMenuRequest.menuPath,
+            imageUrl = updateRoleMenuRequest.imageUrl,
+            isVisible = updateRoleMenuRequest.isVisible,
+            menuType = updateRoleMenuRequest.menuType,
+            orderNo = updateRoleMenuRequest.orderNo,
+        )
+        val updatedMenu = menuDomainPort.updateMenu(interDomainMenuInfo)
+        val updatedMenuId = updatedMenu.id ?: throw BusinessException(
+            ErrorCode.INTERNAL_SERVER_ERROR,
+            "Menu ID is null after update"
+        )
+
+        // 2. 기존 매핑들을 soft delete 처리
+        roleMenuPersistencePort.findByMenuId(updatedMenuId)
+            .forEach { existingRoleMenu ->
+                val deletedRoleMenu = existingRoleMenu.delete()
+                roleMenuPersistencePort.save(deletedRoleMenu)
+            }
+
+        // 3. 새로운 매핑들 생성
+        updateRoleMenuRequest.roles.forEach { roleId ->
+            val roleMenu = RoleMenu(
+                id = null,
+                roleId = roleId,
+                menuId = updatedMenuId,
+                status = Status.active,
+                createdId = 1L,
+                createdAt = LocalDateTime.now(),
+                updatedId = 0L,
+                updatedAt = null
+            )
+            roleMenuPersistencePort.save(roleMenu)
+        }
+    }
+
 }

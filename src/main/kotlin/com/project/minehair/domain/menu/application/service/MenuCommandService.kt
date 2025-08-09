@@ -15,4 +15,12 @@ class MenuCommandService(
     override fun createMenu(menu: Menu): Menu {
         return menuPersistencePort.save(menu)
     }
+
+    override fun updateMenu(menu: Menu): Menu {
+        val existingMenu  = menu.id?.let { menuPersistencePort.findById(it) }
+            ?: throw IllegalArgumentException("Menu with id ${menu.id} does not exist.")
+
+        val updatedMenu = existingMenu.updateFrom(menu);
+        return menuPersistencePort.save(updatedMenu)
+    }
 }

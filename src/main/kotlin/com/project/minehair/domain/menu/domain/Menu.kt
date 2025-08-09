@@ -43,4 +43,16 @@ data class Menu(
         updatedId = updatedId,
         updatedAt = LocalDateTime.now()
     )
+
+    fun updateFrom(other: Menu) = copy(
+        parentId = other.parentId,
+        name = other.name,
+        path = other.path,
+        imageUrl = other.imageUrl,
+        isVisible = other.isVisible,
+        menuType = other.menuType,
+        orderNo = other.orderNo,
+        updatedId = 1L,
+        updatedAt = LocalDateTime.now()
+    )
 }

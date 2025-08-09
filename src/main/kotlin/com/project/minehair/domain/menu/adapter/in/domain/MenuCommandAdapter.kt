@@ -3,6 +3,7 @@ package com.project.minehair.domain.menu.adapter.`in`.domain
 import com.project.minehair.domain.menu.adapter.out.persistence.MenuMapper
 import com.project.minehair.domain.menu.application.port.`in`.MenuCommandUseCase
 import com.project.minehair.domain.menu.application.port.`in`.commnad.CreateMenuCommand
+import com.project.minehair.domain.menu.application.port.`in`.commnad.UpdateMenuCommand
 import com.project.minehair.domain.menu.domain.Menu
 import org.springframework.stereotype.Component
 
@@ -15,6 +16,11 @@ class MenuCommandAdapter(
     fun createMenu(command: CreateMenuCommand): Menu {
         val menu = menuMapper.toDomain(command)
         return menuCommandUseCase.createMenu(menu)
+    }
+
+    fun updateMenu(command: UpdateMenuCommand): Menu {
+        val menu = menuMapper.toDomain(command)
+        return menuCommandUseCase.updateMenu(menu)
     }
 
 }

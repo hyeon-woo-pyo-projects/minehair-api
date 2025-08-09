@@ -13,7 +13,7 @@ class RoleMenuPersistenceAdapter(
 ) : RoleMenuPersistencePort {
 
     override fun findByRoleId(roleId: Long): List<RoleMenu> {
-        return roleMenuJpaRepository.findByRoleId(roleId)
+        return roleMenuJpaRepository.findByRoleIdAndStatus(roleId, Status.active)
             .map { roleMenuMapper.toDomain(it) }
     }
 
