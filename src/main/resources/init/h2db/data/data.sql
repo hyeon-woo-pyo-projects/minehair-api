@@ -2,19 +2,19 @@
 -- 대카테고리: parent_id = NULL
 INSERT IGNORE INTO menu (id, parent_id, name, path, image_url, is_visible, menu_type, order_no, status, created_id, created_at, updated_id)
 VALUES
-(1, NULL, '소개', '/about', '', true, 'MAJOR', 10, 'active', 1, NOW(), 1),
-(2, NULL, '염색', '/color', '', true, 'MAJOR', 20, 'active', 1, NOW(), 1),
-(3, NULL, '탈색', '/bleach', '', true, 'MAJOR', 30, 'active', 1, NOW(), 1),
-(4, NULL, '클리닉', '/clinic', '', true, 'MAJOR', 40, 'active', 1, NOW(), 1),
-(5, NULL, '상담/예약', '/contact', '', true, 'MAJOR', 50, 'active', 1, NOW(), 1),
-(6, NULL, 'Review', '/review', '', true, 'MAJOR', 60, 'active', 1, NOW(), 1),
-(7, NULL, 'Q&A', '/qna', '', true, 'MAJOR', 70, 'active', 1, NOW(), 1),
-(8, NULL, 'Community', '/community', '', true, 'MAJOR', 80, 'active', 1, NOW(), 1);
+(1, NULL, '소개', '/about', null, true, 'MAJOR', 10, 'active', 1, NOW(), 1),
+(2, NULL, '염색', '/color', null, true, 'MAJOR', 20, 'active', 1, NOW(), 1),
+(3, NULL, '탈색', '/bleach', null, true, 'MAJOR', 30, 'active', 1, NOW(), 1),
+(4, NULL, '클리닉', '/clinic', null, true, 'MAJOR', 40, 'active', 1, NOW(), 1),
+(5, NULL, '상담/예약', '/contact', null, true, 'MAJOR', 50, 'active', 1, NOW(), 1),
+(6, NULL, 'Review', '/review', null, true, 'MAJOR', 60, 'active', 1, NOW(), 1),
+(7, NULL, 'Q&A', '/qna', null, true, 'MAJOR', 70, 'active', 1, NOW(), 1),
+(8, NULL, 'Community', '/community', null, true, 'MAJOR', 80, 'active', 1, NOW(), 1);
 
 -- 중카테고리/소카테고리: parent_id를 정확히 지정해야 함
 -- 중복되면 무시됨 (name + parent_id 기준)
 INSERT INTO menu (parent_id, name, path, image_url, is_visible, menu_type, order_no, status, created_id, created_at, updated_id)
-SELECT m.id, '모발', '/clinic/hair', '', true, 'MINOR', 1, 'active', 1, NOW(), 1
+SELECT m.id, '모발', '/clinic/hair', null, true, 'MINOR', 1, 'active', 1, NOW(), 1
 FROM menu m
 WHERE m.name = '클리닉'
   AND NOT EXISTS (
@@ -23,7 +23,7 @@ WHERE m.name = '클리닉'
 
 -- 소카테고리들
 INSERT INTO menu (parent_id, name, path, image_url, is_visible, menu_type, order_no, status, created_id, created_at, updated_id)
-SELECT m.id, '리바이탈', '/clinic/hair/revital', '', true, 'SUB', 1, 'active', 1, NOW(), 1
+SELECT m.id, '리바이탈', '/clinic/hair/revital', null, true, 'SUB', 1, 'active', 1, NOW(), 1
 FROM menu m WHERE m.name = '모발'
   AND NOT EXISTS (SELECT 1 FROM menu WHERE name = '리바이탈' AND parent_id = m.id);
 -----------------------------------------------------------------------------------------------------------------------
