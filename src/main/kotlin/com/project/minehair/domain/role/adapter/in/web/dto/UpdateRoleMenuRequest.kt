@@ -2,7 +2,7 @@ package com.project.minehair.domain.role.adapter.`in`.web.dto
 
 import io.swagger.v3.oas.annotations.media.Schema
 
-data class CreateRoleMenuRequest(
+data class UpdateRoleMenuRequest(
 
     @Schema(name = "parentId", description = "부모 메뉴 ID")
     val parentId: Long? = null,
@@ -16,5 +16,5 @@ data class CreateRoleMenuRequest(
     val roles: List<Long>,
     @Schema(name = "menuType", description = "메뉴 타입(대(MAJOR), 중(MINOR), 소(SUB))")
     val menuType: String,
-
+    
 )

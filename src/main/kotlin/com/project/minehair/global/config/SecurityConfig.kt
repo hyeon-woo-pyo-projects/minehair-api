@@ -41,6 +41,8 @@ class SecurityConfig(
                     .requestMatchers(
                         "/api/v3/api-docs/**",
                         "/api/swagger-ui/**",
+
+
                         "/api/swagger-ui.html",
                         "/swagger-resources/**",
                         "/webjars/**"
@@ -49,7 +51,7 @@ class SecurityConfig(
                     .requestMatchers("/api/auth/**").permitAll()  // 로그인/회원가입은 토큰 불필요
                     .requestMatchers(HttpMethod.GET, "/api/role-menus/**").permitAll() // 공개 API
                     .requestMatchers(HttpMethod.POST, "/api/user/**").permitAll() // 사용자 조회는 공개
-                    .requestMatchers(HttpMethod.GET, "/api/banner/post").permitAll() // 게시상태의 배너 조회는 공개
+                    .requestMatchers(HttpMethod.GET, "/api/banner/**").permitAll() // 게시상태의 배너 조회는 공개
                     .anyRequest().authenticated()  // 나머지는 인증 필요
             }
             .authenticationProvider(authenticationProvider())

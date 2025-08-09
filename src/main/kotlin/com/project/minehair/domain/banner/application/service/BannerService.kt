@@ -101,7 +101,7 @@ class BannerService(
         val banner = bannerPersistencePort.findById(id)
             ?: throw BusinessException(ErrorCode.NOT_FOUND, "Banner with id $id not found")
 
-        banner.update(
+        val updatedBanner = banner.update(
             content = request.content,
             color = request.color,
             textColor = request.textColor,
@@ -110,7 +110,7 @@ class BannerService(
             isPost = request.isPost
         )
 
-        bannerPersistencePort.save(banner)
+        bannerPersistencePort.save(updatedBanner)
     }
 
     /**
