@@ -5,7 +5,7 @@ spring:
       on-profile: local
 
 jwt:
-  access-token-expiration: 60      # 1시간 (분 단위)
+  access-token-expiration: 1440      # 1시간 (분 단위)
   refresh-token-expiration: 20160  # 2주 (분 단위)
 
 ---
@@ -15,7 +15,7 @@ spring:
       on-profile: dev
 
 jwt:
-  access-token-expiration: 60      # 1시간 (분 단위)
+  access-token-expiration: 1440      # 1시간 (분 단위)
   refresh-token-expiration: 20160  # 2주 (분 단위)
 
 ---
@@ -25,5 +25,5 @@ spring:
       on-profile: prd
 
 jwt:
-  access-token-expiration: 60      # 1시간 (분 단위)
+  access-token-expiration: 1440      # 1시간 (분 단위)
   refresh-token-expiration: 20160  # 2주 (분 단위)

@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # 설정 변수
-IMAGE_NAME="minehair-dev"
-CONTAINER_NAME="minehair-dev"
+IMAGE_NAME="minehair-api"
+CONTAINER_NAME="minehair-api"
 HOST_IMAGE_PATH="/root/minehair/images"
 
 echo "Docker 이미지 빌드 중..."
