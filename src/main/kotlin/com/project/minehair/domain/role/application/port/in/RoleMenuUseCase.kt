@@ -11,6 +11,11 @@ interface RoleMenuUseCase {
     fun getMenusByRole(): List<RoleMenuResponse>
 
     /**
+     * 관리자 메뉴에서 메뉴 목록 조회
+     */
+    fun getMenusByRoleForAdmin(): List<RoleMenuResponse>
+
+    /**
      * 메뉴 생성 및 역할 세팅
      */
     fun createMenuAndAssignRoles(createRoleMenuRequest: CreateRoleMenuRequest)

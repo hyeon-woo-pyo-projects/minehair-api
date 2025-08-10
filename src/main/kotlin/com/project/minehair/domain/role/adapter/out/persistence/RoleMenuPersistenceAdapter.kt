@@ -12,6 +12,11 @@ class RoleMenuPersistenceAdapter(
     private val roleMenuMapper: RoleMenuMapper
 ) : RoleMenuPersistencePort {
 
+    override fun findAll(): List<RoleMenu> {
+        return roleMenuJpaRepository.findAllByStatus(Status.active)
+            .map { roleMenuMapper.toDomain(it) }
+    }
+
     override fun findByRoleId(roleId: Long): List<RoleMenu> {
         return roleMenuJpaRepository.findByRoleIdAndStatus(roleId, Status.active)
             .map { roleMenuMapper.toDomain(it) }

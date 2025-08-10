@@ -5,6 +5,11 @@ import com.project.minehair.domain.role.domain.RoleMenu
 interface RoleMenuPersistencePort {
 
     /**
+     * 역할-메뉴 매핑 목록 조회
+     */
+    fun findAll(): List<RoleMenu>
+
+    /**
      * 역할 ID로 역할-메뉴 매핑 목록 조회
      */
     fun findByRoleId(roleId: Long): List<RoleMenu>

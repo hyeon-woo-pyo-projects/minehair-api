@@ -23,6 +23,13 @@ class RoleMenuInboundWebAdapter(
         return BaseResponse.success(menus)
     }
 
+    @Operation(summary = "역할별 메뉴 목록 조회(관리자)", description = "관리자 메뉴에서 메뉴 목록을 조회합니다")
+    @GetMapping("/admin")
+    fun getMenusByRoleForAdmin(): BaseResponse<List<RoleMenuResponse>> {
+        val menus = roleMenuUseCase.getMenusByRoleForAdmin()
+        return BaseResponse.success(menus)
+    }
+
     @Operation(summary = "메뉴 생성 및 역할 세팅", description = "메뉴 생성 및 역할 세팅")
     @PostMapping
     fun createMenuAndAssignRoles(@RequestBody createRoleMenuRequest: CreateRoleMenuRequest): BaseResponse<Nothing?> {

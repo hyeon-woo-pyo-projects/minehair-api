@@ -55,7 +55,40 @@ class RoleMenuService(
                         menuVisible = it.isVisible,
                         menuType = it.menuType,
                         menuOrderNo = it.orderNo,
-                        status = roleMenu.status
+                    )
+                }
+            }
+        }
+    }
+
+    override fun getMenusByRoleForAdmin(): List<RoleMenuResponse> {
+        // 1. role_menu 매핑 조회
+        val roleMenus = roleMenuPersistencePort.findAll()
+
+        // 2. 메뉴 ID 목록 추출
+        val menuIds = roleMenus.map { it.menuId }
+
+        // 3. 메뉴 정보 조회 (다른 도메인 호출)
+        val menus = menuDomainPort.getMenusByIds(menuIds)
+
+        // 4. 매핑하여 응답 생성
+        return roleMenus.mapNotNull { roleMenu ->
+            val menu = menus.find { it.id == roleMenu.menuId }
+            menu?.let {
+                roleMenu.id?.let { it1 ->
+                    RoleMenuResponse(
+                        id = it1,
+                        menuId = roleMenu.menuId,
+                        parentId = it.parentId,
+                        menuName = it.name,
+                        menuPath = it.path,
+                        imageUrl = it.imageUrl,
+                        menuVisible = it.isVisible,
+                        menuType = it.menuType,
+                        menuOrderNo = it.orderNo,
+                        // 역할 ID 목록 추가(roleMenus를 그룹핑하여 리스트 생성)
+                        roleIdList = roleMenus.filter { rm -> rm.menuId == roleMenu.menuId }
+                            .map { it.roleId }
                     )
                 }
             }

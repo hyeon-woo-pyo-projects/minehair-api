@@ -1,7 +1,5 @@
 package com.project.minehair.domain.role.adapter.`in`.web.dto
 
-import com.project.minehair.global.enums.Status
-
 data class RoleMenuResponse(
     val id: Long,
     val menuId: Long,
@@ -12,5 +10,5 @@ data class RoleMenuResponse(
     val menuVisible: Boolean,
     val menuType: String,
     val menuOrderNo: Int,
-    val status: Status
+    val roleIdList: List<Long>? = null,
 )
