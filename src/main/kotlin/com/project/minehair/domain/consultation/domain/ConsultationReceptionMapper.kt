@@ -47,4 +47,8 @@ class ConsultationReceptionMapper {
         )
     }
 
+    fun toDomainList(entities: List<ConsultationReceptionJpaEntity>): List<ConsultationReception> {
+        return entities.map { toDomain(it) }
+    }
+
 }

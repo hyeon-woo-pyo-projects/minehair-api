@@ -42,6 +42,11 @@ class ConsultationInboundWebAdapter(
     /**
      * 상담 신청 목록 조회
      */
+    @Operation(summary = "상담 신청 목록 조회", description = "상담 신청 목록 조회")
+    @GetMapping("/reception")
+    fun getConsultationReceptionList(): BaseResponse<List<ConsultationReceptionResponse>> {
+        return BaseResponse.success(consultationUseCase.getConsultationReceptionList())
+    }
 
     /**
      * 상담 신청 처리

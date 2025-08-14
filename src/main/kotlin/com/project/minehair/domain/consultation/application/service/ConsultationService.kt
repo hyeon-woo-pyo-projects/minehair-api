@@ -36,4 +36,9 @@ class ConsultationService(
         val savedDomain = consultationReceptionPersistencePort.saveConsultationReception(consultationReception)
         return consultationReceptionMapper.toResponse(savedDomain)
     }
+
+    override fun getConsultationReceptionList(): List<ConsultationReceptionResponse> {
+        return consultationReceptionPersistencePort.findAll()
+            .map { consultationReceptionMapper.toResponse(it) }
+    }
 }

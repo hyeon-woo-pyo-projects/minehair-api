@@ -53,6 +53,7 @@ class SecurityConfig(
                     .requestMatchers(HttpMethod.GET, "/api/role-menus/**").permitAll() // 공개 API
                     .requestMatchers(HttpMethod.POST, "/api/user/**").permitAll() // 사용자 조회는 공개
                     .requestMatchers(HttpMethod.GET, "/api/banner/**").permitAll() // 게시상태의 배너 조회는 공개
+                    .requestMatchers("/api/consultation/**").permitAll() // 상담 카테고리 조회는 공개
                     .anyRequest().authenticated()  // 나머지는 인증 필요
             }
             .authenticationProvider(authenticationProvider())

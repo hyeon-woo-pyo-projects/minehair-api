@@ -16,15 +16,10 @@ interface ConsultationUseCase {
      */
     fun createConsultationReception(request: CreateConsultationReceptionRequest): ConsultationReceptionResponse
 
-//    /**
-//     * 상담 신청
-//     */
-//    fun applyConsultation(request: ConsultationApplyRequest): Long
-//
-//    /**
-//     * 상담 신청 목록 조회
-//     */
-//    fun getConsultationApplications(): List<ConsultationApplicationResponse>
+    /**
+     * 상담 신청 목록 조회
+     */
+    fun getConsultationReceptionList(): List<ConsultationReceptionResponse>
 //
 //    /**
 //     * 상담 신청 처리
