@@ -3,10 +3,13 @@ package com.project.minehair.domain.consultation.domain
 import com.project.minehair.domain.consultation.adapter.`in`.web.dto.ConsultationReceptionResponse
 import com.project.minehair.domain.consultation.adapter.`in`.web.dto.CreateConsultationReceptionRequest
 import com.project.minehair.domain.consultation.adapter.out.persistence.ConsultationReceptionJpaEntity
+import com.project.minehair.global.utils.CryptoUtil
 import org.springframework.stereotype.Component
 
 @Component
-class ConsultationReceptionMapper {
+class ConsultationReceptionMapper(
+    private val cryptoUtil: CryptoUtil
+) {
 
     fun toDomain(entity: ConsultationReceptionJpaEntity): ConsultationReception {
         return ConsultationReception(
@@ -44,6 +47,7 @@ class ConsultationReceptionMapper {
         return ConsultationReceptionResponse(
             id = reception.id!!,
             name = reception.name,
+            phone = cryptoUtil.decrypt(reception.phone),
         )
     }
 
