@@ -3,6 +3,7 @@ package com.project.minehair.domain.consultation.adapter.`in`.web.dto
 import io.swagger.v3.oas.annotations.media.Schema
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.NotNull
+import jakarta.validation.constraints.Pattern
 
 data class CreateConsultationReceptionRequest(
 
@@ -12,6 +13,10 @@ data class CreateConsultationReceptionRequest(
 
     @Schema(description = "전화번호", example = "01012345678", required = true)
     @field:NotBlank(message = "전화번호는 필수입니다.")
+    @field:Pattern(
+        regexp = "^01[016789]\\d{8}$",
+        message = "전화번호는 11자리 숫자여야 합니다. (예: 01012345678)"
+    )
     val phoneNumber: String,
 
     @Schema(description = "카테고리 ID", example = "1", required = true)
