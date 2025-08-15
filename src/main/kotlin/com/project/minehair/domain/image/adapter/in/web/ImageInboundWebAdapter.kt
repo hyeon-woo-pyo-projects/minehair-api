@@ -2,6 +2,7 @@ package com.project.minehair.domain.image.adapter.`in`.web
 
 import com.project.minehair.domain.image.adapter.`in`.web.dto.ImageUploadResponse
 import com.project.minehair.domain.image.application.port.`in`.ImageUseCase
+import com.project.minehair.domain.image.domain.ImagePathType
 import com.project.minehair.global.response.BaseResponse
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
@@ -25,9 +26,9 @@ class ImageInboundWebAdapter(
         consumes = [MediaType.MULTIPART_FORM_DATA_VALUE]
     )
     fun uploadImage(
-        @PathVariable("imagePath") imagePath: String,
+        @PathVariable("imagePath") imagePathType: ImagePathType,
         @RequestParam("imageFile") imageFile: MultipartFile
     ): BaseResponse<ImageUploadResponse> {
-        return BaseResponse.success(imageUseCase.uploadImage(imagePath, imageFile))
+        return BaseResponse.success(imageUseCase.uploadImage(imagePathType, imageFile))
     }
 }
