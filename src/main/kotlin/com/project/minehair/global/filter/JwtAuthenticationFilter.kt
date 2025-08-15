@@ -37,12 +37,9 @@ class JwtAuthenticationFilter(
             path.startsWith("/api/user") && request.method == "POST" -> true
             path.startsWith("/api/banner") && request.method == "GET" -> true
             path.startsWith("/uploads") -> true
-            // 개발 도구들
-            // path.startsWith("/h2-console/") -> true
-            // path.startsWith("/v3/api-docs/") -> true
-            // path.startsWith("/swagger-ui/") -> true
-            // path.startsWith("/swagger-resources/") -> true
-            // path.startsWith("/webjars/") -> true
+            path.startsWith("/api/consulation") -> true
+            // API가 아닌 경로는 필터링하지 않음 (404 처리를 위해)
+            !path.startsWith("/api/") -> true
             else -> false
         }
     }

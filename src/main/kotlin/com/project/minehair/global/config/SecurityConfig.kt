@@ -42,8 +42,6 @@ class SecurityConfig(
                     .requestMatchers(
                         "/api/v3/api-docs/**",
                         "/api/swagger-ui/**",
-
-
                         "/api/swagger-ui.html",
                         "/swagger-resources/**",
                         "/webjars/**"
@@ -54,7 +52,8 @@ class SecurityConfig(
                     .requestMatchers(HttpMethod.POST, "/api/user/**").permitAll() // 사용자 조회는 공개
                     .requestMatchers(HttpMethod.GET, "/api/banner/**").permitAll() // 게시상태의 배너 조회는 공개
                     .requestMatchers("/api/consultation/**").permitAll() // 상담 카테고리 조회는 공개
-                    .anyRequest().authenticated()  // 나머지는 인증 필요
+                    .requestMatchers("/api/**").authenticated()  // API 경로만 인증 필요
+                    .anyRequest().permitAll()  // 나머지는 모두 허용 (404 처리를 위해)
             }
             .authenticationProvider(authenticationProvider())
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter::class.java)
