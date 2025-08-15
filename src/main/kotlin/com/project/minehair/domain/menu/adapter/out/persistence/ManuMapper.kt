@@ -1,5 +1,6 @@
 package com.project.minehair.domain.menu.adapter.out.persistence
 
+import com.project.minehair.domain.menu.adapter.`in`.web.dto.MenuResponse
 import com.project.minehair.domain.menu.application.port.`in`.commnad.CreateMenuCommand
 import com.project.minehair.domain.menu.application.port.`in`.commnad.UpdateMenuCommand
 import com.project.minehair.domain.menu.domain.Menu
@@ -133,5 +134,22 @@ class MenuMapper {
             menuType = interDomainMenuInfo.menuType,
             orderNo = interDomainMenuInfo.orderNo,
         )
+    }
+
+    fun toResponse(domain: Menu): MenuResponse {
+        return MenuResponse(
+            id = domain.id,
+            parentId = domain.parentId,
+            name = domain.name,
+            path = domain.path,
+            imageUrl = domain.imageUrl,
+            isVisible = domain.isVisible,
+            menuType = domain.menuType,
+            orderNo = domain.orderNo,
+        )
+    }
+
+    fun toResponseList(domains: List<Menu>): List<MenuResponse> {
+        return domains.map { toResponse(it) }
     }
 }

@@ -59,4 +59,10 @@ class MenuPersistenceAdapter(
     override fun findMaxOrderNo(): Int? {
         return menuJpaRepository.findTopByOrderByOrderNoDesc()?.orderNo
     }
+
+    override fun updateAll(menus: List<Menu>): List<Menu> {
+        val entities = menus.map { menuMapper.toEntity(it) }
+        val updatedEntities = menuJpaRepository.saveAll(entities)
+        return updatedEntities.map { menuMapper.toDomain(it) }
+    }
 }

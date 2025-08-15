@@ -1,7 +1,7 @@
 package com.project.minehair.domain.role.adapter.`in`.web.dto
 
 data class RoleMenuResponse(
-    val id: Long,
+    val id: Long?,
     val menuId: Long,
     val parentId: Long?,
     val menuName: String,

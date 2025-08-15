@@ -58,7 +58,7 @@ class RoleMenuService(
                     )
                 }
             }
-        }
+        }.sortedBy { it.menuOrderNo }
     }
 
     override fun getMenusByRoleForAdmin(): List<RoleMenuResponse> {
@@ -71,28 +71,25 @@ class RoleMenuService(
         // 3. 메뉴 정보 조회 (다른 도메인 호출)
         val menus = menuDomainPort.getMenusByIds(menuIds)
 
-        // 4. 매핑하여 응답 생성
-        return roleMenus.mapNotNull { roleMenu ->
-            val menu = menus.find { it.id == roleMenu.menuId }
-            menu?.let {
-                roleMenu.id?.let { it1 ->
-                    RoleMenuResponse(
-                        id = it1,
-                        menuId = roleMenu.menuId,
-                        parentId = it.parentId,
-                        menuName = it.name,
-                        menuPath = it.path,
-                        imageUrl = it.imageUrl,
-                        menuVisible = it.isVisible,
-                        menuType = it.menuType,
-                        menuOrderNo = it.orderNo,
-                        // 역할 ID 목록 추가(roleMenus를 그룹핑하여 리스트 생성)
-                        roleIdList = roleMenus.filter { rm -> rm.menuId == roleMenu.menuId }
-                            .map { it.roleId }
-                    )
-                }
+        // 4. menus에 role매핑하여 응답 생성
+        return menus.mapNotNull { menu ->
+            roleMenus.find { it.menuId == menu.id }?.let { roleMenu ->
+                RoleMenuResponse(
+                    id = null,
+                    menuId = roleMenu.menuId,
+                    parentId = menu.parentId,
+                    menuName = menu.name,
+                    menuPath = menu.path,
+                    imageUrl = menu.imageUrl,
+                    menuVisible = menu.isVisible,
+                    menuType = menu.menuType,
+                    menuOrderNo = menu.orderNo,
+                    // 역할 ID 목록 추가(roleMenus를 그룹핑하여 리스트 생성)
+                    roleIdList = roleMenus.filter { rm -> rm.menuId == roleMenu.menuId }
+                        .map { it.roleId }
+                )
             }
-        }
+        }.sortedBy { it.menuOrderNo }
     }
 
     @Transactional

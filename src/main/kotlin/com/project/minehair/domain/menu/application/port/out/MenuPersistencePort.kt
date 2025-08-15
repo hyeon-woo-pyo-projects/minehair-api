@@ -39,4 +39,9 @@ interface MenuPersistencePort {
     fun findByPath(path: String): Menu?
 
     fun findMaxOrderNo(): Int? // 최대 정렬 번호 조회
+
+    /**
+     * 메뉴 목록 업데이트
+     */
+    fun updateAll(menus: List<Menu>): List<Menu>
 }

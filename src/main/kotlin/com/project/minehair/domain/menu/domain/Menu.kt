@@ -55,4 +55,8 @@ data class Menu(
         updatedId = 1L,
         updatedAt = LocalDateTime.now()
     )
+
+    fun updateOrderNo(newOrderNo: Int): Menu {
+        return copy(orderNo = newOrderNo, updatedId = 1L, updatedAt = LocalDateTime.now())
+    }
 }
