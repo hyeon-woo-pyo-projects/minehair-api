@@ -10,10 +10,23 @@ import org.springframework.stereotype.Component
 class ConsultationCategoryPersistenceAdapter(
     private val consultationCategoryJpaRepository: ConsultationCategoryJpaRepository,
     private val consultationCategoryMapper: ConsultationCategoryMapper
-): ConsultationCategoryPersistencePort {
+) : ConsultationCategoryPersistencePort {
 
     override fun findAll(): List<ConsultationCategory> {
         return consultationCategoryJpaRepository.findAllByStatus(Status.active)
             .let { consultationCategoryMapper.toDomainList(it) }
     }
+
+    override fun save(consultationCategory: ConsultationCategory): ConsultationCategory {
+        val entity = consultationCategoryMapper.toEntity(consultationCategory)
+        return consultationCategoryJpaRepository.save(entity)
+            .let { consultationCategoryMapper.toDomain(it) }
+    }
+
+    override fun findById(id: Long): ConsultationCategory {
+        return consultationCategoryJpaRepository.findById(id)
+            .orElseThrow { IllegalArgumentException("Consultation Category not found with id: $id") }
+            .let { consultationCategoryMapper.toDomain(it) }
+    }
+
 }

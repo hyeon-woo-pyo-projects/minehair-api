@@ -16,9 +16,6 @@ class ConsultationCategoryJpaEntity(
     @Column(name = "name")
     val name: String,
 
-    @Column(name = "description")
-    val description: String?,
-
     override val id: Long? = null,
     override val status: Status = Status.active,
     override val createdId: Long = 0L,

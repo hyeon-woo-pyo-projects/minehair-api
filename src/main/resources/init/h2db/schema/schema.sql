@@ -82,8 +82,7 @@ CREATE TABLE IF NOT EXISTS banner (
 CREATE TABLE IF NOT EXISTS consultation_category (
     id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT 'ID',
     code VARCHAR(50) NOT NULL COMMENT '상담 항목 코드',
-    name VARCHAR(50) NOT NULL COMMENT '상담 항목 이름',
-    description VARCHAR(255) NULL COMMENT '상담 항목 설명',
+    name VARCHAR(255) NOT NULL COMMENT '상담 항목 이름',
     status VARCHAR(20) NOT NULL DEFAULT 'active' COMMENT '상태',
     created_id BIGINT NOT NULL COMMENT '생성자 ID',
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '생성 시간',

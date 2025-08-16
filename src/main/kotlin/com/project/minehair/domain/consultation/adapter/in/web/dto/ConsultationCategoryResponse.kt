@@ -4,5 +4,4 @@ data class ConsultationCategoryResponse(
     val id: Long,
     val code: String,
     val name: String,
-    val description: String? = null
 )

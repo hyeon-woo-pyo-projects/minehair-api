@@ -1,6 +1,7 @@
 package com.project.minehair.domain.consultation.domain
 
 import com.project.minehair.domain.consultation.adapter.`in`.web.dto.ConsultationCategoryResponse
+import com.project.minehair.domain.consultation.adapter.`in`.web.dto.CreateConsultationCategoryRequest
 import com.project.minehair.domain.consultation.adapter.out.persistence.ConsultationCategoryJpaEntity
 import org.springframework.stereotype.Component
 
@@ -12,9 +13,16 @@ class ConsultationCategoryMapper {
             id = entity.id,
             code = entity.code,
             name = entity.name,
-            description = entity.description,
         )
     }
+
+    fun toDomain(request: CreateConsultationCategoryRequest): ConsultationCategory {
+        return ConsultationCategory(
+            code = request.code,
+            name = request.name,
+        )
+    }
+
 
     fun toDomainList(entities: List<ConsultationCategoryJpaEntity>): List<ConsultationCategory> {
         return entities.map { toDomain(it) }
@@ -25,7 +33,9 @@ class ConsultationCategoryMapper {
             id = category.id,
             code = category.code,
             name = category.name,
-            description = category.description,
+            status = category.status,
+            updatedAt = category.updatedAt,
+            updatedId = category.updatedId,
         )
     }
 
@@ -34,7 +44,6 @@ class ConsultationCategoryMapper {
             id = category.id!!,
             code = category.code,
             name = category.name,
-            description = category.description
         )
     }
 

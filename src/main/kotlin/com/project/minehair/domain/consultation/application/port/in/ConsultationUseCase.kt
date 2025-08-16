@@ -2,6 +2,7 @@ package com.project.minehair.domain.consultation.application.port.`in`
 
 import com.project.minehair.domain.consultation.adapter.`in`.web.dto.ConsultationCategoryResponse
 import com.project.minehair.domain.consultation.adapter.`in`.web.dto.ConsultationReceptionResponse
+import com.project.minehair.domain.consultation.adapter.`in`.web.dto.CreateConsultationCategoryRequest
 import com.project.minehair.domain.consultation.adapter.`in`.web.dto.CreateConsultationReceptionRequest
 
 interface ConsultationUseCase {
@@ -10,6 +11,16 @@ interface ConsultationUseCase {
      * 상담 카테고리(관심시술) 조회
      */
     fun getConsultationCategories(): List<ConsultationCategoryResponse>
+
+    /**
+     * 상담 카테고리(관심시술) 생성
+     */
+    fun createConsultationCategory(request: CreateConsultationCategoryRequest): ConsultationCategoryResponse
+
+    /**
+     * 상담 카테고리(관심시술) 삭제
+     */
+    fun deleteConsultationCategory(id: Long): ConsultationCategoryResponse
 
     /**
      * 상담 접수

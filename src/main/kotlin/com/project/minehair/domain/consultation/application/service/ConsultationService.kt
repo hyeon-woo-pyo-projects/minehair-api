@@ -2,6 +2,7 @@ package com.project.minehair.domain.consultation.application.service
 
 import com.project.minehair.domain.consultation.adapter.`in`.web.dto.ConsultationCategoryResponse
 import com.project.minehair.domain.consultation.adapter.`in`.web.dto.ConsultationReceptionResponse
+import com.project.minehair.domain.consultation.adapter.`in`.web.dto.CreateConsultationCategoryRequest
 import com.project.minehair.domain.consultation.adapter.`in`.web.dto.CreateConsultationReceptionRequest
 import com.project.minehair.domain.consultation.application.port.`in`.ConsultationUseCase
 import com.project.minehair.domain.consultation.application.port.out.ConsultationCategoryPersistencePort
@@ -13,17 +14,32 @@ import org.springframework.stereotype.Service
 
 @Service
 class ConsultationService(
-    private val consultationCategotyPersistencePort: ConsultationCategoryPersistencePort,
+    private val consultationCategoryPersistencePort: ConsultationCategoryPersistencePort,
     private val consultationCategoryMapper: ConsultationCategoryMapper,
     private val consultationReceptionPersistencePort: ConsultationReceptionPersistencePort,
     private val consultationReceptionMapper: ConsultationReceptionMapper,
     private val cryptoUtil: CryptoUtil
-): ConsultationUseCase {
+) : ConsultationUseCase {
 
     override fun getConsultationCategories(): List<ConsultationCategoryResponse> {
-        return consultationCategotyPersistencePort.findAll()
+        return consultationCategoryPersistencePort.findAll()
             .map { consultationCategoryMapper.toResponse(it) }
     }
+
+    override fun createConsultationCategory(request: CreateConsultationCategoryRequest): ConsultationCategoryResponse {
+        val consultationCategory = consultationCategoryMapper.toDomain(request)
+        val savedDomain = consultationCategoryPersistencePort.save(consultationCategory)
+        return consultationCategoryMapper.toResponse(savedDomain)
+    }
+
+    override fun deleteConsultationCategory(id: Long): ConsultationCategoryResponse {
+        //id로 조회 후 상태를 inactive로 변경
+        val consultationCategory = consultationCategoryPersistencePort.findById(id)
+        val consultationCategoryForDelete = consultationCategory.delete()
+        val deletedConsultationCategory = consultationCategoryPersistencePort.save(consultationCategoryForDelete)
+        return consultationCategoryMapper.toResponse(deletedConsultationCategory)
+    }
+
 
     override fun createConsultationReception(request: CreateConsultationReceptionRequest): ConsultationReceptionResponse {
 

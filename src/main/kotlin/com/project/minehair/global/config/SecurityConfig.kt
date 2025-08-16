@@ -51,7 +51,9 @@ class SecurityConfig(
                     .requestMatchers(HttpMethod.GET, "/api/role-menus/**").permitAll() // 공개 API
                     .requestMatchers(HttpMethod.POST, "/api/user/**").permitAll() // 사용자 조회는 공개
                     .requestMatchers(HttpMethod.GET, "/api/banner/**").permitAll() // 게시상태의 배너 조회는 공개
-                    .requestMatchers("/api/consultation/**").permitAll() // 상담 카테고리 조회는 공개
+                    .requestMatchers(HttpMethod.GET, "/api/consultation/categories").permitAll() // 상담 카테고리 조회는 공개
+                    .requestMatchers(HttpMethod.POST, "/api/consultation/reception").permitAll() // 상담 카테고리 조회는 공개
+                    .requestMatchers("/api/consultation/reception").permitAll() // 상담 접수는 공개
                     .requestMatchers("/api/**").authenticated()  // API 경로만 인증 필요
                     .anyRequest().permitAll()  // 나머지는 모두 허용 (404 처리를 위해)
             }
