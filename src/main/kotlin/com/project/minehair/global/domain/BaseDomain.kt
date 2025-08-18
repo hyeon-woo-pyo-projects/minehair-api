@@ -8,7 +8,7 @@ abstract class BaseDomain(
     open val status: Status,
     open val createdId: Long,
     open val createdAt: LocalDateTime,
-    open val updatedId: Long,
+    open val updatedId: Long?,
     open val updatedAt: LocalDateTime?
 ) {
     fun isActive(): Boolean = status == Status.active

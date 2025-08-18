@@ -104,3 +104,16 @@ CREATE TABLE IF NOT EXISTS consultation_reception (
     updated_id BIGINT NOT NULL COMMENT '수정자 ID',
     updated_at DATETIME NULL COMMENT '수정 시간'
 ) COMMENT '상담 접수 테이블' CHARSET=utf8mb4;
+
+-- 홈 슬라이드 테이블
+CREATE TABLE IF NOT EXISTS home_slide (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT 'ID',
+    image_url VARCHAR(255) NOT NULL COMMENT '이미지 URL',
+    link TEXT NOT NULL COMMENT '링크',
+    order_no int not null DEFAULT 0 comment '정렬 순서',
+    status VARCHAR(20) NOT NULL DEFAULT 'active' COMMENT '상태',
+    created_id BIGINT NOT NULL COMMENT '생성자 ID',
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '생성 시간',
+    updated_id BIGINT NOT NULL COMMENT '수정자 ID',
+    updated_at DATETIME NULL COMMENT '수정 시간'
+) COMMENT '홈 슬라이드 테이블' CHARSET=utf8mb4;
