@@ -87,8 +87,7 @@ CREATE TABLE IF NOT EXISTS consultation_category (
     created_id BIGINT NOT NULL COMMENT '생성자 ID',
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '생성 시간',
     updated_id BIGINT NOT NULL COMMENT '수정자 ID',
-    updated_at DATETIME NULL COMMENT '수정 시간',
-    CONSTRAINT uq_consultation_category_code UNIQUE (code)
+    updated_at DATETIME NULL COMMENT '수정 시간'
 ) COMMENT '상담 항목 테이블' CHARSET=utf8mb4;
 
 -- 상담 접수 테이블
