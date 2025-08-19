@@ -1,5 +1,6 @@
 package com.project.minehair.domain.home.domain
 
+import com.project.minehair.domain.home.adapter.`in`.web.dto.CreateHomeSlideRequest
 import com.project.minehair.domain.home.adapter.`in`.web.dto.HomeSlideResponse
 import com.project.minehair.domain.home.adapter.out.persistence.HomeSlideJpaEntity
 import org.springframework.stereotype.Component
@@ -23,6 +24,14 @@ class HomeSlideMapper {
 
     fun toDomainList(entities: List<HomeSlideJpaEntity>): List<HomeSlide> {
         return entities.map { toDomain(it) }
+    }
+
+    fun toDomain(request: CreateHomeSlideRequest): HomeSlide {
+        return HomeSlide(
+            imageUrl = request.imageUrl,
+            link = request.link,
+            orderNo = request.orderNo
+        )
     }
 
     fun toEntity(homeSlide: HomeSlide): HomeSlideJpaEntity {
