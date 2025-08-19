@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS role_menu (
     created_id BIGINT NOT NULL COMMENT '생성자 ID',
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '생성 시간',
     updated_id BIGINT NOT NULL COMMENT '수정자 ID',
-    updated_at DATETIME NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '수정 시간',
+    updated_at DATETIME NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '수정 시간'
 ) COMMENT='역할별 메뉴 접근 권한' CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- 사용자 테이블 (회원과 관리자 통합)
@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS users (
     created_id BIGINT NOT NULL COMMENT '생성자 ID',
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '생성 시간',
     updated_id BIGINT NOT NULL COMMENT '수정자 ID',
-    updated_at DATETIME NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '수정 시간',
+    updated_at DATETIME NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '수정 시간'
 ) COMMENT='사용자 테이블 (회원/관리자 통합)' CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- 배너 테이블
@@ -98,7 +98,7 @@ CREATE TABLE IF NOT EXISTS consultation_reception (
     created_id BIGINT NOT NULL COMMENT '생성자 ID',
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '생성 시간',
     updated_id BIGINT NOT NULL COMMENT '수정자 ID',
-    updated_at DATETIME NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '수정 시간',
+    updated_at DATETIME NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '수정 시간'
 ) COMMENT='상담 접수 테이블' CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- 홈 슬라이드 테이블
