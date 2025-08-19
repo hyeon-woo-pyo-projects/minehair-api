@@ -24,8 +24,8 @@ docker rm -f "$CONTAINER_NAME" 2>/dev/null && echo "$CONTAINER_NAME 정리 완�
 
 echo "새 컨테이너 실행 중..."
 docker run -d \
-  -e SPRING_PROFILES_ACTIVE=dev \
-  -e SQL_INIT_MODE=always \
+  -e SPRING_PROFILES_ACTIVE=prd \
+  -e SQL_INIT_MODE=never \
   -e SERVER_PORT=8080 \
   -e BASE_URL=https://minehair401.com \
   -p 8080:8080 \

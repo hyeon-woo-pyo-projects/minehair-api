@@ -35,7 +35,7 @@ spring:
     init:
       schema-locations: classpath*:init/h2db/schema/schema.sql
       data-locations: classpath*:init/h2db/data/data.sql
-      mode: always
+      mode: ${SQL_INIT_MODE:always}
 
   jpa:
     defer-datasource-initialization: true
@@ -81,7 +81,7 @@ spring:
     init:
       schema-locations: classpath*:init/h2db/schema/schema.sql
       data-locations: classpath*:init/h2db/data/data.sql
-      mode: always
+      mode: ${SQL_INIT_MODE:always}
 
   jpa:
     defer-datasource-initialization: true
@@ -123,12 +123,12 @@ spring:
 
   sql:
     init:
-      schema-locations: classpath*:initdata/schema/schema.sql
-#      data-locations: classpath*:initdata/data/data.sql
-      mode: never          # <-- schema.sql 항상 실행
+      schema-locations: classpath*:init/mariadb/schema/schema.sql
+      data-locations: classpath*:init/mariadb/data/data.sql
+      mode: ${SQL_INIT_MODE:never}
 
   jpa:
-    defer-datasource-initialization: false
+    defer-datasource-initialization: true
     hibernate:
       ddl-auto: none
     show-sql: false
