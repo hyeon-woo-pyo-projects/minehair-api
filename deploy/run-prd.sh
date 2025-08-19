@@ -4,6 +4,7 @@
 IMAGE_NAME="minehair-api"
 CONTAINER_NAME="minehair-api"
 HOST_IMAGE_PATH="/root/minehair/images"
+NETWORK_NAME="minehair-network"
 
 echo "Docker 이미지 빌드 중..."
 docker build -t "$IMAGE_NAME" .
@@ -19,6 +20,9 @@ echo "호스트 이미지 디렉토리 생성 중..."
 mkdir -p "$HOST_IMAGE_PATH"
 echo "이미지 저장 경로 생성 완료: $HOST_IMAGE_PATH"
 
+# 네트워크 생성 (이미 있으면 에러 무시)
+docker network create $NETWORK_NAME 2>/dev/null && echo "네트워크 $NETWORK_NAME 생성" || echo "네트워크 $NETWORK_NAME 이미 존재"
+
 echo "기존 컨테이너 중지 및 삭제 중..."
 docker rm -f "$CONTAINER_NAME" 2>/dev/null && echo "$CONTAINER_NAME 정리 완료" || echo "종료할 컨테이너 없음"
 
@@ -30,6 +34,7 @@ docker run -d \
   -e BASE_URL=https://minehair401.com \
   -p 8080:8080 \
   -v "$HOST_IMAGE_PATH":/app/uploads \
+  --network $NETWORK_NAME \
   --name "$CONTAINER_NAME" \
   "$IMAGE_NAME"
 
