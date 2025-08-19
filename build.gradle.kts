@@ -65,6 +65,8 @@ dependencies {
 
 	compileOnly("org.projectlombok:lombok")
 	runtimeOnly("com.h2database:h2")
+	// MariaDB JDBC 드라이버 추가
+	runtimeOnly("org.mariadb.jdbc:mariadb-java-client")
 	annotationProcessor("org.projectlombok:lombok")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
