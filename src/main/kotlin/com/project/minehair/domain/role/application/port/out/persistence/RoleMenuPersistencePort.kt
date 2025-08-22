@@ -48,4 +48,15 @@ interface RoleMenuPersistencePort {
      * 역할-메뉴 매핑 저장
      */
     fun save(roleMenu: RoleMenu): RoleMenu
+
+    /**
+     * 역할-메뉴 매핑 삭제
+     */
+    fun delete(roleMenu: RoleMenu): RoleMenu
+
+    /**
+     * 역할-메뉴 매핑 삭제
+     */
+    fun delete(roleMenuList: List<RoleMenu>): List<RoleMenu>
+
 }

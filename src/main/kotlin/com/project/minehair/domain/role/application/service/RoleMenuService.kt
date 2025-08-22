@@ -175,4 +175,35 @@ class RoleMenuService(
         }
     }
 
+    @Transactional
+    override fun deleteMenuRole(menuId: Long): List<RoleMenuResponse>{
+        // 1. 메뉴 정보 조회
+        val menu = menuDomainPort.getMenuById(menuId)
+            ?: throw BusinessException(ErrorCode.NOT_FOUND, "Menu not found with ID: $menuId")
+
+        // 2. 역할 매핑 조회
+        val roleMenus = roleMenuPersistencePort.findByMenuId(menuId)
+
+
+        // 3. 역할 매핑 삭제
+        val deletedList = roleMenuPersistencePort.delete(roleMenus)
+
+        // 4. 응답 생성
+        return deletedList.map { roleMenu ->
+            RoleMenuResponse(
+                id = roleMenu.id,
+                menuId = roleMenu.menuId,
+                parentId = menu.parentId,
+                menuName = menu.name,
+                menuPath = menu.path,
+                imageUrl = menu.imageUrl,
+                menuVisible = menu.isVisible,
+                menuType = menu.menuType,
+                menuOrderNo = menu.orderNo
+            )
+        }
+
+
+    }
+
 }

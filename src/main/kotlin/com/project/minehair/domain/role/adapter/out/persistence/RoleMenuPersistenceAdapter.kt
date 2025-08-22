@@ -65,4 +65,18 @@ class RoleMenuPersistenceAdapter(
         val savedEntity = roleMenuJpaRepository.save(entity)
         return roleMenuMapper.toDomain(savedEntity)
     }
+
+    override fun delete(roleMenu: RoleMenu): RoleMenu {
+        val roleMenuForDelete = roleMenu.delete()
+        val entity = roleMenuMapper.toEntity(roleMenuForDelete)
+        val deletedEntity = roleMenuJpaRepository.save(entity)
+        return roleMenuMapper.toDomain(deletedEntity)
+    }
+
+    override fun delete(roleMenuList: List<RoleMenu>): List<RoleMenu> {
+        val deletedRoleMenus = roleMenuList.map { it.delete() }
+        val entities = deletedRoleMenus.map { roleMenuMapper.toEntity(it) }
+        val deletedEntities = roleMenuJpaRepository.saveAll(entities)
+        return deletedEntities.map { roleMenuMapper.toDomain(it) }
+    }
 }

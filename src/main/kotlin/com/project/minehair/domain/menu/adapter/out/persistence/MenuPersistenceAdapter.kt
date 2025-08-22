@@ -2,6 +2,7 @@ package com.project.minehair.domain.menu.adapter.out.persistence
 
 import com.project.minehair.domain.menu.application.port.out.MenuPersistencePort
 import com.project.minehair.domain.menu.domain.Menu
+import com.project.minehair.global.enums.Status
 import org.springframework.stereotype.Component
 
 // MenuPersistenceAdapter.kt - 영속성 어댑터
@@ -18,9 +19,8 @@ class MenuPersistenceAdapter(
     }
 
     override fun findById(id: Long): Menu? {
-        return menuJpaRepository.findById(id)
-            .map { menuMapper.toDomain(it) }
-            .orElse(null)
+        return menuJpaRepository.findByIdAndStatus(id, Status.active)
+            ?.let { menuMapper.toDomain(it) }
     }
 
     override fun findAll(): List<Menu> {
@@ -37,7 +37,7 @@ class MenuPersistenceAdapter(
         if (ids.isEmpty()) {
             return emptyList()
         }
-        return menuJpaRepository.findAllById(ids)
+        return menuJpaRepository.findAllByIdInAndStatus(ids, Status.active)
             .map { menuMapper.toDomain(it) }
     }
 

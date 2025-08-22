@@ -104,7 +104,7 @@ CREATE TABLE IF NOT EXISTS consultation_reception (
 -- 홈 슬라이드 테이블
 CREATE TABLE IF NOT EXISTS home_slide (
     id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT 'ID',
-    image_url VARCHAR(255) NOT NULL COMMENT '이미지 URL',
+    image_url TEXT NOT NULL COMMENT '이미지 URL',
     link TEXT NOT NULL COMMENT '링크',
     order_no INT NOT NULL DEFAULT 0 COMMENT '정렬 순서',
     status VARCHAR(20) NOT NULL DEFAULT 'active' COMMENT '상태',
