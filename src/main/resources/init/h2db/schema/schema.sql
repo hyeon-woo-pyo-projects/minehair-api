@@ -117,3 +117,34 @@ CREATE TABLE IF NOT EXISTS home_slide (
     updated_id BIGINT NOT NULL COMMENT '수정자 ID',
     updated_at DATETIME NULL COMMENT '수정 시간'
 ) COMMENT '홈 슬라이드 테이블' CHARSET=utf8mb4;
+
+-- QNA 게시판 테이블
+CREATE TABLE IF NOT EXISTS board_qna (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT 'ID',
+    title VARCHAR(200) NOT NULL COMMENT '제목',
+    content TEXT NOT NULL COMMENT '내용',
+    author VARCHAR(50) NOT NULL COMMENT '작성자',
+    view_count INT DEFAULT 0 COMMENT '조회수',
+    status VARCHAR(20) NOT NULL DEFAULT 'active' COMMENT '상태',
+    created_id BIGINT NOT NULL COMMENT '생성자 ID',
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '생성 시간',
+    updated_id BIGINT NOT NULL COMMENT '수정자 ID',
+    updated_at DATETIME NULL COMMENT '수정 시간'
+) COMMENT 'QNA 게시판 테이블' CHARSET=utf8mb4;
+
+-- REVIEW 게시판 테이블
+CREATE TABLE IF NOT EXISTS board_review (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT 'ID',
+    title VARCHAR(200) NOT NULL COMMENT '제목',
+    content TEXT NOT NULL COMMENT '내용',
+    author VARCHAR(50) NOT NULL COMMENT '작성자',
+    password VARCHAR(100) COMMENT '비밀번호 (해시)',
+    view_count INT DEFAULT 0 COMMENT '조회수',
+    is_secret BOOLEAN DEFAULT FALSE COMMENT '비밀글 여부',
+    is_answered BOOLEAN DEFAULT FALSE COMMENT '답변완료 여부',
+    status VARCHAR(20) NOT NULL DEFAULT 'active' COMMENT '상태',
+    created_id BIGINT NOT NULL COMMENT '생성자 ID',
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '생성 시간',
+    updated_id BIGINT NOT NULL COMMENT '수정자 ID',
+    updated_at DATETIME NULL COMMENT '수정 시간'
+) COMMENT 'QNA 게시판 테이블' CHARSET=utf8mb4;
