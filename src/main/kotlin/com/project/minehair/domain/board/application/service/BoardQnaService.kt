@@ -32,7 +32,7 @@ class BoardQnaService(
     }
 
     @Transactional
-    override fun createBoardQnaPage(request: CreateBoardQnaRequest): BoardQnaResponse {
+    override fun createBoardQna(request: CreateBoardQnaRequest): BoardQnaResponse {
         val requestWithAuthor = request.withAuthor("")
         val boardQnaForCreate = boardQnaMapper.toDomain(requestWithAuthor)
         val createdBoardQna = boardQnaPersistencePort.save(boardQnaForCreate)
@@ -40,7 +40,7 @@ class BoardQnaService(
     }
 
     @Transactional
-    override fun updateBoardQnaPage(id: Long, request: UpdateBoardQnaRequest): BoardQnaResponse {
+    override fun updateBoardQna(id: Long, request: UpdateBoardQnaRequest): BoardQnaResponse {
         val boardQna = boardQnaPersistencePort.findByIdActiveState(id)
         val boardQnaForUpdate = boardQna.update(request)
         val updatedBoardQna = boardQnaPersistencePort.save(boardQnaForUpdate)
@@ -48,7 +48,7 @@ class BoardQnaService(
     }
 
     @Transactional
-    override fun deleteBoardQnaPage(id: Long): BoardQnaResponse {
+    override fun deleteBoardQna(id: Long): BoardQnaResponse {
         val boardQna = boardQnaPersistencePort.findByIdActiveState(id)
         val boardQnaForDelete = boardQna.delete()
         val deletedBoardQna = boardQnaPersistencePort.save(boardQnaForDelete)

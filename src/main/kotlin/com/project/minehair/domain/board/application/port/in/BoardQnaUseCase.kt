@@ -21,16 +21,16 @@ interface BoardQnaUseCase {
     /**
      * QNA 게시판 생성
      */
-    fun createBoardQnaPage(request: CreateBoardQnaRequest): BoardQnaResponse
+    fun createBoardQna(request: CreateBoardQnaRequest): BoardQnaResponse
 
     /**
      * QNA 게시판 수정
      */
-    fun updateBoardQnaPage(id: Long, request: UpdateBoardQnaRequest): BoardQnaResponse
+    fun updateBoardQna(id: Long, request: UpdateBoardQnaRequest): BoardQnaResponse
 
     /**
      * QNA 게시판 삭제
      */
-    fun deleteBoardQnaPage(id: Long): BoardQnaResponse
+    fun deleteBoardQna(id: Long): BoardQnaResponse
 
 }

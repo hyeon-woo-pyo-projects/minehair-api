@@ -40,25 +40,25 @@ class BoardQnaInboundWebAdapter(
         return BaseResponse.success(boardQnaUseCase.getBoardQnaDetails(id))
     }
 
-    @Operation(summary = "QNA 게시판 조회 (페이지)", description = "QNA 게시판 조회 (페이지)")
+    @Operation(summary = "QNA 게시판 작성", description = "QNA 게시판 작성")
     @PostMapping
-    fun createBoardQnaPage(@Valid @RequestBody request: CreateBoardQnaRequest): BaseResponse<BoardQnaResponse> {
-        return BaseResponse.success(boardQnaUseCase.createBoardQnaPage(request))
+    fun createBoardQna(@Valid @RequestBody request: CreateBoardQnaRequest): BaseResponse<BoardQnaResponse> {
+        return BaseResponse.success(boardQnaUseCase.createBoardQna(request))
     }
 
     @Operation(summary = "QNA 게시판 수정", description = "QNA 게시판 수정")
     @PatchMapping("/{id}")
-    fun updateBoardQnaPage(
+    fun updateBoardQna(
         @PathVariable id: Long,
         @Valid @RequestBody request: UpdateBoardQnaRequest
     ): BaseResponse<BoardQnaResponse> {
-        return BaseResponse.success(boardQnaUseCase.updateBoardQnaPage(id, request))
+        return BaseResponse.success(boardQnaUseCase.updateBoardQna(id, request))
     }
 
     @Operation(summary = "QNA 게시판 삭제", description = "QNA 게시판 삭제")
     @DeleteMapping("/{id}")
-    fun deleteBoardQnaPage(@PathVariable id: Long): BaseResponse<BoardQnaResponse> {
-        return BaseResponse.success(boardQnaUseCase.deleteBoardQnaPage(id))
+    fun deleteBoardQna(@PathVariable id: Long): BaseResponse<BoardQnaResponse> {
+        return BaseResponse.success(boardQnaUseCase.deleteBoardQna(id))
     }
 
 
