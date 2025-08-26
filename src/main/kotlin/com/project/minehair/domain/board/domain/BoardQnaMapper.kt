@@ -51,6 +51,7 @@ class BoardQnaMapper {
             content = domain.content,
             author = domain.author,
             viewCount = domain.viewCount,
+            status = domain.status
         )
     }
 

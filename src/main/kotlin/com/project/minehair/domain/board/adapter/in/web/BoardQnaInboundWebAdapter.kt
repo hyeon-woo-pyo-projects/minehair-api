@@ -3,18 +3,13 @@ package com.project.minehair.domain.board.adapter.`in`.web
 import com.project.minehair.domain.board.adapter.`in`.web.dto.BoardQnaPageRequest
 import com.project.minehair.domain.board.adapter.`in`.web.dto.BoardQnaResponse
 import com.project.minehair.domain.board.adapter.`in`.web.dto.CreateBoardQnaRequest
+import com.project.minehair.domain.board.adapter.`in`.web.dto.UpdateBoardQnaRequest
 import com.project.minehair.domain.board.application.port.`in`.BoardQnaUseCase
 import com.project.minehair.global.response.BaseResponse
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
 import jakarta.validation.Valid
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.ModelAttribute
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @Tag(name = "QNA 게시판 API", description = "QNA 게시판 API")
 @RestController
@@ -23,9 +18,6 @@ class BoardQnaInboundWebAdapter(
     private val boardQnaUseCase: BoardQnaUseCase
 ) {
 
-    /**
-     * QNA 게시판 조회 (페이지)
-     */
     @Operation(summary = "QNA 게시판 조회 (페이지)", description = "QNA 게시판 조회 (페이지)")
     @GetMapping("/page")
     fun getBoardQnaPage(@Valid @ModelAttribute request: BoardQnaPageRequest): BaseResponse<List<BoardQnaResponse>> {
@@ -42,22 +34,31 @@ class BoardQnaInboundWebAdapter(
         return BaseResponse.success(boardQnaPage.content, paginationInfo)
     }
 
-    /**
-     * QNA 게시판 상세조회
-     */
     @Operation(summary = "QNA 게시판 상세조회", description = "QNA 게시판 상세조회")
     @GetMapping("/details/{id}")
-    fun getBoardQnaDetails (@PathVariable id: Long): BaseResponse<BoardQnaResponse> {
+    fun getBoardQnaDetails(@PathVariable id: Long): BaseResponse<BoardQnaResponse> {
         return BaseResponse.success(boardQnaUseCase.getBoardQnaDetails(id))
     }
 
-    /**
-     * QNA 게시판 생성
-     */
     @Operation(summary = "QNA 게시판 조회 (페이지)", description = "QNA 게시판 조회 (페이지)")
     @PostMapping
-    fun createBoardQnaPage(@Valid @RequestBody request: CreateBoardQnaRequest) : BaseResponse<BoardQnaResponse> {
+    fun createBoardQnaPage(@Valid @RequestBody request: CreateBoardQnaRequest): BaseResponse<BoardQnaResponse> {
         return BaseResponse.success(boardQnaUseCase.createBoardQnaPage(request))
+    }
+
+    @Operation(summary = "QNA 게시판 수정", description = "QNA 게시판 수정")
+    @PatchMapping("/{id}")
+    fun updateBoardQnaPage(
+        @PathVariable id: Long,
+        @Valid @RequestBody request: UpdateBoardQnaRequest
+    ): BaseResponse<BoardQnaResponse> {
+        return BaseResponse.success(boardQnaUseCase.updateBoardQnaPage(id, request))
+    }
+
+    @Operation(summary = "QNA 게시판 삭제", description = "QNA 게시판 삭제")
+    @DeleteMapping("/{id}")
+    fun deleteBoardQnaPage(@PathVariable id: Long): BaseResponse<BoardQnaResponse> {
+        return BaseResponse.success(boardQnaUseCase.deleteBoardQnaPage(id))
     }
 
 

@@ -1,5 +1,6 @@
 package com.project.minehair.domain.board.domain
 
+import com.project.minehair.domain.board.adapter.`in`.web.dto.UpdateBoardQnaRequest
 import com.project.minehair.global.domain.BaseDomain
 import com.project.minehair.global.enums.Status
 import java.time.LocalDateTime
@@ -24,6 +25,27 @@ data class BoardQna(
     fun incrementViewCount(): BoardQna {
         return this.copy(
             viewCount = this.viewCount + 1,
+            updatedAt = LocalDateTime.now()
+        )
+    }
+
+    /**
+     * 게시글 정보를 업데이트한 새로운 객체 반환
+     */
+    fun update(
+        request: UpdateBoardQnaRequest
+    ): BoardQna {
+        return this.copy(
+            title = request.title,
+            content = request.content,
+            updatedId = updatedId,
+            updatedAt = LocalDateTime.now()
+        )
+    }
+
+    fun delete(): BoardQna {
+        return this.copy(
+            status = Status.deleted,
             updatedAt = LocalDateTime.now()
         )
     }

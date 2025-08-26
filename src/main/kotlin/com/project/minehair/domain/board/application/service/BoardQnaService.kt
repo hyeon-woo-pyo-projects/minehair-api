@@ -3,6 +3,7 @@ package com.project.minehair.domain.board.application.service
 import com.project.minehair.domain.board.adapter.`in`.web.dto.BoardQnaPageRequest
 import com.project.minehair.domain.board.adapter.`in`.web.dto.BoardQnaResponse
 import com.project.minehair.domain.board.adapter.`in`.web.dto.CreateBoardQnaRequest
+import com.project.minehair.domain.board.adapter.`in`.web.dto.UpdateBoardQnaRequest
 import com.project.minehair.domain.board.application.port.`in`.BoardQnaUseCase
 import com.project.minehair.domain.board.application.port.out.BoardQnaPersistencePort
 import com.project.minehair.domain.board.domain.BoardQnaMapper
@@ -15,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional
 class BoardQnaService(
     private val boardQnaPersistencePort: BoardQnaPersistencePort,
     private val boardQnaMapper: BoardQnaMapper
-): BoardQnaUseCase {
+) : BoardQnaUseCase {
 
     override fun getBoardQnaPage(request: BoardQnaPageRequest): Page<BoardQnaResponse> {
         return boardQnaPersistencePort.findAllPageActiveState(request.page, request.size)
@@ -25,7 +26,7 @@ class BoardQnaService(
     @Transactional
     override fun getBoardQnaDetails(id: Long): BoardQnaResponse {
         val boardQna = boardQnaPersistencePort.findByIdActiveState(id)
-        val increasedViewCountBoardQna =  boardQna.incrementViewCount()
+        val increasedViewCountBoardQna = boardQna.incrementViewCount()
         val updatedBoardQna = boardQnaPersistencePort.save(increasedViewCountBoardQna)
         return boardQnaMapper.toResponse(updatedBoardQna)
     }
@@ -38,6 +39,21 @@ class BoardQnaService(
         return boardQnaMapper.toResponse(createdBoardQna)
     }
 
+    @Transactional
+    override fun updateBoardQnaPage(id: Long, request: UpdateBoardQnaRequest): BoardQnaResponse {
+        val boardQna = boardQnaPersistencePort.findByIdActiveState(id)
+        val boardQnaForUpdate = boardQna.update(request)
+        val updatedBoardQna = boardQnaPersistencePort.save(boardQnaForUpdate)
+        return boardQnaMapper.toResponse(updatedBoardQna)
+    }
+
+    @Transactional
+    override fun deleteBoardQnaPage(id: Long): BoardQnaResponse {
+        val boardQna = boardQnaPersistencePort.findByIdActiveState(id)
+        val boardQnaForDelete = boardQna.delete()
+        val deletedBoardQna = boardQnaPersistencePort.save(boardQnaForDelete)
+        return boardQnaMapper.toResponse(deletedBoardQna)
+    }
 
 
 }

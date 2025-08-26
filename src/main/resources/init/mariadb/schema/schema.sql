@@ -112,6 +112,7 @@ CREATE TABLE IF NOT EXISTS home_slide (
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '생성 시간',
     updated_id BIGINT NOT NULL COMMENT '수정자 ID',
     updated_at DATETIME NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '수정 시간'
+
 ) COMMENT='홈 슬라이드 테이블' CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- QNA 게시판 테이블

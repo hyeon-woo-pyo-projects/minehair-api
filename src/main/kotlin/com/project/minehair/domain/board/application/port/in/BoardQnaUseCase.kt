@@ -3,6 +3,7 @@ package com.project.minehair.domain.board.application.port.`in`
 import com.project.minehair.domain.board.adapter.`in`.web.dto.BoardQnaPageRequest
 import com.project.minehair.domain.board.adapter.`in`.web.dto.BoardQnaResponse
 import com.project.minehair.domain.board.adapter.`in`.web.dto.CreateBoardQnaRequest
+import com.project.minehair.domain.board.adapter.`in`.web.dto.UpdateBoardQnaRequest
 import org.springframework.data.domain.Page
 
 interface BoardQnaUseCase {
@@ -22,14 +23,14 @@ interface BoardQnaUseCase {
      */
     fun createBoardQnaPage(request: CreateBoardQnaRequest): BoardQnaResponse
 
-//    /**
-//     * QNA 게시판 수정
-//     */
-//    fun updateBoardQnaPage(request: UpdateBoardQnaRequest): BoardQnaResponse
-//
-//    /**
-//     * QNA 게시판 삭제
-//     */
-//    fun deleteBoardQnaPage(id: Long): BoardQnaResponse
+    /**
+     * QNA 게시판 수정
+     */
+    fun updateBoardQnaPage(id: Long, request: UpdateBoardQnaRequest): BoardQnaResponse
+
+    /**
+     * QNA 게시판 삭제
+     */
+    fun deleteBoardQnaPage(id: Long): BoardQnaResponse
 
 }
