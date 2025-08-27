@@ -145,3 +145,20 @@ CREATE TABLE IF NOT EXISTS board_review (
     updated_id BIGINT NOT NULL COMMENT '수정자 ID',
     updated_at DATETIME NULL COMMENT '수정 시간'
 ) COMMENT 'Review 게시판 테이블' CHARSET=utf8mb4;
+
+-- 쿠폰 테이블
+CREATE TABLE IF NOT EXISTS coupon (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT 'ID',
+    content TEXT NOT NULL COMMENT '쿠폰 내용',
+    condition_type VARCHAR(50) NOT NULL COMMENT '조건 타입(구입액, 생일 등)',
+    discount_type VARCHAR(50) NOT NULL COMMENT '할인 타입(정액, 정률)',
+    discount_amount INT NOT NULL COMMENT '할인 값',
+    period_start DATE NOT NULL COMMENT '시작 기간',
+    period_end DATE NOT NULL COMMENT '종료 기간',
+    is_post BOOLEAN NOT NULL DEFAULT false COMMENT '게시 여부',
+    status VARCHAR(20) NOT NULL DEFAULT 'active' COMMENT '상태',
+    created_id BIGINT NOT NULL COMMENT '생성자 ID',
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '생성 시간',
+    updated_id BIGINT NOT NULL COMMENT '수정자 ID',
+    updated_at DATETIME NULL COMMENT '수정 시간'
+) COMMENT '쿠폰 테이블' CHARSET=utf8mb4;
