@@ -37,12 +37,14 @@ class CouponService (
             .let { couponMapper.toResponse(it) }
     }
 
+    @Transactional
     override fun updateCoupon(id: Long, request: UpdateCouponRequest): CouponResponse {
         val coupon = couponPersistencePort.findById(id)
         val couponForUpdate = coupon.update(request)
         return couponMapper.toResponse(couponPersistencePort.save(couponForUpdate))
     }
 
+    @Transactional
     override fun deleteCoupon(id: Long): CouponResponse {
         val coupon = couponPersistencePort.findById(id)
         val couponForDelete = coupon.delete()

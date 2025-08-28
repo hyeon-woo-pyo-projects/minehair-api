@@ -55,6 +55,7 @@ class SecurityConfig(
                     .requestMatchers(HttpMethod.POST, "/api/consultation/reception").permitAll() // 상담 카테고리 조회는 공개
                     .requestMatchers("/api/consultation/reception").permitAll() // 상담 접수는 공개
                     .requestMatchers(HttpMethod.GET, "/api/home/slide").permitAll() // 홈 슬라이드 조회는 공개
+                    .requestMatchers(HttpMethod.GET, "/api/coupon/posted").permitAll() // 게시된 쿠폰 목록 조회
                     .requestMatchers("/api/**").authenticated()  // API 경로만 인증 필요
                     .anyRequest().permitAll()  // 나머지는 모두 허용 (404 처리를 위해)
             }
