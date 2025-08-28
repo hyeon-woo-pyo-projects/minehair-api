@@ -2,6 +2,7 @@ package com.project.minehair.domain.coupon.application.service
 
 import com.project.minehair.domain.coupon.adapter.`in`.web.dto.CouponResponse
 import com.project.minehair.domain.coupon.adapter.`in`.web.dto.CreateCouponRequest
+import com.project.minehair.domain.coupon.adapter.`in`.web.dto.UpdateCouponRequest
 import com.project.minehair.domain.coupon.application.port.`in`.CouponUseCase
 import com.project.minehair.domain.coupon.application.port.out.CouponPersistencePort
 import com.project.minehair.domain.coupon.domain.CouponMapper
@@ -24,6 +25,28 @@ class CouponService (
     override fun getCouponList(): List<CouponResponse> {
         return couponPersistencePort.findAllActiveStatus()
             .let {couponMapper.toResponseList(it)}
+    }
+
+    override fun getPostedCouponList(): List<CouponResponse> {
+        return couponPersistencePort.findAllPostedActiveStatus()
+            .let {couponMapper.toResponseList(it)}
+    }
+
+    override fun getCouponDetails(id: Long): CouponResponse {
+        return couponPersistencePort.findById(id)
+            .let { couponMapper.toResponse(it) }
+    }
+
+    override fun updateCoupon(id: Long, request: UpdateCouponRequest): CouponResponse {
+        val coupon = couponPersistencePort.findById(id)
+        val couponForUpdate = coupon.update(request)
+        return couponMapper.toResponse(couponPersistencePort.save(couponForUpdate))
+    }
+
+    override fun deleteCoupon(id: Long): CouponResponse {
+        val coupon = couponPersistencePort.findById(id)
+        val couponForDelete = coupon.delete()
+        return couponMapper.toResponse(couponPersistencePort.save(couponForDelete))
     }
 
 }

@@ -22,4 +22,14 @@ class CouponPersistenceAdapter(
             .let { couponMapper.toDomainList(it) }
     }
 
+    override fun findAllPostedActiveStatus(): List<Coupon> {
+        return couponJpaRepository.findAllByStatusAndIsPost(Status.active, true)
+            .let { couponMapper.toDomainList(it) }
+    }
+
+    override fun findById(id: Long): Coupon {
+        return couponJpaRepository.findById(id).get()
+            .let { couponMapper.toDomain(it) }
+    }
+
 }

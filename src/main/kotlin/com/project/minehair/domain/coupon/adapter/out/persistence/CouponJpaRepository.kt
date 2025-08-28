@@ -12,4 +12,9 @@ interface CouponJpaRepository : JpaRepository<CouponJpaEntity, Long> {
      */
     fun findAllByStatus(status: Status): List<CouponJpaEntity>
 
+    /**
+     * 게시된 쿠폰 활성 리스트 조회
+     */
+    fun findAllByStatusAndIsPost(status: Status, isPost: Boolean): List<CouponJpaEntity>
+
 }

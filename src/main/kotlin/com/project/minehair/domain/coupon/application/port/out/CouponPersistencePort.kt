@@ -14,4 +14,15 @@ interface CouponPersistencePort {
      */
     fun findAllActiveStatus(): List<Coupon>
 
+    /**
+     * 게시된 쿠폰 리스트 조회
+     */
+    fun findAllPostedActiveStatus(): List<Coupon>
+
+    /**
+     * id로 쿠폰 조회
+     */
+    fun findById(id: Long): Coupon
+
+
 }
