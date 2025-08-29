@@ -8,6 +8,7 @@ CREATE TABLE IF NOT EXISTS menu (
     is_visible BOOLEAN NOT NULL DEFAULT TRUE COMMENT '메뉴 표시 여부',
     menu_type VARCHAR(20) NOT NULL COMMENT '메뉴 타입 (대(MAJOR), 중(MINOR), 소(SUB))',
     order_no INT NOT NULL DEFAULT 0 COMMENT '정렬 순서',
+    is_manage BOOLEAN NOT NULL DEFAULT TRUE comment '관리 여부',
     status VARCHAR(20) NOT NULL DEFAULT 'active' COMMENT '상태',
     created_id BIGINT NOT NULL COMMENT '생성자 ID',
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '생성 시간',

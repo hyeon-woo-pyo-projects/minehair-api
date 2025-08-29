@@ -22,6 +22,7 @@ class MenuMapper {
             isVisible = entity.isVisible,
             menuType = entity.menuType,
             orderNo = entity.orderNo,
+            isManage = entity.isManage,
             status = entity.status,
             createdId = entity.createdId,
             createdAt = entity.createdAt,
@@ -40,6 +41,7 @@ class MenuMapper {
             isVisible = createMenuCommand.isVisible,
             menuType = createMenuCommand.menuType,
             orderNo = createMenuCommand.orderNo,
+            isManage = createMenuCommand.isManage,
             createdId = 1L,
             createdAt = LocalDateTime.now(),
             updatedId = 0L,
@@ -57,6 +59,7 @@ class MenuMapper {
             isVisible = updateMenuCommand.isVisible,
             menuType = updateMenuCommand.menuType,
             orderNo = updateMenuCommand.orderNo,
+            isManage = updateMenuCommand.isManage,
             createdId = 1L,
             createdAt = LocalDateTime.now(),
             updatedId = 0L,
@@ -99,6 +102,7 @@ class MenuMapper {
             isVisible = domain.isVisible,
             menuType = domain.menuType,
             orderNo = domain.orderNo,
+            isManage = domain.isManage
         )
     }
 
@@ -119,7 +123,8 @@ class MenuMapper {
             imageUrl = interDomainMenuInfo.imageUrl,
             isVisible = interDomainMenuInfo.isVisible,
             menuType = interDomainMenuInfo.menuType,
-            orderNo = interDomainMenuInfo.orderNo
+            orderNo = interDomainMenuInfo.orderNo,
+            isManage = interDomainMenuInfo.isManage
         )
     }
 
@@ -133,6 +138,7 @@ class MenuMapper {
             isVisible = interDomainMenuInfo.isVisible,
             menuType = interDomainMenuInfo.menuType,
             orderNo = interDomainMenuInfo.orderNo,
+            isManage = interDomainMenuInfo.isManage
         )
     }
 

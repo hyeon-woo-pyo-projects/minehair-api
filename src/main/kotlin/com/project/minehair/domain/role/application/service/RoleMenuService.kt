@@ -70,6 +70,7 @@ class RoleMenuService(
 
         // 3. 메뉴 정보 조회 (다른 도메인 호출)
         val menus = menuDomainPort.getMenusByIds(menuIds)
+            .filter { it.isManage }
 
         // 4. menus에 role매핑하여 응답 생성
         return menus.mapNotNull { menu ->
@@ -105,6 +106,7 @@ class RoleMenuService(
             isVisible = createRoleMenuRequest.isVisible,
             menuType = createRoleMenuRequest.menuType,
             orderNo = maxOrderNo.plus(1),
+            isManage = true
         )
         val menu = menuDomainPort.createMenu(interDomainMenuInfo)
 
@@ -145,6 +147,7 @@ class RoleMenuService(
             isVisible = updateRoleMenuRequest.isVisible,
             menuType = updateRoleMenuRequest.menuType,
             orderNo = updateRoleMenuRequest.orderNo,
+            isManage = true
         )
         val updatedMenu = menuDomainPort.updateMenu(interDomainMenuInfo)
         val updatedMenuId = updatedMenu.id ?: throw BusinessException(

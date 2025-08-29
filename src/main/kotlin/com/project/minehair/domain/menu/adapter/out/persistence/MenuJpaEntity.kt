@@ -32,6 +32,9 @@ data class MenuJpaEntity(
     @Column(name = "order_no", nullable = false)
     val orderNo: Int = 0,
 
+    @Column(name = "is_manage", nullable = false)
+    val isManage: Boolean = true,
+
     // BaseJpaEntity 필드들 override
     override val id: Long? = null,
     override val status: Status = Status.active,

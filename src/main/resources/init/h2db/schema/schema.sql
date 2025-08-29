@@ -7,6 +7,7 @@ CREATE TABLE IF NOT EXISTS menu (
     is_visible boolean not null default true comment '메뉴 표시 여부',
     menu_type varchar(20) not null comment '메뉴 타입 (대(MAJOR), 중(MINOR), 소(SUB))',
     order_no int not null DEFAULT 0 comment '정렬 순서',
+    is_manage boolean not null default true comment '관리 여부',
     status varchar(20) not null default 'active' comment '상태',
     created_id bigint not null comment '생성자 ID',
     created_at datetime not null default current_timestamp comment '생성 시간',
