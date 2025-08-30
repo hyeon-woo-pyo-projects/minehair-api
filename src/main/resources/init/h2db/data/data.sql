@@ -97,7 +97,36 @@ INSERT IGNORE INTO users (
     NOW(),
     1,
     NULL
-);
+),
+(
+    1,
+    'system2',
+    '$2a$10$nZDAWUA7.IVQn62NSya4ueQaV.eRGFrweOHTWMvAtRtrSwMZwcl5S',
+    '시스템',
+    '010-0000-0000',
+    '',
+    'system@example.com',
+    'active',
+    1,
+    NOW(),
+    1,
+    NULL
+),
+(
+    1,
+    'system3',
+    '$2a$10$nZDAWUA7.IVQn62NSya4ueQaV.eRGFrweOHTWMvAtRtrSwMZwcl5S',
+    '시스템',
+    '010-0000-0000',
+    '',
+    'system@example.com',
+    'active',
+    1,
+    NOW(),
+    1,
+    NULL
+)
+;
 -----------------------------------------------------------------------------------------------------------------------
 -- [banner] 테이블 초기 데이터 삽입 ---------------------------------------------------------------------------------------
 INSERT IGNORE INTO banner (

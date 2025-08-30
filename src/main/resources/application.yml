@@ -10,6 +10,7 @@ spring:
       - classpath:application-jwt.yml
       - classpath:application-logging.yml
       - classpath:application-redis.yml
+      - classpath:application-file.yml
   lifecycle:
     timeout-per-shutdown-phase: 30s  # 각 셧다운 단계별 최대 대기 시간
 
