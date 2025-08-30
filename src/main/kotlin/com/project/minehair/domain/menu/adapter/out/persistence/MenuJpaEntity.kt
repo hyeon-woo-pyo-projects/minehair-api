@@ -35,6 +35,9 @@ data class MenuJpaEntity(
     @Column(name = "is_manage", nullable = false)
     val isManage: Boolean = true,
 
+    @Column(name = "is_contents", nullable = false)
+    val isContents: Boolean = true,
+
     // BaseJpaEntity 필드들 override
     override val id: Long? = null,
     override val status: Status = Status.active,

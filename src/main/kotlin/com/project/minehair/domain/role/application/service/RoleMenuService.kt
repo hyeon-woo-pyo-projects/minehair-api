@@ -55,6 +55,7 @@ class RoleMenuService(
                         menuVisible = it.isVisible,
                         menuType = it.menuType,
                         menuOrderNo = it.orderNo,
+                        isContents = it.isContents
                     )
                 }
             }
@@ -87,7 +88,8 @@ class RoleMenuService(
                     menuOrderNo = menu.orderNo,
                     // 역할 ID 목록 추가(roleMenus를 그룹핑하여 리스트 생성)
                     roleIdList = roleMenus.filter { rm -> rm.menuId == roleMenu.menuId }
-                        .map { it.roleId }
+                        .map { it.roleId },
+                    isContents = menu.isContents
                 )
             }
         }.sortedBy { it.menuOrderNo }
@@ -106,7 +108,8 @@ class RoleMenuService(
             isVisible = createRoleMenuRequest.isVisible,
             menuType = createRoleMenuRequest.menuType,
             orderNo = maxOrderNo.plus(1),
-            isManage = true
+            isManage = true,
+            isContents = createRoleMenuRequest.isContents
         )
         val menu = menuDomainPort.createMenu(interDomainMenuInfo)
 
@@ -147,7 +150,8 @@ class RoleMenuService(
             isVisible = updateRoleMenuRequest.isVisible,
             menuType = updateRoleMenuRequest.menuType,
             orderNo = updateRoleMenuRequest.orderNo,
-            isManage = true
+            isManage = true,
+            isContents = updateRoleMenuRequest.isContents
         )
         val updatedMenu = menuDomainPort.updateMenu(interDomainMenuInfo)
         val updatedMenuId = updatedMenu.id ?: throw BusinessException(
@@ -202,7 +206,8 @@ class RoleMenuService(
                 imageUrl = menu.imageUrl,
                 menuVisible = menu.isVisible,
                 menuType = menu.menuType,
-                menuOrderNo = menu.orderNo
+                menuOrderNo = menu.orderNo,
+                isContents = menu.isContents
             )
         }
 

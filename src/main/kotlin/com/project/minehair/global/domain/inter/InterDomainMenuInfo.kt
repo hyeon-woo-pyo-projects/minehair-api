@@ -9,6 +9,7 @@ data class InterDomainMenuInfo(
     val isVisible: Boolean,
     val menuType: String,
     val orderNo: Int,
-    val isManage: Boolean
+    val isManage: Boolean,
+    val isContents: Boolean
 )
 

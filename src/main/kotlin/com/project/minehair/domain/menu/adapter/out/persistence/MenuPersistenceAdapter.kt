@@ -23,8 +23,8 @@ class MenuPersistenceAdapter(
             ?.let { menuMapper.toDomain(it) }
     }
 
-    override fun findAll(): List<Menu> {
-        return menuJpaRepository.findAll()
+    override fun findAllActiveStatus(): List<Menu> {
+        return menuJpaRepository.findAllByStatus(Status.active)
             .map { menuMapper.toDomain(it) }
     }
 

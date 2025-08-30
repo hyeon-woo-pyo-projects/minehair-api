@@ -7,7 +7,7 @@ interface MenuPersistencePort {
     // 기존 CRUD 메서드들
     fun save(menu: Menu): Menu
     fun findById(id: Long): Menu?
-    fun findAll(): List<Menu>
+    fun findAllActiveStatus(): List<Menu>
     fun deleteById(id: Long)
 
     // MenuQueryService용 추가 메서드들

@@ -46,4 +46,10 @@ class MenuService(
         val updatedMenus = menuPersistencePort.updateAll(menusForUpdate)
         return menuMapper.toResponseList(updatedMenus)
     }
+
+    override fun getContentsMenuList(): List<MenuResponse> {
+        return menuMapper.toResponseList(menuPersistencePort.findAllActiveStatus()
+            .filter { it.isContents }
+        )
+    }
 }

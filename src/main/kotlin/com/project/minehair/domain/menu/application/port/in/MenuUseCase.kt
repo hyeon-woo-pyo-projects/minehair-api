@@ -11,9 +11,9 @@ interface MenuUseCase {
      */
     fun changeMenuOrderNo(request: List<ChangeMenuOrderNoRequest>): List<MenuResponse>
 
-//    fun createMenu(request: CreateMenuRequest): MenuResponse
-//    fun getMenuById(id: Long): MenuResponse
-//    fun getAllMenus(): List<MenuResponse>
-//    fun updateMenu(id: Long, request: UpdateMenuRequest): MenuResponse
-//    fun deleteMenu(id: Long)
+    /**
+     * 컨텐츠용 메뉴 조회
+     */
+    fun getContentsMenuList(): List<MenuResponse>
+
 }

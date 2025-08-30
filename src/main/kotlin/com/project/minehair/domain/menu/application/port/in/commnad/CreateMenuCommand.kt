@@ -9,6 +9,7 @@ data class CreateMenuCommand(
     val isVisible: Boolean,
     val menuType: String,
     val orderNo: Int,
-    val isManage: Boolean
+    val isManage: Boolean = true,
+    val isContents: Boolean
 
 )

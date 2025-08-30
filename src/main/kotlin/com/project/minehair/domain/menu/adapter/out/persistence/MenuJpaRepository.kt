@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository
 @Repository
 interface MenuJpaRepository : JpaRepository<MenuJpaEntity, Long> {
 
+    fun findAllByStatus(status: Status): List<MenuJpaEntity>
+
     fun findByIdAndStatus(id: Long, status: Status): MenuJpaEntity?
 
     fun findAllByIdInAndStatus(ids: List<Long>, status: Status): List<MenuJpaEntity>

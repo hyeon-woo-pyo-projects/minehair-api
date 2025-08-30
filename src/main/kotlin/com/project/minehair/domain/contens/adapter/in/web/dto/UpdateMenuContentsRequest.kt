@@ -1,0 +1,21 @@
+package com.project.minehair.domain.contens.adapter.`in`.web.dto
+
+import com.project.minehair.domain.contens.domain.ContentsType
+import io.swagger.v3.oas.annotations.media.Schema
+import jakarta.validation.constraints.NotBlank
+import jakarta.validation.constraints.NotNull
+
+data class UpdateMenuContentsRequest(
+
+    @Schema(description = "메뉴 Id", example = "메뉴 Id", required = true)
+    @field:NotNull(message = "메뉴 Id는 필수 입니다.")
+    val menuId: Long,
+
+    @Schema(description = "컨텐츠 타입", example = "컨텐츠 타입", required = true)
+    @field:NotNull(message = "컨텐츠 타입은 필수 입니다.")
+    val contentsType: ContentsType,
+
+    @Schema(description = "컨텐츠 url", example = "컨텐츠 url", required = true)
+    @field:NotBlank(message = "컨텐츠 url은 필수 입니다.")
+    val contentsUrl: String,
+)

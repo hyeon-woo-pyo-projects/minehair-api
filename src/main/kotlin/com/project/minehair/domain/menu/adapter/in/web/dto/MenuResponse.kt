@@ -10,4 +10,5 @@ data class MenuResponse(
     val imageUrl: String?,
     val isVisible: Boolean,
     val menuType: String,
+    val isContents: Boolean
 )

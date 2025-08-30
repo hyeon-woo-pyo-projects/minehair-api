@@ -7,13 +7,15 @@ CREATE TABLE IF NOT EXISTS menu (
     is_visible boolean not null default true comment '메뉴 표시 여부',
     menu_type varchar(20) not null comment '메뉴 타입 (대(MAJOR), 중(MINOR), 소(SUB))',
     order_no int not null DEFAULT 0 comment '정렬 순서',
-    is_manage boolean not null default true comment '관리 여부',
+    is_manage boolean not null default true comment '관리자 페이지 관리 여부',
+    is_contents boolean not null default false comment '컨텐츠 메뉴 여부',
     status varchar(20) not null default 'active' comment '상태',
     created_id bigint not null comment '생성자 ID',
     created_at datetime not null default current_timestamp comment '생성 시간',
     updated_id bigint not null comment '수정자 ID',
     updated_at datetime null comment '수정 시간'
 ) comment '메뉴' CHARSET=utf8mb4;
+
 -- 제약 조건 제거
 ALTER TABLE menu DROP CONSTRAINT IF EXISTS uq_menu_name_parent;
 -- 제약 조건 추가
@@ -163,3 +165,17 @@ CREATE TABLE IF NOT EXISTS coupon (
     updated_id BIGINT NOT NULL COMMENT '수정자 ID',
     updated_at DATETIME NULL COMMENT '수정 시간'
 ) COMMENT '쿠폰 테이블' CHARSET=utf8mb4;
+
+-- 메뉴 컨텐츠 테이블
+CREATE TABLE IF NOT EXISTS menu_contents (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT 'ID',
+    menu_id TEXT NOT NULL COMMENT '컨텐츠용 메뉴 id',
+    contents_type VARCHAR(50) NOT NULL COMMENT '컨텐츠 타입(IMAGE,VIDEO)',
+    contents_url TEXT NOT NULL COMMENT '컨텐츠 URL',
+    order_no INT NOT NULL DEFAULT 0 comment '정렬 순서',
+    status VARCHAR(20) NOT NULL DEFAULT 'active' COMMENT '상태',
+    created_id BIGINT NOT NULL COMMENT '생성자 ID',
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '생성 시간',
+    updated_id BIGINT NOT NULL COMMENT '수정자 ID',
+    updated_at DATETIME NULL COMMENT '수정 시간'
+) COMMENT '메뉴 컨텐츠 테이블' CHARSET=utf8mb4;

@@ -23,6 +23,7 @@ class MenuMapper {
             menuType = entity.menuType,
             orderNo = entity.orderNo,
             isManage = entity.isManage,
+            isContents = entity.isContents,
             status = entity.status,
             createdId = entity.createdId,
             createdAt = entity.createdAt,
@@ -42,6 +43,7 @@ class MenuMapper {
             menuType = createMenuCommand.menuType,
             orderNo = createMenuCommand.orderNo,
             isManage = createMenuCommand.isManage,
+            isContents = createMenuCommand.isContents,
             createdId = 1L,
             createdAt = LocalDateTime.now(),
             updatedId = 0L,
@@ -60,6 +62,7 @@ class MenuMapper {
             menuType = updateMenuCommand.menuType,
             orderNo = updateMenuCommand.orderNo,
             isManage = updateMenuCommand.isManage,
+            isContents = updateMenuCommand.isContents,
             createdId = 1L,
             createdAt = LocalDateTime.now(),
             updatedId = 0L,
@@ -102,7 +105,8 @@ class MenuMapper {
             isVisible = domain.isVisible,
             menuType = domain.menuType,
             orderNo = domain.orderNo,
-            isManage = domain.isManage
+            isManage = domain.isManage,
+            isContents = domain.isContents
         )
     }
 
@@ -124,7 +128,9 @@ class MenuMapper {
             isVisible = interDomainMenuInfo.isVisible,
             menuType = interDomainMenuInfo.menuType,
             orderNo = interDomainMenuInfo.orderNo,
-            isManage = interDomainMenuInfo.isManage
+            isManage = interDomainMenuInfo.isManage,
+            isContents = interDomainMenuInfo.isContents
+
         )
     }
 
@@ -138,7 +144,8 @@ class MenuMapper {
             isVisible = interDomainMenuInfo.isVisible,
             menuType = interDomainMenuInfo.menuType,
             orderNo = interDomainMenuInfo.orderNo,
-            isManage = interDomainMenuInfo.isManage
+            isManage = interDomainMenuInfo.isManage,
+            isContents = interDomainMenuInfo.isContents
         )
     }
 
@@ -152,6 +159,7 @@ class MenuMapper {
             isVisible = domain.isVisible,
             menuType = domain.menuType,
             orderNo = domain.orderNo,
+            isContents = domain.isContents
         )
     }
 

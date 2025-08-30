@@ -34,7 +34,8 @@ class RoleMenuOutboundAdapter(
                     isVisible = menu.isVisible,
                     menuType = menu.menuType,
                     orderNo = menu.orderNo,
-                    isManage = menu.isManage
+                    isManage = menu.isManage,
+                    isContents = menu.isContents
                 )
             }
     }
@@ -51,7 +52,8 @@ class RoleMenuOutboundAdapter(
                 isVisible = menu.isVisible,
                 menuType = menu.menuType,
                 orderNo = menu.orderNo,
-                isManage = menu.isManage
+                isManage = menu.isManage,
+                isContents = menu.isContents
             )
         } catch (e: Exception) {
             // Menu가 없는 경우 null 반환

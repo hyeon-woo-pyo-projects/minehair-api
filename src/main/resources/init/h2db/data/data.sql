@@ -1,15 +1,15 @@
 -- [menu] 테이블 초기 데이터 삽입 ------------------------------------------------------------------------------------------
 -- 대카테고리: parent_id = NULL
-INSERT IGNORE INTO menu (id, parent_id, name, path, image_url, is_visible, menu_type, order_no, is_manage, status, created_id, created_at, updated_id)
+INSERT IGNORE INTO menu (id, parent_id, name, path, image_url, is_visible, menu_type, order_no, is_manage, is_contents, status, created_id, created_at, updated_id)
 VALUES
-(1, NULL, '소개', '/about', null, true, 'MAJOR', 10, true, 'active', 1, NOW(), 1),
-(2, NULL, '염색', '/color', null, true, 'MAJOR', 20, true, 'active', 1, NOW(), 1),
-(3, NULL, '탈색', '/bleach', null, true, 'MAJOR', 30, true, 'active', 1, NOW(), 1),
-(4, NULL, '클리닉', '/clinic', null, true, 'MAJOR', 40, true, 'active', 1, NOW(), 1),
-(5, NULL, '상담/예약', '/contact', null, true, 'MAJOR', 50, true, 'active', 1, NOW(), 1),
-(6, NULL, 'Review', '/review', null, true, 'MAJOR', 60, false, 'active', 1, NOW(), 1),
-(7, NULL, 'Q&A', '/qna', null, true, 'MAJOR', 70, false, 'active', 1, NOW(), 1),
-(8, NULL, 'Community', '/community', null, true, 'MAJOR', 80, true, 'active', 1, NOW(), 1);
+(1, NULL, '소개', '/about', null, true, 'MAJOR', 10, true, false,  'active', 1, NOW(), 1),
+(2, NULL, '염색', '/color', null, true, 'MAJOR', 20, true, false, 'active', 1, NOW(), 1),
+(3, NULL, '탈색', '/bleach', null, true, 'MAJOR', 30, true, false, 'active', 1, NOW(), 1),
+(4, NULL, '클리닉', '/clinic', null, true, 'MAJOR', 40, true, false, 'active', 1, NOW(), 1),
+(5, NULL, '상담/예약', '/contact', null, true, 'MAJOR', 50, true, false, 'active', 1, NOW(), 1),
+(6, NULL, 'Review', '/review', null, true, 'MAJOR', 60, false, false, 'active', 1, NOW(), 1),
+(7, NULL, 'Q&A', '/qna', null, true, 'MAJOR', 70, false, false, 'active', 1, NOW(), 1),
+(8, NULL, 'Community', '/community', null, true, 'MAJOR', 80, true, false, 'active', 1, NOW(), 1);
 
 -- 중카테고리/소카테고리: parent_id를 정확히 지정해야 함
 -- 중복되면 무시됨 (name + parent_id 기준)

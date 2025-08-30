@@ -11,4 +11,5 @@ data class RoleMenuResponse(
     val menuType: String,
     val menuOrderNo: Int,
     val roleIdList: List<Long>? = null,
+    val isContents: Boolean
 )

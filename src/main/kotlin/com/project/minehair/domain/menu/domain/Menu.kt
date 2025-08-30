@@ -13,6 +13,7 @@ data class Menu(
     val menuType: String,
     val orderNo: Int,
     val isManage: Boolean,
+    val isContents: Boolean,
 
     override val id: Long? = null,
     override val status: Status = Status.active,
