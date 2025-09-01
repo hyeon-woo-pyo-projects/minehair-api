@@ -162,10 +162,11 @@ CREATE TABLE IF NOT EXISTS coupon (
     updated_at DATETIME NULL COMMENT '수정 시간'
 ) COMMENT='쿠폰 테이블' CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- 메뉴 컨텐츠 테이블
-CREATE TABLE IF NOT EXISTS menu_contents (
+-- 페이지 컨텐츠 테이블
+CREATE TABLE IF NOT EXISTS page_contents (
     id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT 'ID',
-    menu_id TEXT NOT NULL COMMENT '컨텐츠용 메뉴 id',
+    menu_id INT NOT NULL DEFAULT 0 COMMENT '컨텐츠용 메뉴 id',
+    page_url TEXT NOT NULL COMMENT '컨텐츠용 페이지 URL',
     contents_type VARCHAR(50) NOT NULL COMMENT '컨텐츠 타입(IMAGE,VIDEO)',
     contents_url TEXT NOT NULL COMMENT '컨텐츠 URL',
     order_no INT NOT NULL DEFAULT 0 comment '정렬 순서',
@@ -174,4 +175,18 @@ CREATE TABLE IF NOT EXISTS menu_contents (
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '생성 시간',
     updated_id BIGINT NOT NULL COMMENT '수정자 ID',
     updated_at DATETIME NULL COMMENT '수정 시간'
-) COMMENT '메뉴 컨텐츠 테이블' CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) COMMENT '페이지 컨텐츠 테이블' CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- 이벤트 페이지 테이블
+CREATE TABLE IF NOT EXISTS event_page_contents (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT 'ID',
+    order_no INT NOT NULL DEFAULT 0 comment '정렬 순서',
+    slide_order_no INT NOT NULL DEFAULT 0 comment '정렬 순서',
+    image_url TEXT NOT NULL COMMENT '이미지 URL',
+    link_url TEXT NOT NULL COMMENT '연결 URL',
+    status VARCHAR(20) NOT NULL DEFAULT 'active' COMMENT '상태',
+    created_id BIGINT NOT NULL COMMENT '생성자 ID',
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '생성 시간',
+    updated_id BIGINT NOT NULL COMMENT '수정자 ID',
+    updated_at DATETIME NULL COMMENT '수정 시간'
+) COMMENT '이벤트 페이지 테이블' CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

@@ -5,9 +5,9 @@ import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface MenuContentsJpaRepository : JpaRepository<MenuContentsJpaEntity, Long> {
+interface PageContentsJpaRepository : JpaRepository<PageContentsJpaEntity, Long> {
 
-    fun findAllByMenuIdAndStatus(menuId: Long, status: Status): List<MenuContentsJpaEntity>
+    fun findAllByMenuIdAndStatus(menuId: Long, status: Status): List<PageContentsJpaEntity>
 
-    fun findTopByOrderByOrderNoDesc(): MenuContentsJpaEntity?
+    fun findTopByOrderByOrderNoDesc(): PageContentsJpaEntity?
 }

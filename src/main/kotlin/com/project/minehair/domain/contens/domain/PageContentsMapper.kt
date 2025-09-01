@@ -1,19 +1,18 @@
 package com.project.minehair.domain.contens.domain
 
-import com.project.minehair.domain.contens.adapter.`in`.web.dto.CreateMenuContentsRequest
-import com.project.minehair.domain.contens.adapter.`in`.web.dto.MenuContentsResponse
-import com.project.minehair.domain.contens.adapter.out.persistence.MenuContentsJpaEntity
-import com.project.minehair.domain.menu.adapter.`in`.web.dto.MenuResponse
-import com.project.minehair.domain.menu.domain.Menu
+import com.project.minehair.domain.contens.adapter.`in`.web.dto.CreatePageContentsRequest
+import com.project.minehair.domain.contens.adapter.`in`.web.dto.PageContentsResponse
+import com.project.minehair.domain.contens.adapter.out.persistence.PageContentsJpaEntity
 import org.springframework.stereotype.Component
 
 @Component
-class MenuContentsMapper {
+class PageContentsMapper {
 
-    fun toDomain(entity: MenuContentsJpaEntity): MenuContents {
-        return MenuContents(
+    fun toDomain(entity: PageContentsJpaEntity): PageContents {
+        return PageContents(
             id = entity.id,
             menuId = entity.menuId,
+            pageUrl = entity.pageUrl,
             contentsType = entity.contentsType,
             contentsUrl = entity.contentsUrl,
             orderNo = entity.orderNo,
@@ -25,14 +24,15 @@ class MenuContentsMapper {
         )
     }
 
-    fun toDomainList(entityList: List<MenuContentsJpaEntity>): List<MenuContents> {
+    fun toDomainList(entityList: List<PageContentsJpaEntity>): List<PageContents> {
         return entityList.map { toDomain(it) }
     }
 
-    fun toEntity(domain: MenuContents): MenuContentsJpaEntity {
-        return MenuContentsJpaEntity(
+    fun toEntity(domain: PageContents): PageContentsJpaEntity {
+        return PageContentsJpaEntity(
             id = domain.id,
             menuId = domain.menuId,
+            pageUrl = domain.pageUrl,
             contentsType = domain.contentsType,
             contentsUrl = domain.contentsUrl,
             orderNo = domain.orderNo,
@@ -44,25 +44,27 @@ class MenuContentsMapper {
         )
     }
 
-    fun toResponse(domain: MenuContents): MenuContentsResponse {
-        return MenuContentsResponse(
+    fun toResponse(domain: PageContents): PageContentsResponse {
+        return PageContentsResponse(
             id = domain.id!!,
             menuId = domain.menuId,
+            pageUrl = domain.pageUrl,
             contentsType = domain.contentsType,
             contentsUrl = domain.contentsUrl,
             orderNo = domain.orderNo,
         )
     }
 
-    fun toResponseList(domainList: List<MenuContents>): List<MenuContentsResponse> {
+    fun toResponseList(domainList: List<PageContents>): List<PageContentsResponse> {
         return domainList.map { toResponse(it) }
     }
 
     // create request -> domain
-    fun toDomain(request: CreateMenuContentsRequest): MenuContents {
-        return MenuContents(
+    fun toDomain(request: CreatePageContentsRequest): PageContents {
+        return PageContents(
             id = null,
             menuId = request.menuId,
+            pageUrl = request.pageUrl,
             contentsType = request.contentsType,
             contentsUrl = request.contentsUrl,
             orderNo = 0

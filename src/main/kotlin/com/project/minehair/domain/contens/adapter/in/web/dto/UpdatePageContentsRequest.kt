@@ -5,11 +5,14 @@ import io.swagger.v3.oas.annotations.media.Schema
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.NotNull
 
-data class UpdateMenuContentsRequest(
+data class UpdatePageContentsRequest(
 
-    @Schema(description = "메뉴 Id", example = "메뉴 Id", required = true)
-    @field:NotNull(message = "메뉴 Id는 필수 입니다.")
-    val menuId: Long,
+    @Schema(description = "메뉴 Id", example = "1", required = true)
+    val menuId: Long = 0L,
+
+    @Schema(description = "페이지 Url", example = "/url/test", required = true)
+    @field:NotBlank(message = "페이지 Url은 필수 입니다.")
+    val pageUrl: String,
 
     @Schema(description = "컨텐츠 타입", example = "컨텐츠 타입", required = true)
     @field:NotNull(message = "컨텐츠 타입은 필수 입니다.")

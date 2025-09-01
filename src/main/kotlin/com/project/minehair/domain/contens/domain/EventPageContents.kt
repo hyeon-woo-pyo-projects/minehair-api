@@ -1,18 +1,17 @@
 package com.project.minehair.domain.contens.domain
 
-import com.project.minehair.domain.contens.adapter.`in`.web.dto.UpdateMenuContentsRequest
-import com.project.minehair.domain.menu.domain.Menu
+import com.project.minehair.domain.contens.adapter.`in`.web.dto.UpdateEventPageContentsRequest
+import com.project.minehair.domain.contens.adapter.`in`.web.dto.UpdatePageContentsRequest
 import com.project.minehair.global.domain.BaseDomain
 import com.project.minehair.global.enums.Status
-import jakarta.persistence.Column
 import java.time.LocalDateTime
 
-data class MenuContents(
+data class EventPageContents(
 
-    val menuId: Long,
-    val contentsType: ContentsType,
-    val contentsUrl: String,
     val orderNo: Int,
+    val slideOrderNo: Int,
+    val imageUrl: String,
+    val linkUrl: String,
 
     override val id: Long? = null,
     override val status: Status = Status.active,
@@ -28,14 +27,19 @@ data class MenuContents(
         updatedAt = LocalDateTime.now()
     )
 
-    fun updateOrderNo(newOrderNo: Int): MenuContents {
+    fun updateOrderNo(newOrderNo: Int): EventPageContents {
         return copy(orderNo = newOrderNo, updatedId = 1L, updatedAt = LocalDateTime.now())
     }
 
-    fun updateFrom(updateRequest: UpdateMenuContentsRequest) = copy(
-        menuId = updateRequest.menuId,
-        contentsType = updateRequest.contentsType,
-        contentsUrl = updateRequest.contentsUrl,
+    fun updateSlideOrderNo(newSlideOrderNo: Int): EventPageContents {
+        return copy(slideOrderNo = newSlideOrderNo, updatedId = 1L, updatedAt = LocalDateTime.now())
+    }
+
+    fun updateFrom(updateRequest: UpdateEventPageContentsRequest) = copy(
+        orderNo = updateRequest.orderNo,
+        slideOrderNo = updateRequest.slideOrderNo,
+        imageUrl = updateRequest.imageUrl,
+        linkUrl = updateRequest.linkUrl,
         updatedId = 1L,
         updatedAt = LocalDateTime.now()
     )

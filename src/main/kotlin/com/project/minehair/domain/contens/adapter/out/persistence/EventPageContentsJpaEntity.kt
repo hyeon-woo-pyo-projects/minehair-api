@@ -9,22 +9,21 @@ import jakarta.persistence.Table
 import java.time.LocalDateTime
 
 @Entity
-@Table(name = "menu_contents")
-data class MenuContentsJpaEntity(
-
-    @Column(name = "menu_id", nullable = false)
-    val menuId: Long,
-
-    @Column(name = "contents_type", nullable = false)
-    val contentsType: ContentsType,
-
-    @Column(name = "contents_url", nullable = false)
-    val contentsUrl: String,
+@Table(name = "event_page_contents")
+class EventPageContentsJpaEntity(
 
     @Column(name = "order_no", nullable = false)
     val orderNo: Int,
 
-    // BaseJpaEntity 필드들 override
+    @Column(name = "slide_order_no", nullable = false)
+    val slideOrderNo: Int,
+
+    @Column(name = "image_url", nullable = false)
+    val imageUrl: String,
+
+    @Column(name = "link_url", nullable = false)
+    val linkUrl: String,
+
     override val id: Long? = null,
     override val status: Status = Status.active,
     override val createdId: Long = 0L,
