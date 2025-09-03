@@ -1,18 +1,15 @@
 package com.project.minehair.domain.contens.domain
 
-import com.project.minehair.domain.contens.adapter.`in`.web.dto.UpdateEventPageContentsRequest
+import com.project.minehair.domain.contens.adapter.`in`.web.dto.UpdateSnsPlatformRequest
 import com.project.minehair.global.domain.BaseDomain
 import com.project.minehair.global.enums.Status
 import java.time.LocalDateTime
 
-data class EventPageContents(
+data class SnsPlatform(
 
     val orderNo: Int,
-    val slideOrderNo: Int,
     val imageUrl: String,
     val linkUrl: String,
-    val textContent: String? = null,
-    val isAddPost: Boolean,
 
     override val id: Long? = null,
     override val status: Status = Status.active,
@@ -28,21 +25,14 @@ data class EventPageContents(
         updatedAt = LocalDateTime.now()
     )
 
-    fun updateOrderNo(newOrderNo: Int): EventPageContents {
+    fun updateOrderNo(newOrderNo: Int): SnsPlatform {
         return copy(orderNo = newOrderNo, updatedId = 1L, updatedAt = LocalDateTime.now())
     }
 
-    fun updateSlideOrderNo(newSlideOrderNo: Int): EventPageContents {
-        return copy(slideOrderNo = newSlideOrderNo, updatedId = 1L, updatedAt = LocalDateTime.now())
-    }
-
-    fun updateFrom(updateRequest: UpdateEventPageContentsRequest) = copy(
+    fun updateFrom(updateRequest: UpdateSnsPlatformRequest) = copy(
         orderNo = updateRequest.orderNo,
-        slideOrderNo = updateRequest.slideOrderNo,
         imageUrl = updateRequest.imageUrl,
         linkUrl = updateRequest.linkUrl,
-        textContent = updateRequest.textContent,
-        isAddPost = updateRequest.isAddPost,
         updatedId = 1L,
         updatedAt = LocalDateTime.now()
     )

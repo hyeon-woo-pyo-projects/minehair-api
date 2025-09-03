@@ -16,6 +16,8 @@ class EventPageContentsMapper {
             imageUrl = entity.imageUrl,
             linkUrl = entity.linkUrl,
             status = entity.status,
+            textContent = entity.textContent,
+            isAddPost = entity.isAddPost,
             createdId = entity.createdId,
             createdAt = entity.createdAt,
             updatedId = entity.updatedId,
@@ -34,6 +36,8 @@ class EventPageContentsMapper {
             slideOrderNo = domain.slideOrderNo,
             imageUrl = domain.imageUrl,
             linkUrl = domain.linkUrl,
+            textContent = domain.textContent,
+            isAddPost = domain.isAddPost,
             status = domain.status,
             createdId = domain.createdId,
             createdAt = domain.createdAt,
@@ -49,6 +53,8 @@ class EventPageContentsMapper {
             slideOrderNo = domain.slideOrderNo,
             imageUrl = domain.imageUrl,
             linkUrl = domain.linkUrl,
+            textContent = domain.textContent,
+            isAddPost = domain.isAddPost,
         )
     }
 
@@ -64,6 +70,8 @@ class EventPageContentsMapper {
             slideOrderNo = 0,
             imageUrl = request.imageUrl,
             linkUrl = request.linkUrl,
+            textContent = request.textContent,
+            isAddPost = request.isAddPost,
         )
     }
 

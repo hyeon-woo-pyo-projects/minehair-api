@@ -8,26 +8,17 @@ import jakarta.persistence.Table
 import java.time.LocalDateTime
 
 @Entity
-@Table(name = "event_page_contents")
-class EventPageContentsJpaEntity(
+@Table(name = "sns_platform")
+class SnsPlatformJpaEntity(
 
     @Column(name = "order_no", nullable = false)
     val orderNo: Int,
-
-    @Column(name = "slide_order_no", nullable = false)
-    val slideOrderNo: Int,
 
     @Column(name = "image_url", nullable = false)
     val imageUrl: String,
 
     @Column(name = "link_url", nullable = false)
     val linkUrl: String,
-
-    @Column(name = "text_content")
-    val textContent: String? = null,
-
-    @Column(name = "is_add_post", nullable = false)
-    val isAddPost: Boolean,
 
     override val id: Long? = null,
     override val status: Status = Status.active,

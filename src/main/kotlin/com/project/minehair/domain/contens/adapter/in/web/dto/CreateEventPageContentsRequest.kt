@@ -20,4 +20,12 @@ data class CreateEventPageContentsRequest(
     @Schema(description = "링크 url", example = "/page/url", required = true)
     @field:NotBlank(message = "링크 Url은 필수 입니다.")
     val linkUrl: String,
+
+    @Schema(description = "텍스트 내용", example = "이벤트 페이지 입니다.", required = false)
+    val textContent: String? = null,
+
+    @Schema(description = "포스트 추가 여부", example = "true", required = true)
+    @field:NotNull(message = "포스트 추가 여부는 필수 입니다.")
+    val isAddPost: Boolean
+
 )

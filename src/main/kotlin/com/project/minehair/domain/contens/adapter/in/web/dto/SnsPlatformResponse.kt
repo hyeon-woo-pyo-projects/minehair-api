@@ -1,11 +1,8 @@
 package com.project.minehair.domain.contens.adapter.`in`.web.dto
 
-data class EventPageContentsResponse(
+data class SnsPlatformResponse(
     val id: Long,
     val orderNo: Int,
-    val slideOrderNo: Int,
     val imageUrl: String,
     val linkUrl: String,
-    val textContent: String?,
-    val isAddPost: Boolean
 )

@@ -188,9 +188,25 @@ CREATE TABLE IF NOT EXISTS event_page_contents (
     slide_order_no INT NOT NULL DEFAULT 0 comment '정렬 순서',
     image_url TEXT NOT NULL COMMENT '이미지 URL',
     link_url TEXT NOT NULL COMMENT '연결 URL',
+    text_content TEXT NULL COMMENT '텍스트 내용',
+    is_add_post BOOLEAN NOT NULL DEFAULT false COMMENT '게시 여부',
     status VARCHAR(20) NOT NULL DEFAULT 'active' COMMENT '상태',
     created_id BIGINT NOT NULL COMMENT '생성자 ID',
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '생성 시간',
     updated_id BIGINT NOT NULL COMMENT '수정자 ID',
     updated_at DATETIME NULL COMMENT '수정 시간'
 ) COMMENT '이벤트 페이지 테이블' CHARSET=utf8mb4;
+
+
+-- sns 플렛폼 테이블
+CREATE TABLE IF NOT EXISTS sns_platform (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT 'ID',
+    order_no INT NOT NULL DEFAULT 0 comment '정렬 순서',
+    image_url TEXT NOT NULL COMMENT '이미지 URL',
+    link_url TEXT NOT NULL COMMENT '연결 URL',
+    status VARCHAR(20) NOT NULL DEFAULT 'active' COMMENT '상태',
+    created_id BIGINT NOT NULL COMMENT '생성자 ID',
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '생성 시간',
+    updated_id BIGINT NOT NULL COMMENT '수정자 ID',
+    updated_at DATETIME NULL COMMENT '수정 시간'
+) COMMENT 'sns 플렛폼 테이블' CHARSET=utf8mb4;
