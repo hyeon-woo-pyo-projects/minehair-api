@@ -197,6 +197,18 @@ CREATE TABLE IF NOT EXISTS event_page_contents (
     updated_at DATETIME NULL COMMENT '수정 시간'
 ) COMMENT '이벤트 페이지 테이블' CHARSET=utf8mb4;
 
+-- 로고 테이블
+CREATE TABLE IF NOT EXISTS logo (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT 'ID',
+    logo_type VARCHAR(50) NOT NULL COMMENT '로고 타입 (예: MAIN, NAVIGATION)',
+    description TEXT NOT NULL COMMENT '로고 내용',
+    image_url TEXT NOT NULL COMMENT '이미지 URL',
+    status VARCHAR(20) NOT NULL DEFAULT 'active' COMMENT '상태',
+    created_id BIGINT NOT NULL COMMENT '생성자 ID',
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '생성 시간',
+    updated_id BIGINT NOT NULL COMMENT '수정자 ID',
+    updated_at DATETIME NULL COMMENT '수정 시간'
+) COMMENT '로고 테이블' CHARSET=utf8mb4;
 
 -- sns 플렛폼 테이블
 CREATE TABLE IF NOT EXISTS sns_platform (
