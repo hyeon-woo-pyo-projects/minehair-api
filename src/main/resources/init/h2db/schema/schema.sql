@@ -213,6 +213,7 @@ CREATE TABLE IF NOT EXISTS logo (
 -- sns 플렛폼 테이블
 CREATE TABLE IF NOT EXISTS sns_platform (
     id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT 'ID',
+    logo_id BIGINT NOT NULL COMMENT '로고 ID',
     order_no INT NOT NULL DEFAULT 0 comment '정렬 순서',
     image_url TEXT NOT NULL COMMENT '이미지 URL',
     link_url TEXT NOT NULL COMMENT '연결 URL',
