@@ -21,7 +21,7 @@ class BusinessException(
             of(ErrorCode.INVALID_REQUEST, message, details)
 
         fun notFound(message: String? = null, details: Any? = null) =
-            of(ErrorCode.RESOURCE_NOT_FOUND, message, details)
+            of(ErrorCode.NOT_FOUND, message, details)
 
         fun userNotFound(message: String? = null, details: Any? = null) =
             of(ErrorCode.USER_NOT_FOUND, message, details)

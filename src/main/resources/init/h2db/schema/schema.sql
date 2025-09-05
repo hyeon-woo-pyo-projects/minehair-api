@@ -166,6 +166,22 @@ CREATE TABLE IF NOT EXISTS coupon (
     updated_at DATETIME NULL COMMENT '수정 시간'
 ) COMMENT '쿠폰 테이블' CHARSET=utf8mb4;
 
+-- 쿠폰 발급 테이블
+CREATE TABLE IF NOT EXISTS coupon_issue (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT 'ID',
+    coupon_id BIGINT NOT NULL COMMENT '쿠폰 Id',
+    user_id BIGINT NOT NULL COMMENT '발급자 Id',
+    issue_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '발급 일자',
+    is_use BOOLEAN NOT NULL DEFAULT false COMMENT '사용 여부',
+    use_date DATE NULL COMMENT '사용 일자',
+    status VARCHAR(20) NOT NULL DEFAULT 'active' COMMENT '상태',
+    created_id BIGINT NOT NULL COMMENT '생성자 ID',
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '생성 시간',
+    updated_id BIGINT NOT NULL COMMENT '수정자 ID',
+    updated_at DATETIME NULL COMMENT '수정 시간'
+) COMMENT '쿠폰 발급 테이블' CHARSET=utf8mb4;
+
+
 -- 메뉴 컨텐츠 테이블
 CREATE TABLE IF NOT EXISTS page_contents (
     id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT 'ID',

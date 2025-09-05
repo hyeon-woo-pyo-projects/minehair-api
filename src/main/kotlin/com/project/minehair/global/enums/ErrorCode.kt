@@ -22,9 +22,9 @@ enum class ErrorCode(
     FORBIDDEN("FORBIDDEN", HttpStatus.FORBIDDEN, "접근 권한이 없습니다."),
     ACCESS_DENIED("ACCESS_DENIED", HttpStatus.FORBIDDEN, "해당 리소스에 대한 접근이 거부되었습니다."),
 
-    RESOURCE_NOT_FOUND("RESOURCE_NOT_FOUND", HttpStatus.NOT_FOUND, "요청한 리소스를 찾을 수 없습니다."),
     USER_NOT_FOUND("USER_NOT_FOUND", HttpStatus.NOT_FOUND, "사용자를 찾을 수 없습니다."),
 
+    FOUND("FOUND", HttpStatus.CONFLICT, "데이터가 존재합니다."),
     NOT_FOUND("NOT_FOUND", HttpStatus.NOT_FOUND, "데이터를 찾을 수 없습니다."),
 
     CONFLICT("CONFLICT", HttpStatus.CONFLICT, "리소스 충돌이 발생했습니다."),

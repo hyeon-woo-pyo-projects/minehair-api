@@ -48,4 +48,9 @@ data class Coupon(
         )
     }
 
+    // 기간이 지났는지 확인
+    fun isExpired(): Boolean {
+        return periodEnd.isBefore(LocalDate.now())
+    }
+
 }

@@ -17,6 +17,10 @@ class JwtTokenContext {
             return tokenContext.get()
         }
 
+        fun getId(): Long {
+            return tokenContext.get().id
+        }
+
         fun getUserId(): String? {
             return tokenContext.get()?.userId
         }

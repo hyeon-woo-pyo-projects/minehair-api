@@ -4,6 +4,7 @@ import com.project.minehair.global.enums.ErrorCode
 import com.project.minehair.global.exception.BusinessException
 import com.project.minehair.global.filter.context.JwtTokenContext
 import com.project.minehair.global.filter.dto.JwtTokenInfo
+import com.project.minehair.global.security.CustomUserDetails
 import com.project.minehair.global.utils.JwtUtil
 import com.project.minehair.global.utils.RedisUtil
 import jakarta.servlet.FilterChain
@@ -129,16 +130,19 @@ class JwtAuthenticationFilter(
 
         // 사용자 정보 로드
         val userDetails = userDetailsService.loadUserByUsername(userId)
-
+        val customUserDetails = userDetails as? CustomUserDetails
         // JWT 토큰 정보 객체 생성 및 컨텍스트에 저장
-        val tokenInfo = JwtTokenInfo(
-            token = jwt,
-            userId = userId,
-            authorities = userDetails.authorities.map { it.authority },
-            issuedAt = jwtUtil.getIssuedAtFromTokenAsLong(jwt),
-            expiresAt = jwtUtil.getExpirationFromTokenAsLong(jwt)
-        )
-        JwtTokenContext.setToken(tokenInfo)
+        if (customUserDetails != null) {
+            val tokenInfo = JwtTokenInfo(
+                id = customUserDetails.getId(),
+                token = jwt,
+                userId = userId,
+                authorities = userDetails.authorities.map { it.authority },
+                issuedAt = jwtUtil.getIssuedAtFromTokenAsLong(jwt),
+                expiresAt = jwtUtil.getExpirationFromTokenAsLong(jwt)
+            )
+            JwtTokenContext.setToken(tokenInfo)
+        }
 
         // Spring Security 인증 객체 생성
         val authentication = UsernamePasswordAuthenticationToken(
