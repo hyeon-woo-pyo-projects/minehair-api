@@ -7,8 +7,6 @@ import org.springframework.stereotype.Repository
 @Repository
 interface BannerJpaRepository : JpaRepository<BannerJpaEntity, Long> {
 
-    fun findByIsPostAndStatus(isPost: Boolean, status: Status): BannerJpaEntity?
-
     fun findAllByStatus(status: Status): List<BannerJpaEntity>
 
     fun findByIdAndStatus(id: Long, status: Status): BannerJpaEntity?

@@ -1,14 +1,17 @@
 package com.project.minehair.domain.banner.adapter.`in`.web
 
 import com.project.minehair.domain.banner.adapter.`in`.web.dto.BannerResponse
-import com.project.minehair.domain.banner.adapter.`in`.web.dto.BannerUpdateRequest
+import com.project.minehair.domain.banner.adapter.`in`.web.dto.CreateBannerRequest
+import com.project.minehair.domain.banner.adapter.`in`.web.dto.UpdateBannerRequest
 import com.project.minehair.domain.banner.application.port.`in`.BannerUseCase
 import com.project.minehair.global.response.BaseResponse
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PatchMapping
 import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
@@ -20,28 +23,6 @@ class BannerInboundWebAdapter(
     private val bannerUseCase: BannerUseCase
 ) {
 
-//    /**
-//     * 게시상태의 배너 조회
-//     */
-//    @Operation(summary = "게시상태의 배너 조회", description = "게시상태의 배너 조회")
-//    @GetMapping("/post")
-//    fun getPostBanner(): BaseResponse<BannerResponse> {
-//        return BaseResponse.success(bannerUseCase.getPostBanner())
-//    }
-
-//    /**
-//     * 배너 생성
-//     */
-//    @Operation(summary = "배너 생성", description = "배너 생성")
-//    @PostMapping
-//    fun createBanner(@Valid @RequestBody request: BannerCreateRequest): BaseResponse<Nothing?> {
-//        bannerUseCase.createBanner(request)
-//        return BaseResponse.ok()
-//    }
-
-    /**
-     * 배너 리스트 조회
-     */
     @Operation(summary = "배너 리스트 조회", description = "배너 리스트 조회")
     @GetMapping
     fun getBannersList(): BaseResponse<List<BannerResponse>> {
@@ -49,37 +30,37 @@ class BannerInboundWebAdapter(
         return BaseResponse.success(responses)
     }
 
-//    /**
-//     * 배너 상세 조회
-//     */
-//    @Operation(summary = "배너 상세 조회", description = "배너 상세 조회")
-//    @GetMapping("/{id}")
-//    fun getBannerById(id: Long): BaseResponse<BannerResponse> {
-//        val response = bannerUseCase.getBannerById(id)
-//        return BaseResponse.success(response)
-//    }
+    @Operation(summary = "배너 상세 조회", description = "배너 상세 조회")
+    @GetMapping("/details/{id}")
+    fun getBannersList(
+        @PathVariable id: Long
+    ): BaseResponse<BannerResponse> {
+        return BaseResponse.success(bannerUseCase.getBannersDetails(id))
+    }
 
-    /**
-     * 배너 수정
-     */
+    @Operation(summary = "배너 생성", description = "배너를 생성합니다.")
+    @PostMapping()
+    fun createBanner(
+        @RequestBody request: CreateBannerRequest
+    ): BaseResponse<BannerResponse> {
+        return BaseResponse.success(bannerUseCase.createBanner(request))
+    }
+
     @Operation(summary = "배너 수정", description = "배너 수정")
     @PatchMapping("/{id}")
     fun updateBanner(
         @PathVariable id: Long,
-        @RequestBody request: BannerUpdateRequest
-    ): BaseResponse<Nothing?> {
-        bannerUseCase.updateBanner(id, request)
-        return BaseResponse.ok()
+        @RequestBody request: UpdateBannerRequest
+    ): BaseResponse<BannerResponse> {
+        return BaseResponse.success(bannerUseCase.updateBanner(id, request))
     }
 
-//    /**
-//     * 배너 삭제
-//     */
-//    @Operation(summary = "배너 삭제", description = "배너 삭제")
-//    @DeleteMapping("/{id}")
-//    fun deleteBanner(id: Long): BaseResponse<Nothing?> {
-//        bannerUseCase.deleteBanner(id)
-//        return BaseResponse.ok()
-//    }
+    @Operation(summary = "배너 삭제", description = "배너를 삭제합니다.")
+    @DeleteMapping("/{id}")
+    fun deleteBanner(
+        @PathVariable id: Long,
+    ): BaseResponse<BannerResponse> {
+        return BaseResponse.success(bannerUseCase.deleteBanner(id))
+    }
 
 }

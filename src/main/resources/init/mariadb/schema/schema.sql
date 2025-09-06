@@ -63,17 +63,18 @@ CREATE TABLE IF NOT EXISTS users (
 -- 배너 테이블
 CREATE TABLE IF NOT EXISTS banner (
     id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT 'ID',
-    content TEXT NOT NULL COMMENT '배너 내용',
-    color VARCHAR(10) NOT NULL COMMENT '배너 색상',
-    text_color VARCHAR(10) NOT NULL COMMENT '배너 텍스트 색상',
+    banner_type VARCHAR(50) NOT NULL COMMENT '배너 타입 (예: MAIN, NAVIGATION)',
+    content TEXT NULL COMMENT '배너 내용',
+    color VARCHAR(10) NULL COMMENT '배너 색상',
+    text_color VARCHAR(10) NULL COMMENT '배너 텍스트 색상',
     link TEXT NOT NULL COMMENT '배너 링크',
-    image_url TEXT NULL COMMENT '배너 이미지 URL',
-    is_post BOOLEAN NOT NULL DEFAULT FALSE COMMENT '게시 여부',
+    image_url TEXT NOT NULL COMMENT '배너 이미지 URL',
+    is_post BOOLEAN NOT NULL DEFAULT false COMMENT '게시 여부',
     status VARCHAR(20) NOT NULL DEFAULT 'active' COMMENT '상태',
     created_id BIGINT NOT NULL COMMENT '생성자 ID',
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '생성 시간',
     updated_id BIGINT NOT NULL COMMENT '수정자 ID',
-    updated_at DATETIME NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '수정 시간'
+    updated_at DATETIME NULL COMMENT '수정 시간'
 ) COMMENT='배너 테이블' CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- 상담 항목 테이블

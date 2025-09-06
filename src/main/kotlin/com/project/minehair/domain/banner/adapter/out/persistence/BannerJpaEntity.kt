@@ -1,9 +1,12 @@
 package com.project.minehair.domain.banner.adapter.out.persistence
 
+import com.project.minehair.domain.banner.domain.BannerType
 import com.project.minehair.global.entity.BaseJpaEntity
 import com.project.minehair.global.enums.Status
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
+import jakarta.persistence.EnumType
+import jakarta.persistence.Enumerated
 import jakarta.persistence.Table
 import java.time.LocalDateTime
 
@@ -11,25 +14,28 @@ import java.time.LocalDateTime
 @Table(name = "banner")
 class BannerJpaEntity (
 
+    @Column(name = "banner_type")
+    @Enumerated(EnumType.STRING)
+    val bannerType: BannerType,
+
     @Column(name = "content")
-    val content: String,
+    val content: String?,
 
     @Column(name = "color")
-    val color: String,
+    val color: String?,
 
     @Column(name = "text_color")
-    val textColor: String,
+    val textColor: String?,
 
     @Column(name = "link")
     val link: String,
 
     @Column(name = "image_url")
-    val imageUrl: String?,
+    val imageUrl: String,
 
     @Column(name = "is_post")
     val isPost: Boolean,
 
-    // BaseJpaEntity 필드들 override
     override val id: Long? = null,
     override val status: Status = Status.active,
     override val createdId: Long = 0L,

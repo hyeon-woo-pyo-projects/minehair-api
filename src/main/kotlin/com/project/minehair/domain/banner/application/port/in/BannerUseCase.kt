@@ -1,20 +1,10 @@
 package com.project.minehair.domain.banner.application.port.`in`
 
-import com.project.minehair.domain.banner.adapter.`in`.web.dto.BannerCreateRequest
 import com.project.minehair.domain.banner.adapter.`in`.web.dto.BannerResponse
-import com.project.minehair.domain.banner.adapter.`in`.web.dto.BannerUpdateRequest
+import com.project.minehair.domain.banner.adapter.`in`.web.dto.CreateBannerRequest
+import com.project.minehair.domain.banner.adapter.`in`.web.dto.UpdateBannerRequest
 
 interface BannerUseCase {
-
-    /**
-     * 게시상태의 배너 조회
-     */
-    fun getPostBanner(): BannerResponse
-
-    /**
-     * 배너 생성
-     */
-    fun createBanner(request: BannerCreateRequest)
 
     /**
      * 배너 리스트 조회
@@ -22,18 +12,23 @@ interface BannerUseCase {
     fun getBannersList(): List<BannerResponse>
 
     /**
-     * 배너 상세 조회
+     * 배너 리스트 조회
      */
-    fun getBannerById(id: Long): BannerResponse
+    fun getBannersDetails(id: Long): BannerResponse
+
+    /**
+     * 배너 생성
+     */
+    fun createBanner(request: CreateBannerRequest): BannerResponse
 
     /**
      * 배너 수정
      */
-    fun updateBanner(id: Long, request: BannerUpdateRequest)
+    fun updateBanner(id: Long, request: UpdateBannerRequest): BannerResponse
 
     /**
      * 배너 삭제
      */
-    fun deleteBanner(id: Long)
+    fun deleteBanner(id: Long): BannerResponse
 
 }

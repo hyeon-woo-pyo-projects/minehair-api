@@ -1,14 +1,11 @@
 package com.project.minehair.domain.banner.application.service
 
-import com.project.minehair.domain.banner.adapter.`in`.web.dto.BannerCreateRequest
 import com.project.minehair.domain.banner.adapter.`in`.web.dto.BannerResponse
-import com.project.minehair.domain.banner.adapter.`in`.web.dto.BannerUpdateRequest
+import com.project.minehair.domain.banner.adapter.`in`.web.dto.CreateBannerRequest
+import com.project.minehair.domain.banner.adapter.`in`.web.dto.UpdateBannerRequest
 import com.project.minehair.domain.banner.application.port.`in`.BannerUseCase
 import com.project.minehair.domain.banner.application.port.out.BannerPersistencePort
-import com.project.minehair.domain.banner.domain.Banner
 import com.project.minehair.domain.banner.domain.BannerMapper
-import com.project.minehair.global.enums.ErrorCode
-import com.project.minehair.global.exception.BusinessException
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -20,113 +17,46 @@ class BannerService(
 ) : BannerUseCase {
 
     /**
-     * 게시상태의 배너 조회
-     */
-    override fun getPostBanner(): BannerResponse {
-        return bannerPersistencePort.findByIsPost(true)?.let { banner ->
-            BannerResponse(
-                id = banner.id,
-                content = banner.content,
-                color = banner.color,
-                textColor = banner.textColor,
-                link = banner.link,
-                imageUrl = banner.imageUrl,
-                isPost = banner.isPost
-            )
-        } ?: BannerResponse(
-            id = null,
-            content = "",
-            color = "",
-            textColor = "",
-            link = "",
-            imageUrl = null,
-            isPost = false
-        )
-    }
-
-    /**
-     * 배너 생성
-     */
-    @Transactional(readOnly = false)
-    override fun createBanner(request: BannerCreateRequest) {
-        val banner = Banner.of(
-            content = request.content,
-            color = request.color,
-            textColor = request.textColor,
-            link = request.link,
-            imageUrl = request.imageUrl,
-        )
-        bannerPersistencePort.save(banner)
-    }
-
-    /**
      * 배너 리스트 조회
      */
     override fun getBannersList(): List<BannerResponse> {
-        return bannerPersistencePort.findAll().map { banner ->
-            BannerResponse(
-                id = banner.id,
-                content = banner.content,
-                color = banner.color,
-                textColor = banner.textColor,
-                link = banner.link,
-                imageUrl = banner.imageUrl,
-                isPost = banner.isPost
-            )
-        }
+        return bannerMapper.toResponseList(bannerPersistencePort.findAllActiveStatus())
     }
 
     /**
      * 배너 상세 조회
      */
-    override fun getBannerById(id: Long): BannerResponse {
-        return bannerPersistencePort.findById(id)?.let { banner ->
-            BannerResponse(
-                id = banner.id,
-                content = banner.content,
-                color = banner.color,
-                textColor = banner.textColor,
-                link = banner.link,
-                imageUrl = banner.imageUrl,
-                isPost = banner.isPost
-            )
-        } ?: throw BusinessException(ErrorCode.NOT_FOUND, "Banner with id $id not found")
+    override fun getBannersDetails(id: Long): BannerResponse {
+        return bannerMapper.toResponse(bannerPersistencePort.findById(id))
+    }
+
+    /**
+     * 배너 생성
+     */
+    @Transactional
+    override fun createBanner(request: CreateBannerRequest): BannerResponse {
+        val domainForCreate = bannerMapper.toDomain(request)
+        return bannerMapper.toResponse(bannerPersistencePort.save(domainForCreate))
     }
 
     /**
      * 배너 수정
      */
-    @Transactional(readOnly = false)
-    override fun updateBanner(id: Long, request: BannerUpdateRequest) {
+    @Transactional
+    override fun updateBanner(id: Long, request: UpdateBannerRequest): BannerResponse {
         val banner = bannerPersistencePort.findById(id)
-            ?: throw BusinessException(ErrorCode.NOT_FOUND, "Banner with id $id not found")
-
-        val updatedBanner = banner.update(
-            content = request.content,
-            color = request.color,
-            textColor = request.textColor,
-            link = request.link,
-            imageUrl = request.imageUrl,
-            isPost = request.isPost
-        )
-
-        bannerPersistencePort.save(updatedBanner)
+        val bannerForUpdate = banner.updateFrom(request)
+        return bannerMapper.toResponse(bannerPersistencePort.save(bannerForUpdate))
     }
 
     /**
      * 배너 삭제
      */
-    @Transactional(readOnly = false)
-    override fun deleteBanner(id: Long) {
+    @Transactional
+    override fun deleteBanner(id: Long): BannerResponse {
         val banner = bannerPersistencePort.findById(id)
-            ?: throw BusinessException(ErrorCode.NOT_FOUND, "Banner with id $id not found")
-
-        banner.delete()
-        bannerPersistencePort.save(banner)
+        val bannerForDelete = banner.delete()
+        return bannerMapper.toResponse(bannerPersistencePort.save(bannerForDelete))
     }
 
-    // 게시 상태의 배너가 있는지 확인
-    private fun getPostBannerExists(): Boolean {
-        return bannerPersistencePort.findByIsPost(true) != null
-    }
 }

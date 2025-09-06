@@ -130,6 +130,7 @@ INSERT IGNORE INTO users (
 -----------------------------------------------------------------------------------------------------------------------
 -- [banner] 테이블 초기 데이터 삽입 ---------------------------------------------------------------------------------------
 INSERT IGNORE INTO banner (
+    banner_type,
     content,
     color,
     text_color,
@@ -142,11 +143,12 @@ INSERT IGNORE INTO banner (
     updated_id,
     updated_at
 ) VALUES (
+    'MAIN',
     '새로운 배너를 추가해보세요.',
     '#FF5733',
     '#FFFFFF',
     'https://example.com',
-    NULL,
+    '',
     true,
     'active',
     1,

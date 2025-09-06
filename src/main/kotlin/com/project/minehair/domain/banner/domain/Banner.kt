@@ -1,15 +1,18 @@
 package com.project.minehair.domain.banner.domain
 
+import com.project.minehair.domain.banner.adapter.`in`.web.dto.UpdateBannerRequest
 import com.project.minehair.global.domain.BaseDomain
 import com.project.minehair.global.enums.Status
 import java.time.LocalDateTime
 
 data class Banner(
-    val content: String,
-    val color: String,
-    val textColor: String,
+
+    val bannerType: BannerType,
+    val content: String?,
+    val color: String?,
+    val textColor: String?,
     val link: String,
-    val imageUrl: String?,
+    val imageUrl: String,
     val isPost: Boolean,
 
     override val id: Long? = null,
@@ -20,46 +23,18 @@ data class Banner(
     override val updatedAt: LocalDateTime? = null
 ) : BaseDomain(id, status, createdId, createdAt, updatedId, updatedAt) {
 
-    companion object {
-        // 정적 팩토리 메서드로 생성
-        fun of(
-            content: String,
-            color: String,
-            textColor: String,
-            link: String,
-            imageUrl: String?,
-            isPost: Boolean = false
-        ): Banner {
-            return Banner(
-                content = content,
-                color = color,
-                textColor = textColor,
-                link = link,
-                imageUrl = imageUrl,
-                isPost = isPost,
-                createdId = 1L,
-                createdAt = LocalDateTime.now()
-            )
-        }
-    }
-
     // 수정 메서드
-    fun update(
-        content: String,
-        color: String,
-        textColor: String,
-        link: String,
-        imageUrl: String?,
-        isPost: Boolean
+    fun updateFrom(
+        updateRequest: UpdateBannerRequest
     ): Banner {
         return copy(
-            content = content,
-            color = color,
-            textColor = textColor,
-            link = link,
-            imageUrl = imageUrl,
-            isPost = isPost,
-            updatedId = updatedId,
+            bannerType = updateRequest.bannerType,
+            content = updateRequest.content,
+            color = updateRequest.color,
+            textColor = updateRequest.textColor,
+            link = updateRequest.link,
+            imageUrl = updateRequest.imageUrl,
+            isPost = updateRequest.isPost,
             updatedAt = LocalDateTime.now()
         )
     }
