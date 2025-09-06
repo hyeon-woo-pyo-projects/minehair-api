@@ -1,10 +1,15 @@
 package com.project.minehair.domain.contents.adapter.`in`.web.dto
 
+import com.project.minehair.domain.contents.domain.EventPageContentsType
 import io.swagger.v3.oas.annotations.media.Schema
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.NotNull
 
 data class CreateEventPageContentsRequest(
+
+    @Schema(description = "컨텐츠 타입", example = "NORMAL, SLIDE", required = true)
+    @field:NotNull(message = "컨텐츠 타입은 필수 입니다.")
+    val contentsType: EventPageContentsType,
 
     @Schema(description = "순서", example = "1", required = true)
     val orderNo: Long,

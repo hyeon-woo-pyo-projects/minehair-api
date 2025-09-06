@@ -1,13 +1,14 @@
 package com.project.minehair.domain.contents.application.port.`in`
 
 import com.project.minehair.domain.contents.adapter.`in`.web.dto.*
+import com.project.minehair.domain.contents.domain.EventPageContentsType
 
 interface EventPageContentsUseCase {
 
     /**
      * 리스트 조회
      */
-    fun getEventPageContentsList(): List<EventPageContentsResponse>
+    fun getEventPageContentsList(contentsType: EventPageContentsType): List<EventPageContentsResponse>
 
     /**
      * 상세 조회

@@ -7,6 +7,7 @@ import java.time.LocalDateTime
 
 data class EventPageContents(
 
+    val contentsType: EventPageContentsType,
     val orderNo: Int,
     val slideOrderNo: Int,
     val imageUrl: String,
@@ -30,10 +31,6 @@ data class EventPageContents(
 
     fun updateOrderNo(newOrderNo: Int): EventPageContents {
         return copy(orderNo = newOrderNo, updatedId = 1L, updatedAt = LocalDateTime.now())
-    }
-
-    fun updateSlideOrderNo(newSlideOrderNo: Int): EventPageContents {
-        return copy(slideOrderNo = newSlideOrderNo, updatedId = 1L, updatedAt = LocalDateTime.now())
     }
 
     fun updateFrom(updateRequest: UpdateEventPageContentsRequest) = copy(

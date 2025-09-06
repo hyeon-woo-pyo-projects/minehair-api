@@ -6,6 +6,7 @@ import com.project.minehair.domain.contents.adapter.`in`.web.dto.UpdateEventPage
 import com.project.minehair.domain.contents.application.port.`in`.EventPageContentsUseCase
 import com.project.minehair.domain.contents.application.port.out.EventPageContentsPersistencePort
 import com.project.minehair.domain.contents.domain.EventPageContentsMapper
+import com.project.minehair.domain.contents.domain.EventPageContentsType
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -16,8 +17,10 @@ class EventPageContentsService(
     private val eventPageContentsMapper: EventPageContentsMapper
 ) : EventPageContentsUseCase {
 
-    override fun getEventPageContentsList(): List<EventPageContentsResponse> {
-        return eventPageContentsMapper.toResponseList(eventPageContentsPersistencePort.getAllByMenuIdActiveStatus())
+    override fun getEventPageContentsList(contentsType: EventPageContentsType): List<EventPageContentsResponse> {
+        return eventPageContentsMapper.toResponseList(eventPageContentsPersistencePort.getAllByMenuIdActiveStatus()
+            .filter { it.contentsType == contentsType }
+        )
     }
 
     override fun getEventPageContentsDetails(id: Long): EventPageContentsResponse {

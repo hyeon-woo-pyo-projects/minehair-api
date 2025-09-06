@@ -195,6 +195,7 @@ CREATE TABLE IF NOT EXISTS page_contents (
 -- 이벤트 페이지 테이블
 CREATE TABLE IF NOT EXISTS event_page_contents (
     id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT 'ID',
+    contents_type VARCHAR(50) NOT NULL COMMENT '컨텐츠 타입(NORMAL, SLIDE)',
     order_no INT NOT NULL DEFAULT 0 comment '정렬 순서',
     slide_order_no INT NOT NULL DEFAULT 0 comment '정렬 순서',
     image_url TEXT NOT NULL COMMENT '이미지 URL',

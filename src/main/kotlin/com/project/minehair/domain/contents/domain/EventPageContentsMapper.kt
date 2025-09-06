@@ -11,6 +11,7 @@ class EventPageContentsMapper {
     fun toDomain(entity: EventPageContentsJpaEntity): EventPageContents {
         return EventPageContents(
             id = entity.id,
+            contentsType = entity.contentsType,
             orderNo = entity.orderNo,
             slideOrderNo = entity.slideOrderNo,
             imageUrl = entity.imageUrl,
@@ -32,6 +33,7 @@ class EventPageContentsMapper {
     fun toEntity(domain: EventPageContents): EventPageContentsJpaEntity {
         return EventPageContentsJpaEntity(
             id = domain.id,
+            contentsType = domain.contentsType,
             orderNo = domain.orderNo,
             slideOrderNo = domain.slideOrderNo,
             imageUrl = domain.imageUrl,
@@ -49,6 +51,7 @@ class EventPageContentsMapper {
     fun toResponse(domain: EventPageContents): EventPageContentsResponse {
         return EventPageContentsResponse(
             id = domain.id!!,
+            contentsType = domain.contentsType,
             orderNo = domain.orderNo,
             slideOrderNo = domain.slideOrderNo,
             imageUrl = domain.imageUrl,
@@ -66,6 +69,7 @@ class EventPageContentsMapper {
     fun toDomain(request: CreateEventPageContentsRequest): EventPageContents {
         return EventPageContents(
             id = null,
+            contentsType = request.contentsType,
             orderNo = 0,
             slideOrderNo = 0,
             imageUrl = request.imageUrl,
