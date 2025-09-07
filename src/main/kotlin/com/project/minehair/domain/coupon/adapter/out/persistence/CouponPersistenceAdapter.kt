@@ -32,4 +32,9 @@ class CouponPersistenceAdapter(
             .let { couponMapper.toDomain(it) }
     }
 
+    override fun findAllByIdIn(idSet: Set<Long>): List<Coupon> {
+        return couponJpaRepository.findAllByIdIn(idSet)
+            .let { couponMapper.toDomainList(it) }
+    }
+
 }

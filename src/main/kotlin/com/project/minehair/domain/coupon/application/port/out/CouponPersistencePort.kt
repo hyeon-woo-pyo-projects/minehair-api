@@ -24,5 +24,10 @@ interface CouponPersistencePort {
      */
     fun findById(id: Long): Coupon
 
+    /**
+     * id Set으로 쿠폰 조회
+     */
+    fun findAllByIdIn(idSet: Set<Long>): List<Coupon>
+
 
 }

@@ -1,5 +1,6 @@
 package com.project.minehair.domain.coupon.adapter.`in`.web.dto
 
+import com.project.minehair.domain.coupon.domain.Coupon
 import java.time.LocalDate
 
 data class CouponIssueResponse(
@@ -9,6 +10,7 @@ data class CouponIssueResponse(
     val issueDate: LocalDate,
     val isUse: Boolean,
     val useDate: LocalDate?,
+    val couponInfo: CouponResponse?
 ) {
 
 }

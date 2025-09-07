@@ -1,5 +1,6 @@
 package com.project.minehair.domain.coupon.domain
 
+import com.project.minehair.domain.coupon.adapter.`in`.web.dto.CouponResponse
 import com.project.minehair.global.domain.BaseDomain
 import com.project.minehair.global.enums.Status
 import java.time.LocalDate
@@ -12,6 +13,7 @@ data class CouponIssue(
     val issueDate: LocalDate,
     val isUse: Boolean,
     val useDate: LocalDate? = null,
+    val couponInfo: CouponResponse? = null,
 
     override val id: Long? = null,
     override val status: Status = Status.active,
@@ -45,5 +47,12 @@ data class CouponIssue(
             useDate = LocalDate.now()
         )
     }
+
+    fun mapCoupon(couponResponse: CouponResponse) : CouponIssue {
+        return this.copy(
+            couponInfo = couponResponse
+        )
+    }
+
 
 }

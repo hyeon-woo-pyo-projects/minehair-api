@@ -4,17 +4,22 @@ import com.project.minehair.domain.coupon.adapter.`in`.web.dto.CouponResponse
 import com.project.minehair.domain.coupon.adapter.`in`.web.dto.CreateCouponRequest
 import com.project.minehair.domain.coupon.adapter.`in`.web.dto.UpdateCouponRequest
 import com.project.minehair.domain.coupon.application.port.`in`.CouponUseCase
+import com.project.minehair.domain.coupon.application.port.out.CouponIssuePersistencePort
 import com.project.minehair.domain.coupon.application.port.out.CouponPersistencePort
+import com.project.minehair.domain.coupon.domain.CouponIssueMapper
 import com.project.minehair.domain.coupon.domain.CouponMapper
+import com.project.minehair.global.filter.context.JwtTokenContext
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
 @Transactional(readOnly = true)
 @Service
-class CouponService (
+class CouponService(
     private val couponPersistencePort: CouponPersistencePort,
-    private val couponMapper: CouponMapper
-): CouponUseCase {
+    private val couponMapper: CouponMapper,
+    private val couponIssuePersistencePort: CouponIssuePersistencePort,
+    private val couponIssueMapper: CouponIssueMapper
+) : CouponUseCase {
 
     @Transactional
     override fun createCoupon(request: CreateCouponRequest): CouponResponse {
@@ -24,12 +29,23 @@ class CouponService (
 
     override fun getCouponList(): List<CouponResponse> {
         return couponPersistencePort.findAllActiveStatus()
-            .let {couponMapper.toResponseList(it)}
+            .let { couponMapper.toResponseList(it) }
     }
 
     override fun getPostedCouponList(): List<CouponResponse> {
+        val token = JwtTokenContext.getToken()
+
+        if (token != null) {
+            val loginUserId = token.id
+            // 발급 받은 쿠폰 조회
+            val userIssueCouponList = couponIssuePersistencePort.findAllByUserIdActiveStatus(loginUserId)
+            val exceptIssuedCouponList = couponPersistencePort.findAllPostedActiveStatus()
+                .filterNot { coupon -> userIssueCouponList.any { it.couponId == coupon.id } }
+            return couponMapper.toResponseList(exceptIssuedCouponList)
+        }
+
         return couponPersistencePort.findAllPostedActiveStatus()
-            .let {couponMapper.toResponseList(it)}
+            .let { couponMapper.toResponseList(it) }
     }
 
     override fun getCouponDetails(id: Long): CouponResponse {

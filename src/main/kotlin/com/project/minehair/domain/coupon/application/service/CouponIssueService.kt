@@ -7,6 +7,7 @@ import com.project.minehair.domain.coupon.application.port.out.CouponIssuePersis
 import com.project.minehair.domain.coupon.application.port.out.CouponPersistencePort
 import com.project.minehair.domain.coupon.domain.CouponIssue
 import com.project.minehair.domain.coupon.domain.CouponIssueMapper
+import com.project.minehair.domain.coupon.domain.CouponMapper
 import com.project.minehair.global.enums.ErrorCode
 import com.project.minehair.global.exception.BusinessException
 import com.project.minehair.global.filter.context.JwtTokenContext
@@ -18,6 +19,7 @@ import java.time.LocalDate
 @Service
 class CouponIssueService(
     private val couponPersistencePort: CouponPersistencePort,
+    private val couponMapper: CouponMapper,
     private val couponIssuePersistencePort: CouponIssuePersistencePort,
     private val couponIssueMapper: CouponIssueMapper,
 ) : CouponIssueUseCase {
@@ -43,7 +45,18 @@ class CouponIssueService(
 
     override fun getUserIssuedCoupons(): List<CouponIssueResponse> {
         val userId = JwtTokenContext.getId()
-        return couponIssueMapper.toResponseList(couponIssuePersistencePort.findAllByUserIdActiveStatus(userId))
+        val userIssuedCouponList = couponIssuePersistencePort.findAllByUserIdActiveStatus(userId)
+        val couponListMap = couponPersistencePort.findAllByIdIn(
+            userIssuedCouponList.map { it.couponId }.toSet()
+        )
+        val couponResponseListMap = couponMapper.toResponseList(couponListMap).associateBy { it.id }
+
+        // 쿠폰 정보 매핑
+        val mappedIssueCouponList =  userIssuedCouponList.map { couponIssue ->
+            couponIssue.mapCoupon(couponResponseListMap[couponIssue.couponId]!!)
+        }
+
+        return couponIssueMapper.toResponseList(mappedIssueCouponList)
     }
 
     @Transactional

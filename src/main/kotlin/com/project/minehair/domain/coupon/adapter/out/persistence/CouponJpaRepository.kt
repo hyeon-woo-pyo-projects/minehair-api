@@ -17,4 +17,8 @@ interface CouponJpaRepository : JpaRepository<CouponJpaEntity, Long> {
      */
     fun findAllByStatusAndIsPost(status: Status, isPost: Boolean): List<CouponJpaEntity>
 
+    /**
+     * id Set으로 쿠폰 조회
+     */
+    fun findAllByIdIn(idSet: Set<Long>): List<CouponJpaEntity>
 }

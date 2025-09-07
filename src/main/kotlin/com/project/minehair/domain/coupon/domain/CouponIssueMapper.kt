@@ -21,18 +21,6 @@ class CouponIssueMapper {
     fun toDomainList(entityList: List<CouponIssueJpaEntity>): List<CouponIssue> {
         return entityList.map { toDomain(it) }
     }
-//
-//    fun toDomain(request: CreateCouponRequest): Coupon {
-//        return Coupon(
-//            content = request.content,
-//            conditionType = request.conditionType,
-//            discountType = request.discountType,
-//            discountAmount = request.discountAmount,
-//            periodStart = request.periodStart,
-//            periodEnd = request.periodEnd,
-//            isPost = request.isPost,
-//        )
-//    }
 
     fun toResponse(domain: CouponIssue): CouponIssueResponse {
         return CouponIssueResponse(
@@ -42,6 +30,7 @@ class CouponIssueMapper {
             issueDate = domain.issueDate,
             isUse = domain.isUse,
             useDate = domain.useDate,
+            couponInfo = domain.couponInfo
         )
     }
 
