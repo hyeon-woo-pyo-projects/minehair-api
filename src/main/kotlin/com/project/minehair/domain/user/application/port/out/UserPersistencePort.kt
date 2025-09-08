@@ -22,9 +22,19 @@ interface UserPersistencePort {
     /**
      * 사용자 저장
      */
-    fun save(user: User)
+    fun save(user: User): User
 
 
     fun findUserByUserId(userId: String):User
+
+    /**
+     * 사용자 ID로 사용자 조회
+     */
+    fun findById(id: Long): User
+
+    /**
+     * 이름과 전화번호로 사용자 조회
+     */
+    fun findByNameAndPhoneHash(name: String, phoneHash: String): User
 
 }

@@ -41,6 +41,7 @@ class CouponService(
             val userIssueCouponList = couponIssuePersistencePort.findAllByUserIdActiveStatus(loginUserId)
             val exceptIssuedCouponList = couponPersistencePort.findAllPostedActiveStatus()
                 .filterNot { coupon -> userIssueCouponList.any { it.couponId == coupon.id } }
+                .filterNot { it.isExpired() }
             return couponMapper.toResponseList(exceptIssuedCouponList)
         }
 

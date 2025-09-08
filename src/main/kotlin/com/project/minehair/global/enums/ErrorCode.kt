@@ -31,6 +31,7 @@ enum class ErrorCode(
     DUPLICATE_EMAIL("DUPLICATE_EMAIL", HttpStatus.CONFLICT, "이미 존재하는 이메일입니다."),
     DUPLICATE_PHONE("DUPLICATE_PHONE", HttpStatus.CONFLICT, "이미 존재하는 전화번호입니다."),
     DUPLICATE_USERID("DUPLICATE_USER_ID", HttpStatus.CONFLICT, "이미 존재하는 사용자명입니다."),
+    PASSWORD_MISMATCH("PASSWORD_MISMATCH", HttpStatus.BAD_REQUEST, "비밀번호가 일치하지 않습니다."),
 
     // Business Rule Violations
     BUSINESS_RULE_VIOLATION("BUSINESS_RULE_VIOLATION", HttpStatus.BAD_REQUEST, "비즈니스 규칙에 위배됩니다."),

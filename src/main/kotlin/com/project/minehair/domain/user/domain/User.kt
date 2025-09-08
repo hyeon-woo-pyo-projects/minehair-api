@@ -25,11 +25,13 @@ data class User(
         email: String,
         name: String,
         phone: String,
+        phoneHash: String
     ): User {
         return copy(
             email = email,
             name = name,
             phone = phone,
+            phoneHash = phoneHash,
             updatedAt = LocalDateTime.now()
         )
     }
@@ -52,6 +54,12 @@ data class User(
         return copy(
             status = Status.deleted,
             updatedAt = LocalDateTime.now()
+        )
+    }
+
+    fun decryptPhone(decryptedPhone: String): User {
+        return copy(
+            phone = decryptedPhone
         )
     }
 }

@@ -1,7 +1,7 @@
 package com.project.minehair.domain.user.domain
 
 import com.project.minehair.domain.user.adapter.`in`.web.dto.UserResponse
-import com.project.minehair.domain.user.adapter.`in`.web.dto.UserUpdateRequest
+import com.project.minehair.domain.user.adapter.`in`.web.dto.UpdateUserRequest
 import com.project.minehair.domain.user.adapter.out.persistence.UserJpaEntity
 import com.project.minehair.global.domain.inter.InterDomainUserInfo
 import org.springframework.stereotype.Component
@@ -19,9 +19,6 @@ class UserMapper {
             email = user.email,
             name = user.name,
             phoneNumber = user.phone,
-            status = user.status,
-            createdAt = user.createdAt,
-            updatedAt = user.updatedAt
         )
     }
 
@@ -36,7 +33,7 @@ class UserMapper {
      * UserUpdateRequest -> Domain User 업데이트용 변환
      * 기존 User 객체를 받아서 업데이트된 User 반환
      */
-    fun updateToDomain(existingUser: User, request: UserUpdateRequest): User {
+    fun updateToDomain(existingUser: User, request: UpdateUserRequest): User {
         return existingUser.copy(
             email = request.email,
             name = request.name,

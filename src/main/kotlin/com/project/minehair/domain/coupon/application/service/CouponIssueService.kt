@@ -48,13 +48,17 @@ class CouponIssueService(
         val userIssuedCouponList = couponIssuePersistencePort.findAllByUserIdActiveStatus(userId)
         val couponListMap = couponPersistencePort.findAllByIdIn(
             userIssuedCouponList.map { it.couponId }.toSet()
-        )
+        ).filterNot { it.isExpired() }
         val couponResponseListMap = couponMapper.toResponseList(couponListMap).associateBy { it.id }
 
-        // 쿠폰 정보 매핑
+        // 쿠폰 정보 매핑, 매핑이 없으면 넘어가기
         val mappedIssueCouponList =  userIssuedCouponList.map { couponIssue ->
-            couponIssue.mapCoupon(couponResponseListMap[couponIssue.couponId]!!)
-        }
+            if (couponResponseListMap[couponIssue.couponId] != null) {
+                couponIssue.mapCoupon(couponResponseListMap[couponIssue.couponId]!!)
+            } else {
+                null
+            }
+        }.filterNotNull()
 
         return couponIssueMapper.toResponseList(mappedIssueCouponList)
     }

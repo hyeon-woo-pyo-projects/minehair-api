@@ -1,25 +1,12 @@
 package com.project.minehair.domain.user.adapter.`in`.web.dto
 
 import io.swagger.v3.oas.annotations.media.Schema
-import jakarta.validation.constraints.*
+import jakarta.validation.constraints.Email
+import jakarta.validation.constraints.NotBlank
+import jakarta.validation.constraints.Pattern
+import jakarta.validation.constraints.Size
 
-// 회원가입 요청 DTO
-@Schema(description = "회원가입 요청 정보")
-data class UserCreateRequest(
-
-    @Schema(description = "사용자 아이디", example = "user123", required = true)
-    @field:NotBlank(message = "사용자 아이디는 필수입니다.")
-    @field:Size(min = 4, max = 20, message = "사용자 아이디는 4자 이상 20자 이하여야 합니다.")
-    @field:Pattern(
-        regexp = "^[a-zA-Z0-9_]+$",
-        message = "사용자 아이디는 영문, 숫자, 언더스코어만 사용 가능합니다."
-    )
-    val userId: String,
-
-    @Schema(description = "비밀번호", example = "password123!", required = true)
-    @field:NotBlank(message = "비밀번호는 필수입니다.")
-    @field:Size(min = 4, max = 20, message = "비밀번호는 4자 이상 20자 이하여야 합니다.")
-    val password: String,
+data class UpdateUserRequest(
 
     @Schema(description = "사용자 이름", example = "홍길동", required = true)
     @field:NotBlank(message = "사용자 이름은 필수입니다.")

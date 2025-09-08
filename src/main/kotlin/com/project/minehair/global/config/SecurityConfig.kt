@@ -49,7 +49,9 @@ class SecurityConfig(
                     .requestMatchers("/health/**").permitAll() // 헬스 체크 API 접근 허용
                     .requestMatchers("/api/auth/**").permitAll()  // 로그인/회원가입은 토큰 불필요
                     .requestMatchers(HttpMethod.GET, "/api/role-menus/**").permitAll() // 공개 API
-                    .requestMatchers(HttpMethod.POST, "/api/user/**").permitAll() // 사용자 조회는 공개
+                    .requestMatchers(HttpMethod.POST, "/api/user/**").permitAll() // 회원가입 API
+                    .requestMatchers(HttpMethod.GET, "/api/user/user-id").permitAll() // 아이디 찾기 API
+                    .requestMatchers(HttpMethod.PATCH, "/api/user/password/**").permitAll() // 비밀번호 변경 API
                     .requestMatchers(HttpMethod.GET, "/api/banner/**").permitAll() // 게시상태의 배너 조회는 공개
                     .requestMatchers(HttpMethod.GET, "/api/consultation/categories").permitAll() // 상담 카테고리 조회는 공개
                     .requestMatchers(HttpMethod.POST, "/api/consultation/reception").permitAll() // 상담 카테고리 조회는 공개

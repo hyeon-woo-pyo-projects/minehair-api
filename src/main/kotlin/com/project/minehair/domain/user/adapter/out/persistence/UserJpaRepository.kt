@@ -31,4 +31,14 @@ interface UserJpaRepository : JpaRepository<UserJpaEntity, Long> {
      * 이메일로 사용자 조회
      */
     fun findByEmailAndStatus(email: String, status: Status): UserJpaEntity?
+
+    /**
+     * id, 상태로 사용자 조회
+     */
+    fun findByIdAndStatus(id: Long, status: Status): UserJpaEntity?
+
+    /**
+     * 이름과 전화번호로 사용자 조회
+     */
+    fun findByNameAndPhoneHashAndStatus(name: String, phoneHash: String, status: Status): UserJpaEntity?
 }
