@@ -26,9 +26,8 @@ class CouponIssuePersistenceAdapter(
     }
 
     override fun findAllByUserIdActiveStatus(userId: Long): List<CouponIssue> {
-        return couponIssueJpaRepository.findAllByUserIdAndIsUseAndStatus(
+        return couponIssueJpaRepository.findAllByUserIdAndStatus(
             userId,
-            false,
             Status.active
         ).let { couponIssueMapper.toDomainList(it) }
     }

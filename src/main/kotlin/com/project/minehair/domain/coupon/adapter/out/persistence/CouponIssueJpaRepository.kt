@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository
 interface CouponIssueJpaRepository : JpaRepository<CouponIssueJpaEntity, Long> {
     fun findByCouponIdAndUserIdAndStatus(couponId: Long, userId: Long, status: Status): CouponIssueJpaEntity?
 
-    fun findAllByUserIdAndIsUseAndStatus(userId: Long, isUse: Boolean, status: Status): List<CouponIssueJpaEntity>
+    fun findAllByUserIdAndStatus(userId: Long, status: Status): List<CouponIssueJpaEntity>
 }
