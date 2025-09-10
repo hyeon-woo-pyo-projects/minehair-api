@@ -2,6 +2,7 @@ package com.project.minehair.domain.user.adapter.`in`.web.dto
 
 import io.swagger.v3.oas.annotations.media.Schema
 import jakarta.validation.constraints.*
+import java.time.LocalDate
 
 // 회원가입 요청 DTO
 @Schema(description = "회원가입 요청 정보")
@@ -43,4 +44,8 @@ data class CreateUserRequest(
     @field:Email(message = "올바른 이메일 형식이 아닙니다.")
     @field:Size(max = 100, message = "이메일은 100자 이하여야 합니다.")
     val email: String,
+
+    @Schema(description = "생년월일", example = "1990-01-01", required = true)
+    @field:NotNull(message = "생년월일은 필수입니다.")
+    val birthDate: LocalDate
 )

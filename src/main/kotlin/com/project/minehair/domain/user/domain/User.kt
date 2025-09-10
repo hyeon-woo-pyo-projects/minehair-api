@@ -2,6 +2,7 @@ package com.project.minehair.domain.user.domain
 
 import com.project.minehair.global.domain.BaseDomain
 import com.project.minehair.global.enums.Status
+import java.time.LocalDate
 import java.time.LocalDateTime
 
 data class User(
@@ -12,6 +13,7 @@ data class User(
     val name: String,
     val phone: String,
     val phoneHash: String,
+    val birthDate: LocalDate,
 
     override val id: Long? = null,
     override val status: Status = Status.active,
@@ -25,13 +27,15 @@ data class User(
         email: String,
         name: String,
         phone: String,
-        phoneHash: String
+        phoneHash: String,
+        birthDate: LocalDate
     ): User {
         return copy(
             email = email,
             name = name,
             phone = phone,
             phoneHash = phoneHash,
+            birthDate = birthDate,
             updatedAt = LocalDateTime.now()
         )
     }

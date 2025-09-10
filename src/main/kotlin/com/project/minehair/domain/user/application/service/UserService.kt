@@ -61,6 +61,7 @@ class UserService(
             name = request.name,
             phone = cryptoUtil.encrypt(request.phone),
             phoneHash = cryptoUtil.hashForSearch(request.phone),
+            birthDate = request.birthDate,
             status = Status.active,
             createdId = 1L,
             createdAt = LocalDateTime.now(),
@@ -124,6 +125,7 @@ class UserService(
             name = request.name,
             phone = cryptoUtil.encrypt(request.phone),
             phoneHash = cryptoUtil.hashForSearch(request.phone),
+            birthDate = request.birthDate
         )
         return userMapper.toResponse(userPersistencePort.save(updatedUser))
     }

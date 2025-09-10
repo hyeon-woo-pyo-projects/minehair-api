@@ -56,6 +56,7 @@ CREATE TABLE IF NOT EXISTS users (
     phone VARCHAR(255) NOT NULL COMMENT '전화번호',
     phone_hash VARCHAR(255) NOT NULL COMMENT '전화번호 해시',
     email VARCHAR(255) NULL COMMENT '이메일',
+    birth_date DATE NOT NULL COMMENT '생년월일',
     status VARCHAR(20) NOT NULL DEFAULT 'active' COMMENT '상태',
     created_id BIGINT NOT NULL COMMENT '생성자 ID',
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '생성 시간',

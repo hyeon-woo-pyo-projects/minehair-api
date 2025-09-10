@@ -19,6 +19,7 @@ class UserMapper {
             email = user.email,
             name = user.name,
             phoneNumber = user.phone,
+            birthDate = user.birthDate
         )
     }
 
@@ -30,18 +31,6 @@ class UserMapper {
     }
 
     /**
-     * UserUpdateRequest -> Domain User 업데이트용 변환
-     * 기존 User 객체를 받아서 업데이트된 User 반환
-     */
-    fun updateToDomain(existingUser: User, request: UpdateUserRequest): User {
-        return existingUser.copy(
-            email = request.email,
-            name = request.name,
-            phone = request.phone,
-        )
-    }
-
-    /**
      * Domain User -> JPA UserEntity 변환
      */
     fun toEntity(user: User): UserJpaEntity {
@@ -50,6 +39,7 @@ class UserMapper {
             roleId = user.roleId,
             userId = user.userId,
             email = user.email,
+            birthDate = user.birthDate,
             password = user.password,
             name = user.name,
             phone = user.phone,
@@ -71,6 +61,7 @@ class UserMapper {
             name = entity.name,
             phone = entity.phone,
             phoneHash = entity.phoneHash,
+            birthDate = entity.birthDate,
             status = entity.status,
             createdAt = entity.createdAt,
             updatedAt = entity.updatedAt

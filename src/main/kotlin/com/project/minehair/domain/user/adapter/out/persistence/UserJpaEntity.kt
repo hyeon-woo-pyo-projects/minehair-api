@@ -5,6 +5,7 @@ import com.project.minehair.global.enums.Status
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.Table
+import java.time.LocalDate
 import java.time.LocalDateTime
 
 @Entity
@@ -31,6 +32,9 @@ class UserJpaEntity(
 
     @Column(name = "email")
     val email: String?,
+
+    @Column(name = "birth_date")
+    val birthDate: LocalDate,
 
     // BaseJpaEntity 필드들 override
     override val id: Long? = null,
