@@ -64,9 +64,9 @@ class UserInboundWebAdapter(
     }
 
     @Operation(summary = "회원 탈퇴", description = "회원 탈퇴를 진행합니다.")
-    @DeleteMapping
-    fun deleteUser(@PathVariable id: Long): BaseResponse<UserResponse> {
-        return BaseResponse.success(userUseCase.deleteUser(id))
+    @DeleteMapping()
+    fun deleteUser(): BaseResponse<UserResponse> {
+        return BaseResponse.success(userUseCase.deleteUser())
     }
 
 }

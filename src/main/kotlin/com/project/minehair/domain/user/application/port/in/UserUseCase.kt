@@ -41,6 +41,6 @@ interface UserUseCase {
     /**
      * 회원 탈퇴
      */
-    fun deleteUser(id: Long): UserResponse
+    fun deleteUser(): UserResponse
 
 }

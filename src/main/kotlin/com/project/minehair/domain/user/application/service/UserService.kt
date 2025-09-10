@@ -11,6 +11,7 @@ import com.project.minehair.global.enums.Status
 import com.project.minehair.global.exception.BusinessException
 import com.project.minehair.global.filter.context.JwtTokenContext
 import com.project.minehair.global.utils.CryptoUtil
+import com.project.minehair.global.utils.RedisUtil
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -23,7 +24,8 @@ class UserService(
     private val userDomainPort: UserDomainPort,
     private val passwordEncoder: PasswordEncoder,
     private val cryptoUtil: CryptoUtil,
-    private val userMapper: UserMapper
+    private val userMapper: UserMapper,
+    private val redisUtil: RedisUtil
 ) : UserUseCase {
 
     @Transactional
@@ -98,6 +100,7 @@ class UserService(
         return userMapper.toResponse(decryptPhoneUser)
     }
 
+    @Transactional
     override fun updatePassword(id: Long, request: UpdatePasswordRequest): UserResponse {
         if (request.newPassword != request.confirmPassword) {
             throw BusinessException(ErrorCode.PASSWORD_MISMATCH)
@@ -107,6 +110,7 @@ class UserService(
         return userMapper.toResponse(userPersistencePort.save(updatedUser))
     }
 
+    @Transactional
     override fun updateUser(id: Long, request: UpdateUserRequest): UserResponse {
         val user = userPersistencePort.findById(id)
 
@@ -130,10 +134,13 @@ class UserService(
         return userMapper.toResponse(userPersistencePort.save(updatedUser))
     }
 
-    override fun deleteUser(id: Long): UserResponse {
-        val user = userPersistencePort.findById(id)
-        val userForDelete = user.delete()
-        return userMapper.toResponse(userPersistencePort.save(userForDelete))
+    @Transactional
+    override fun deleteUser(): UserResponse {
+        val user = userPersistencePort.findById(JwtTokenContext.getId())
+        val deletedUser = userPersistencePort.save(user.delete())
+        // redis token 삭제
+        redisUtil.delete("user:${JwtTokenContext.getUserId()}:accessToken")
+        return userMapper.toResponse(deletedUser)
     }
 
 
