@@ -187,6 +187,8 @@ CREATE TABLE IF NOT EXISTS page_contents (
     contents_type VARCHAR(50) NOT NULL COMMENT '컨텐츠 타입(IMAGE,VIDEO)',
     contents_url TEXT NOT NULL COMMENT '컨텐츠 URL',
     order_no INT NOT NULL DEFAULT 0 comment '정렬 순서',
+    video_back_ground_url TEXT NULL COMMENT '비디오 백그라운드 URL',
+    consulting_back_ground_url TEXT NULL COMMENT '상담 백그라운드 URL',
     status VARCHAR(20) NOT NULL DEFAULT 'active' COMMENT '상태',
     created_id BIGINT NOT NULL COMMENT '생성자 ID',
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '생성 시간',

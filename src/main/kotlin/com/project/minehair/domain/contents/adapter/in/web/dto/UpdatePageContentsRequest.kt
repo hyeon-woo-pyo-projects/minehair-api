@@ -21,4 +21,10 @@ data class UpdatePageContentsRequest(
     @Schema(description = "컨텐츠 url", example = "컨텐츠 url", required = true)
     @field:NotBlank(message = "컨텐츠 url은 필수 입니다.")
     val contentsUrl: String,
+
+    @Schema(description = "비디오 배경 Url", example = "/image/url", required = false)
+    val videoBackGroundUrl: String?,
+
+    @Schema(description = "컨설팅 배경 Url", example = "/image/url", required = false)
+    val consultingBackGroundUrl: String?,
 )

@@ -16,6 +16,8 @@ class PageContentsMapper {
             contentsType = entity.contentsType,
             contentsUrl = entity.contentsUrl,
             orderNo = entity.orderNo,
+            videoBackGroundUrl = entity.videoBackGroundUrl,
+            consultingBackGroundUrl = entity.consultingBackGroundUrl,
             status = entity.status,
             createdId = entity.createdId,
             createdAt = entity.createdAt,
@@ -36,6 +38,8 @@ class PageContentsMapper {
             contentsType = domain.contentsType,
             contentsUrl = domain.contentsUrl,
             orderNo = domain.orderNo,
+            videoBackGroundUrl = domain.videoBackGroundUrl,
+            consultingBackGroundUrl = domain.consultingBackGroundUrl,
             status = domain.status,
             createdId = domain.createdId,
             createdAt = domain.createdAt,
@@ -52,6 +56,8 @@ class PageContentsMapper {
             contentsType = domain.contentsType,
             contentsUrl = domain.contentsUrl,
             orderNo = domain.orderNo,
+            videoBackGroundUrl = domain.videoBackGroundUrl,
+            consultingBackGroundUrl = domain.consultingBackGroundUrl,
         )
     }
 
@@ -67,7 +73,9 @@ class PageContentsMapper {
             pageUrl = request.pageUrl,
             contentsType = request.contentsType,
             contentsUrl = request.contentsUrl,
-            orderNo = 0
+            orderNo = 0,
+            videoBackGroundUrl = request.videoBackGroundUrl,
+            consultingBackGroundUrl = request.consultingBackGroundUrl,
         )
     }
 

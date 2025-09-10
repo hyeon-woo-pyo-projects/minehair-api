@@ -9,4 +9,6 @@ data class PageContentsResponse(
     val contentsType: ContentsType,
     val contentsUrl: String,
     val orderNo: Int,
+    val videoBackGroundUrl: String?,
+    val consultingBackGroundUrl: String?,
 )

@@ -27,6 +27,12 @@ class PageContentsJpaEntity(
     @Column(name = "order_no", nullable = false)
     val orderNo: Int,
 
+    @Column(name = "video_back_ground_url", nullable = true)
+    val videoBackGroundUrl: String?,
+
+    @Column(name = "consulting_back_ground_url", nullable = true)
+    val consultingBackGroundUrl: String?,
+
     override val id: Long? = null,
     override val status: Status = Status.active,
     override val createdId: Long = 0L,
