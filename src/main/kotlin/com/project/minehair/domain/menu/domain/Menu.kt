@@ -54,6 +54,7 @@ data class Menu(
         isVisible = other.isVisible,
         menuType = other.menuType,
         orderNo = other.orderNo,
+        isContents = other.isContents,
         updatedId = 1L,
         updatedAt = LocalDateTime.now()
     )

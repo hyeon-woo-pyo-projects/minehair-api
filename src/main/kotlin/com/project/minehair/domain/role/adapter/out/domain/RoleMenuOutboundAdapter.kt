@@ -9,6 +9,7 @@ import com.project.minehair.domain.role.application.port.out.domain.RoleMenuDoma
 import com.project.minehair.global.domain.inter.InterDomainMenuInfo
 import com.project.minehair.global.domain.inter.InterDomainRoleInfo
 import org.springframework.stereotype.Component
+import org.springframework.transaction.annotation.Transactional
 
 @Component
 class RoleMenuOutboundAdapter(

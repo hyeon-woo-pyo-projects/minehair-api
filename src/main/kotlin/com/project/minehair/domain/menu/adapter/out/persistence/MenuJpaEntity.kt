@@ -36,7 +36,7 @@ data class MenuJpaEntity(
     val isManage: Boolean = true,
 
     @Column(name = "is_contents", nullable = false)
-    val isContents: Boolean = true,
+    val isContents: Boolean,
 
     // BaseJpaEntity 필드들 override
     override val id: Long? = null,

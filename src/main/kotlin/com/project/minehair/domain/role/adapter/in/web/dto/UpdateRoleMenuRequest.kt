@@ -21,6 +21,6 @@ data class UpdateRoleMenuRequest(
     @Schema(name = "roles", description = "역할 ID 목록")
     val roles: List<Long>,
     @Schema(name = "isContents", description = "컨텐츠 메뉴 여부")
-    val isContents: Boolean = false
+    val isContents: Boolean
 
 )

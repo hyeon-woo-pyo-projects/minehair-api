@@ -137,20 +137,6 @@ CREATE TABLE IF NOT EXISTS board_qna (
     updated_at DATETIME NULL COMMENT '수정 시간'
 ) COMMENT 'QNA 게시판 테이블' CHARSET=utf8mb4;
 
--- REVIEW 게시판 테이블
-CREATE TABLE IF NOT EXISTS board_review (
-    id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT 'ID',
-    title VARCHAR(200) NOT NULL COMMENT '제목',
-    content TEXT NOT NULL COMMENT '내용',
-    author VARCHAR(50) NOT NULL COMMENT '작성자',
-    view_count INT DEFAULT 0 COMMENT '조회수',
-    status VARCHAR(20) NOT NULL DEFAULT 'active' COMMENT '상태',
-    created_id BIGINT NOT NULL COMMENT '생성자 ID',
-    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '생성 시간',
-    updated_id BIGINT NOT NULL COMMENT '수정자 ID',
-    updated_at DATETIME NULL COMMENT '수정 시간'
-) COMMENT 'Review 게시판 테이블' CHARSET=utf8mb4;
-
 -- 쿠폰 테이블
 CREATE TABLE IF NOT EXISTS coupon (
     id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT 'ID',
@@ -243,3 +229,55 @@ CREATE TABLE IF NOT EXISTS sns_platform (
     updated_id BIGINT NOT NULL COMMENT '수정자 ID',
     updated_at DATETIME NULL COMMENT '수정 시간'
 ) COMMENT 'sns 플렛폼 테이블' CHARSET=utf8mb4;
+
+-- REVIEW 카테고리 테이블
+CREATE TABLE IF NOT EXISTS board_review_category (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT 'ID',
+    name VARCHAR(200) NOT NULL COMMENT '제목',
+    order_no INT NOT NULL DEFAULT 0 comment '정렬 순서',
+    status VARCHAR(20) NOT NULL DEFAULT 'active' COMMENT '상태',
+    created_id BIGINT NOT NULL COMMENT '생성자 ID',
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '생성 시간',
+    updated_id BIGINT NOT NULL COMMENT '수정자 ID',
+    updated_at DATETIME NULL COMMENT '수정 시간'
+) COMMENT 'Review 카테고리 테이블' CHARSET=utf8mb4;
+
+-- REVIEW 게시판 테이블
+CREATE TABLE IF NOT EXISTS board_review (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT 'ID',
+    category_id BIGINT NOT NULL COMMENT '카테고리 아이디',
+    title VARCHAR(200) NOT NULL COMMENT '제목',
+    content TEXT NULL COMMENT '내용',
+    image_url TEXT NULL COMMENT '이미지 URL',
+    status VARCHAR(20) NOT NULL DEFAULT 'active' COMMENT '상태',
+    created_id BIGINT NOT NULL COMMENT '생성자 ID',
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '생성 시간',
+    updated_id BIGINT NOT NULL COMMENT '수정자 ID',
+    updated_at DATETIME NULL COMMENT '수정 시간'
+) COMMENT 'Review 게시판 테이블' CHARSET=utf8mb4;
+
+-- REVIEW 댓글 테이블
+CREATE TABLE IF NOT EXISTS board_review_reply (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT 'ID',
+    review_id BIGINT NOT NULL COMMENT '게시글 아이디',
+    content TEXT NOT NULL COMMENT '내용',
+    status VARCHAR(20) NOT NULL DEFAULT 'active' COMMENT '상태',
+    created_id BIGINT NOT NULL COMMENT '생성자 ID',
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '생성 시간',
+    updated_id BIGINT NOT NULL COMMENT '수정자 ID',
+    updated_at DATETIME NULL COMMENT '수정 시간'
+) COMMENT 'Review 댓글 테이블' CHARSET=utf8mb4;
+
+-- 지도 주소 테이블
+CREATE TABLE IF NOT EXISTS map_address (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT 'ID',
+    lat DOUBLE NOT NULL COMMENT '위도',
+    lng DOUBLE NOT NULL COMMENT '경도',
+    address VARCHAR(255) NOT NULL COMMENT '주소',
+    detail_address VARCHAR(255) NULL COMMENT '상세 주소',
+    status VARCHAR(20) NOT NULL DEFAULT 'active' COMMENT '상태',
+    created_id BIGINT NOT NULL COMMENT '생성자 ID',
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '생성 시간',
+    updated_id BIGINT NOT NULL COMMENT '수정자 ID',
+    updated_at DATETIME NULL COMMENT '수정 시간'
+) COMMENT '지도 주소 테이블' CHARSET=utf8mb4;

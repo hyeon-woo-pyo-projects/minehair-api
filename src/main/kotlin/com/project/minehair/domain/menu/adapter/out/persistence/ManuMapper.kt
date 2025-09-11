@@ -82,6 +82,7 @@ class MenuMapper {
             isVisible = domain.isVisible,
             menuType = domain.menuType,
             orderNo = domain.orderNo,
+            isContents = domain.isContents,
             status = domain.status,
             createdId = domain.createdId,
             createdAt = domain.createdAt,
