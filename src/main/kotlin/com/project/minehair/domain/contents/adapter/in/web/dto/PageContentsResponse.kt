@@ -10,5 +10,5 @@ data class PageContentsResponse(
     val contentsUrl: String,
     val orderNo: Int,
     val videoBackGroundUrl: String?,
-    val consultingBackGroundUrl: String?,
+//    val consultingBackGroundUrl: String?,
 )

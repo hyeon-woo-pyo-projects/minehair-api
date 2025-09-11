@@ -35,8 +35,10 @@ data class PageContents(
 
     fun updateFrom(updateRequest: UpdatePageContentsRequest) = copy(
         menuId = updateRequest.menuId,
+        pageUrl = updateRequest.pageUrl,
         contentsType = updateRequest.contentsType,
         contentsUrl = updateRequest.contentsUrl,
+        videoBackGroundUrl = updateRequest.videoBackGroundUrl,
         updatedId = 1L,
         updatedAt = LocalDateTime.now()
     )

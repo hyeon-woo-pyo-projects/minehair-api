@@ -57,7 +57,7 @@ class PageContentsMapper {
             contentsUrl = domain.contentsUrl,
             orderNo = domain.orderNo,
             videoBackGroundUrl = domain.videoBackGroundUrl,
-            consultingBackGroundUrl = domain.consultingBackGroundUrl,
+//            consultingBackGroundUrl = domain.consultingBackGroundUrl,
         )
     }
 
@@ -74,7 +74,7 @@ class PageContentsMapper {
             contentsType = request.contentsType,
             contentsUrl = request.contentsUrl,
             orderNo = 0,
-            videoBackGroundUrl = "",
+            videoBackGroundUrl = request.videoBackGroundUrl,
             consultingBackGroundUrl = "",
         )
     }
