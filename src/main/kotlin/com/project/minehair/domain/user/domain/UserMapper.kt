@@ -18,7 +18,7 @@ class UserMapper {
             userId = user.userId,
             email = user.email,
             name = user.name,
-            phoneNumber = user.phone,
+            phone = user.phone,
             birthDate = user.birthDate
         )
     }
