@@ -3,6 +3,7 @@ package com.project.minehair.domain.user.adapter.`in`.web.dto
 import io.swagger.v3.oas.annotations.media.Schema
 import jakarta.validation.constraints.Email
 import jakarta.validation.constraints.NotBlank
+import jakarta.validation.constraints.NotNull
 import jakarta.validation.constraints.Pattern
 import jakarta.validation.constraints.Size
 import java.time.LocalDate
@@ -29,6 +30,6 @@ data class UpdateUserRequest(
     val email: String,
 
     @Schema(description = "생년월일", example = "1990-01-01", required = true)
-    @field:NotBlank(message = "생년월일은 필수입니다.")
+    @field:NotNull(message = "생년월일은 필수입니다.")
     val birthDate: LocalDate
 )

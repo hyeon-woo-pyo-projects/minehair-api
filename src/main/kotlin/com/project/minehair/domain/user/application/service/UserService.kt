@@ -111,8 +111,8 @@ class UserService(
     }
 
     @Transactional
-    override fun updateUser(id: Long, request: UpdateUserRequest): UserResponse {
-        val user = userPersistencePort.findById(id)
+    override fun updateUser(request: UpdateUserRequest): UserResponse {
+        val user = userPersistencePort.findById(JwtTokenContext.getId())
 
         // 이메일 중복 확인
         if (user.email != request.email && userPersistencePort.existsByEmail(request.email)) {

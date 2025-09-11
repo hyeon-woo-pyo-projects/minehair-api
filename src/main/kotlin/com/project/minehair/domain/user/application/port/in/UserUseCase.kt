@@ -36,7 +36,7 @@ interface UserUseCase {
     /**
      * 회원 정보 수정
      */
-    fun updateUser(id: Long, request: UpdateUserRequest): UserResponse
+    fun updateUser(request: UpdateUserRequest): UserResponse
 
     /**
      * 회원 탈퇴

@@ -56,11 +56,8 @@ class UserInboundWebAdapter(
 
     @Operation(summary = "회원 정보 수정", description = "회원 정보를 수정합니다.")
     @PatchMapping
-    fun updateUser(
-        @PathVariable id: Long,
-        @Valid @RequestBody request: UpdateUserRequest
-    ): BaseResponse<UserResponse> {
-        return BaseResponse.success(userUseCase.updateUser(id, request))
+    fun updateUser(@Valid @RequestBody request: UpdateUserRequest): BaseResponse<UserResponse> {
+        return BaseResponse.success(userUseCase.updateUser(request))
     }
 
     @Operation(summary = "회원 탈퇴", description = "회원 탈퇴를 진행합니다.")
