@@ -20,17 +20,17 @@ class BoardReviewInboundWebAdapter(
 
     @Operation(summary = "Review 게시판 조회 (페이지)", description = "Review 게시판 조회 (페이지)")
     @GetMapping("/page")
-    fun getBoardReviewPage(@Valid @ModelAttribute request: BoardReviewPageRequest): BaseResponse<List<BoardReviewResponse>> {
-
-        val boardReviewPage = boardReviewUseCase.getBoardReviewPage(request)
-
+    fun getBoardReviewPage(
+        categoryId: Long?,
+        @Valid @ModelAttribute request: BoardReviewPageRequest
+    ): BaseResponse<List<BoardReviewResponse>> {
+        val boardReviewPage = boardReviewUseCase.getBoardReviewPage(categoryId, request)
         // Page 객체에서 PaginationInfo 추출
         val paginationInfo = BaseResponse.createPaginationInfo(
             currentPage = boardReviewPage.number + 1, // Page는 0부터 시작하므로 +1
             totalElements = boardReviewPage.totalElements,
             size = boardReviewPage.size
         )
-
         return BaseResponse.success(boardReviewPage.content, paginationInfo)
     }
 
@@ -60,6 +60,5 @@ class BoardReviewInboundWebAdapter(
     fun deleteBoardReview(@PathVariable id: Long): BaseResponse<BoardReviewResponse> {
         return BaseResponse.success(boardReviewUseCase.deleteBoardReview(id))
     }
-
 
 }

@@ -1,4 +1,4 @@
-package com.project.minehair.domain.board.adapter.out.persistence
+package com.project.minehair.domain.address.adapter.out.persistence
 
 import com.project.minehair.global.entity.BaseJpaEntity
 import com.project.minehair.global.enums.Status
@@ -8,20 +8,20 @@ import jakarta.persistence.Table
 import java.time.LocalDateTime
 
 @Entity
-@Table(name = "board_review")
-class BoardReviewJpaEntity(
+@Table(name = "map_address")
+class MapAddressJpaEntity(
 
-    @Column(name = "category_id")
-    val categoryId: Long,
+    @Column(name = "lat")
+    val lat: Double,
 
-    @Column(name = "title")
-    val title: String,
+    @Column(name = "lng")
+    val lng: Double,
 
-    @Column(name = "content")
-    val content: String?,
+    @Column(name = "address")
+    val address: String,
 
-    @Column(name = "image_url")
-    val imageUrl: String?,
+    @Column(name = "detail_address")
+    val detailAddress: String?,
 
     override val id: Long? = null,
     override val status: Status = Status.active,

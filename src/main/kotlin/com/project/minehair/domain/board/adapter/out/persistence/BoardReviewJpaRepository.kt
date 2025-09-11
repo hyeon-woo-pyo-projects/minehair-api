@@ -9,7 +9,16 @@ import org.springframework.stereotype.Repository
 @Repository
 interface BoardReviewJpaRepository : JpaRepository<BoardReviewJpaEntity, Long> {
 
-    fun findAllByStatusOrderByCreatedAtDesc(status: Status, pageable: Pageable): Page<BoardReviewJpaEntity>
+    fun findAllByStatusAndCategoryIdOrderByCreatedAtDesc(
+        status: Status,
+        categoryId: Long,
+        pageable: Pageable
+    ): Page<BoardReviewJpaEntity>
+
+    fun findAllByStatusOrderByCreatedAtDesc(
+        status: Status,
+        pageable: Pageable
+    ): Page<BoardReviewJpaEntity>
 
     fun findByIdAndStatus(id: Long, status: Status): BoardReviewJpaEntity
 }

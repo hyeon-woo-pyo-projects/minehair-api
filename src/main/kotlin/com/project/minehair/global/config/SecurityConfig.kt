@@ -63,6 +63,7 @@ class SecurityConfig(
                     .requestMatchers(HttpMethod.GET, "/api/logo").permitAll() // 로고 리스트 조회
                     .requestMatchers(HttpMethod.GET, "/api/board/review/category").permitAll() // 리뷰 게시판 카테고리 조회
                     .requestMatchers(HttpMethod.GET, "/api/board/review/page").permitAll() // 리뷰 게시판 조회
+                    .requestMatchers(HttpMethod.GET, "/api/map-address").permitAll() // 지도 주소 조회
                     .requestMatchers("/api/**").authenticated()  // API 경로만 인증 필요
                     .anyRequest().permitAll()  // 나머지는 모두 허용 (404 처리를 위해)
             }

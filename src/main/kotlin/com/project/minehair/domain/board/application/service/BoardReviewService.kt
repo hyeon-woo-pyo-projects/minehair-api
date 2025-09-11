@@ -18,23 +18,21 @@ class BoardReviewService(
     private val boardReviewMapper: BoardReviewMapper
 ) : BoardReviewUseCase {
 
-    override fun getBoardReviewPage(request: BoardReviewPageRequest): Page<BoardReviewResponse> {
-        return boardReviewPersistencePort.findAllPageActiveState(request.page, request.size)
+    override fun getBoardReviewPage(categoryId: Long?, request: BoardReviewPageRequest): Page<BoardReviewResponse> {
+        return boardReviewPersistencePort.findAllPageActiveState(categoryId, request.page, request.size)
             .let { boardReviewMapper.toResponsePage(it) }
     }
 
     @Transactional
     override fun getBoardReviewDetails(id: Long): BoardReviewResponse {
         val boardReview = boardReviewPersistencePort.findByIdActiveState(id)
-        val increasedViewCountBoardReview = boardReview.incrementViewCount()
-        val updatedBoardReview = boardReviewPersistencePort.save(increasedViewCountBoardReview)
+        val updatedBoardReview = boardReviewPersistencePort.save(boardReview)
         return boardReviewMapper.toResponse(updatedBoardReview)
     }
 
     @Transactional
     override fun createBoardReview(request: CreateBoardReviewRequest): BoardReviewResponse {
-        val requestWithAuthor = request.withAuthor("")
-        val boardReviewForCreate = boardReviewMapper.toDomain(requestWithAuthor)
+        val boardReviewForCreate = boardReviewMapper.toDomain(request)
         val createdBoardReview = boardReviewPersistencePort.save(boardReviewForCreate)
         return boardReviewMapper.toResponse(createdBoardReview)
     }

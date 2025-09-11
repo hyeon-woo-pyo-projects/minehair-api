@@ -8,7 +8,7 @@ import java.time.LocalDateTime
 data class PageContents(
 
     val menuId: Long,
-    val pageUrl: String,
+    val pageUrl: String?,
     val contentsType: ContentsType,
     val contentsUrl: String,
     val orderNo: Int,

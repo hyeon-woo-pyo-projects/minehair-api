@@ -12,17 +12,20 @@ class BoardReviewMapper {
     fun toDomain(entity: BoardReviewJpaEntity): BoardReview {
         return BoardReview(
             id = entity.id,
+            categoryId = entity.categoryId,
             title = entity.title,
             content = entity.content,
-            author = entity.author,
-            viewCount = entity.viewCount
+            imageUrl = entity.imageUrl,
         )
     }
 
     fun toDomain(request: CreateBoardReviewRequest): BoardReview {
         return BoardReview(
+            id = null,
+            categoryId = request.categoryId,
             title = request.title,
             content = request.content,
+            imageUrl = request.imageUrl,
         )
     }
 
@@ -33,10 +36,10 @@ class BoardReviewMapper {
     fun toResponse(domain: BoardReview): BoardReviewResponse {
         return BoardReviewResponse(
             id = domain.id!!,
+            categoryId = domain.categoryId,
             title = domain.title,
             content = domain.content,
-            author = domain.author,
-            viewCount = domain.viewCount
+            imageUrl = domain.imageUrl,
         )
     }
 
@@ -47,11 +50,12 @@ class BoardReviewMapper {
     fun toEntity(domain: BoardReview): BoardReviewJpaEntity {
         return BoardReviewJpaEntity(
             id = domain.id,
+            categoryId = domain.categoryId,
             title = domain.title,
             content = domain.content,
-            author = domain.author,
-            viewCount = domain.viewCount,
-            status = domain.status
+            imageUrl = domain.imageUrl,
+            status = domain.status,
+            updatedId = domain.updatedId,
         )
     }
 

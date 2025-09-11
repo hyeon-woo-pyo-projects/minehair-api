@@ -173,7 +173,7 @@ CREATE TABLE IF NOT EXISTS coupon_issue (
 CREATE TABLE IF NOT EXISTS page_contents (
     id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT 'ID',
     menu_id INT NOT NULL DEFAULT 0 COMMENT '컨텐츠용 메뉴 id',
-    page_url TEXT NOT NULL COMMENT '컨텐츠용 페이지 URL',
+    page_url TEXT NULL COMMENT '컨텐츠용 페이지 URL',
     contents_type VARCHAR(50) NOT NULL COMMENT '컨텐츠 타입(IMAGE,VIDEO)',
     contents_url TEXT NOT NULL COMMENT '컨텐츠 URL',
     order_no INT NOT NULL DEFAULT 0 comment '정렬 순서',

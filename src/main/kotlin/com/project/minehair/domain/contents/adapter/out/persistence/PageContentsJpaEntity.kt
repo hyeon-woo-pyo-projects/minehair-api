@@ -15,8 +15,8 @@ class PageContentsJpaEntity(
     @Column(name = "menu_id", nullable = false)
     val menuId: Long,
 
-    @Column(name = "page_url", nullable = false)
-    val pageUrl: String,
+    @Column(name = "page_url", nullable = true)
+    val pageUrl: String?,
 
     @Column(name = "contents_type", nullable = false)
     val contentsType: ContentsType,

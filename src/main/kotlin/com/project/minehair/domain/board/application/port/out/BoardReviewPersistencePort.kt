@@ -7,7 +7,7 @@ interface BoardReviewPersistencePort {
     /**
      * QNA 게시판 조회 (페이지)
      */
-    fun findAllPageActiveState(page: Int, size: Int): Page<BoardReview>
+    fun findAllPageActiveState(categoryId: Long?, page: Int, size: Int): Page<BoardReview>
 
     /**
      * QNA 게시판 상세조회

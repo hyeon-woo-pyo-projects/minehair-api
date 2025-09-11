@@ -14,10 +14,20 @@ class BoardReviewPersistenceAdapter(
     private val boardReviewMapper: BoardReviewMapper
 ) : BoardReviewPersistencePort {
 
-    override fun findAllPageActiveState(page: Int, size: Int): Page<BoardReview> {
-        val pageable = PageRequest.of(page - 1, size) // page는 1부터 시작하므로 -1
-        return boardReviewJpaRepository.findAllByStatusOrderByCreatedAtDesc(Status.active, pageable)
-            .let { boardReviewMapper.toDomainPage(it) }
+    override fun findAllPageActiveState(categoryId: Long?, page: Int, size: Int): Page<BoardReview> {
+        val pageable = PageRequest.of(page - 1, size)
+
+        val result = if (categoryId != null) {
+            boardReviewJpaRepository.findAllByStatusAndCategoryIdOrderByCreatedAtDesc(
+                Status.active,
+                categoryId,
+                pageable
+            )
+        } else {
+            boardReviewJpaRepository.findAllByStatusOrderByCreatedAtDesc(Status.active, pageable)
+        }
+
+        return boardReviewMapper.toDomainPage(result)
     }
 
     override fun findByIdActiveState(id: Long): BoardReview {

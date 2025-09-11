@@ -11,7 +11,7 @@ interface BoardReviewUseCase {
     /**
      * Review 게시판 조회 (페이지)
      */
-    fun getBoardReviewPage(request: BoardReviewPageRequest): Page<BoardReviewResponse>
+    fun getBoardReviewPage(categoryId: Long?, request: BoardReviewPageRequest): Page<BoardReviewResponse>
 
     /**
      * Review 게시판 상세조회
