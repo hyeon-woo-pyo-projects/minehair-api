@@ -1,5 +1,6 @@
 package com.project.minehair.domain.contents.application.port.out
 
+import com.project.minehair.domain.contents.domain.ContentsType
 import com.project.minehair.domain.contents.domain.PageContents
 
 interface PageContentsPersistencePort {
@@ -18,6 +19,11 @@ interface PageContentsPersistencePort {
      * max order_no 조회
      */
     fun getMaxOrderNo(): Int
+
+    /**
+     * contentsType으로 조회
+     */
+    fun getAllByContentsType(contentsType: ContentsType): List<PageContents>
 
     /**
      * 생성

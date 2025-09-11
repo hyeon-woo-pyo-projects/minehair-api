@@ -1,9 +1,11 @@
 package com.project.minehair.domain.contents.adapter.`in`.web
 
 import com.project.minehair.domain.contents.adapter.`in`.web.dto.CreatePageContentsRequest
+import com.project.minehair.domain.contents.adapter.`in`.web.dto.EventPageContentsResponse
 import com.project.minehair.domain.contents.adapter.`in`.web.dto.PageContentsResponse
 import com.project.minehair.domain.contents.adapter.`in`.web.dto.UpdatePageContentsRequest
 import com.project.minehair.domain.contents.application.port.`in`.PageContentsUseCase
+import com.project.minehair.domain.contents.domain.ContentsType
 import com.project.minehair.global.response.BaseResponse
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
@@ -21,6 +23,12 @@ class PageContentsInboundWebAdapter(
     @GetMapping("/{menuId}")
     fun getPageContentsList(@PathVariable menuId: Long): BaseResponse<List<PageContentsResponse>> {
         return BaseResponse.success(pageContentsUseCase.getPageContentsList(menuId))
+    }
+
+    @Operation(summary = "타입별 리스트 조회", description = "타입별 리스트 조회")
+    @GetMapping("/type/{contentsType}")
+    fun getPageContentsList(@PathVariable contentsType: ContentsType): BaseResponse<List<PageContentsResponse>> {
+        return BaseResponse.success(pageContentsUseCase.getPageContentsList(contentsType))
     }
 
     @Operation(summary = "상세 조회", description = "상세 조회")
@@ -49,5 +57,4 @@ class PageContentsInboundWebAdapter(
     fun deletePageContents(@PathVariable id: Long): BaseResponse<PageContentsResponse> {
         return BaseResponse.success(pageContentsUseCase.deletePageContents(id))
     }
-
 }

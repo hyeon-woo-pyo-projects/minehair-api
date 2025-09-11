@@ -1,6 +1,7 @@
 package com.project.minehair.domain.contents.adapter.out.persistence
 
 import com.project.minehair.domain.contents.application.port.out.PageContentsPersistencePort
+import com.project.minehair.domain.contents.domain.ContentsType
 import com.project.minehair.domain.contents.domain.PageContents
 import com.project.minehair.domain.contents.domain.PageContentsMapper
 import com.project.minehair.global.enums.Status
@@ -24,6 +25,11 @@ class PageContentsPersistenceAdapter(
 
     override fun getMaxOrderNo(): Int {
         return pageContentsJpaRepository.findTopByOrderByOrderNoDesc()?.orderNo ?: 0
+    }
+
+    override fun getAllByContentsType(contentsType: ContentsType): List<PageContents> {
+        return pageContentsJpaRepository.findAllByContentsTypeAndStatus(contentsType, Status.active)
+            .let { pageContentsMapper.toDomainList(it) }
     }
 
     override fun save(domain: PageContents): PageContents {

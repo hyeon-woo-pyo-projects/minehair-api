@@ -2,6 +2,7 @@ package com.project.minehair.domain.contents.adapter.`in`.web
 
 import com.project.minehair.domain.contents.adapter.`in`.web.dto.*
 import com.project.minehair.domain.contents.application.port.`in`.EventPageContentsUseCase
+import com.project.minehair.domain.contents.domain.ContentsType
 import com.project.minehair.domain.contents.domain.EventPageContentsType
 import com.project.minehair.global.response.BaseResponse
 import io.swagger.v3.oas.annotations.Operation
@@ -48,5 +49,4 @@ class EventPageContentsInboundWebAdapter(
     fun deleteEventPageContents(@PathVariable id: Long): BaseResponse<EventPageContentsResponse> {
         return BaseResponse.success(eventPageContentsUseCase.deleteEventPageContents(id))
     }
-
 }
